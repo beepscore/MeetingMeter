@@ -63,4 +63,22 @@
     return YES;
 }
 
+- (void)setParticipants:(NSMutableArray *)a {
+    if (a == participants)
+        return;
+    
+    // increment retain count on the object 'a' points to.  See Hillegass pg 69
+    [a retain];
+    [partiicpants release];
+    
+    // now 'participants' points to the same object as 'a'
+    participants = a;
+}
+
+- (void)dealloc{
+    [self setParticipants:nil];
+    [super dealloc];
+}
+
+
 @end

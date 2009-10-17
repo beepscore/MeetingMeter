@@ -16,7 +16,8 @@
     NSString *name;
     NSDecimalNumber *hourlyRate;
 }
-@property (retain, nonatomic) NSString *name;
+//@property (retain, nonatomic) NSString *name;
+@property (readwrite, copy) NSString *name;
 @property (retain, nonatomic) NSDecimalNumber *hourlyRate;
 
 
