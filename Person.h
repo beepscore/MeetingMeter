@@ -18,6 +18,8 @@
 }
 //@property (retain, nonatomic) NSString *name;
 @property (readwrite, copy) NSString *name;
+
+// TODO: change type to float, to match Hillegass?
 @property (retain, nonatomic) NSDecimalNumber *hourlyRate;
 
 
