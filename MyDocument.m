@@ -17,7 +17,7 @@
     
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
-    
+        participants = [[NSMutableArray alloc] init];
     }
     return self;
 }
