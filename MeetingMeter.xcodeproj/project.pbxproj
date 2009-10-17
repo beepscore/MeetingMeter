@@ -15,6 +15,7 @@
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		DEC88DE11089A608009178B1 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC88DE01089A608009178B1 /* Person.m */; };
+		DED214661089AA700072063F /* Meeting.m in Sources */ = {isa = PBXBuildFile; fileRef = DED214651089AA6F0072063F /* Meeting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		8D15AC370486D014006FF6A4 /* MeetingMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC88DDF1089A608009178B1 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		DEC88DE01089A608009178B1 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		DED214641089AA6F0072063F /* Meeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meeting.h; sourceTree = "<group>"; };
+		DED214651089AA6F0072063F /* Meeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Meeting.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 			children = (
 				DEC88DDF1089A608009178B1 /* Person.h */,
 				DEC88DE01089A608009178B1 /* Person.m */,
+				DED214641089AA6F0072063F /* Meeting.h */,
+				DED214651089AA6F0072063F /* Meeting.m */,
 				2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */,
 			);
@@ -187,6 +192,7 @@
 				8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				DEC88DE11089A608009178B1 /* Person.m in Sources */,
+				DED214661089AA700072063F /* Meeting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
