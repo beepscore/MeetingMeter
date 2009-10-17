@@ -756,22 +756,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: participants</string>
-						<reference key="source" ref="966153845"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="966153845"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">contentArray: participants</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">participants</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100035</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: arrangedObjects.name</string>
 						<reference key="source" ref="880621017"/>
 						<reference key="destination" ref="966153845"/>
@@ -804,14 +788,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">add:</string>
-						<reference key="source" ref="966153845"/>
-						<reference key="destination" ref="93373234"/>
-					</object>
-					<int key="connectionID">100073</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">remove:</string>
 						<reference key="source" ref="966153845"/>
 						<reference key="destination" ref="900708517"/>
@@ -833,6 +809,30 @@
 						</object>
 					</object>
 					<int key="connectionID">100076</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">add:</string>
+						<reference key="source" ref="966153845"/>
+						<reference key="destination" ref="93373234"/>
+					</object>
+					<int key="connectionID">100078</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArray: myMeeting.participants</string>
+						<reference key="source" ref="966153845"/>
+						<reference key="destination" ref="512844837"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="966153845"/>
+							<reference key="NSDestination" ref="512844837"/>
+							<string key="NSLabel">contentArray: myMeeting.participants</string>
+							<string key="NSBinding">contentArray</string>
+							<string key="NSKeyPath">myMeeting.participants</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">100081</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1365,7 +1365,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100076</int>
+			<int key="maxID">100081</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

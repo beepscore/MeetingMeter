@@ -19,69 +19,46 @@
 // init
 - (id)init {
 
-    [self initWithPerson1:[[Person alloc] init]
-                        person2:[[Person alloc] init]
-                        person3:[[Person alloc] init]
-                        person4:[[Person alloc] init]
-                 person1Present:NO
-                 person2Present:NO
-                 person3Present:NO
-                 person4Present:NO
-                      startTime:nil
-                        endTime:nil
-                    accruedCost:nil];
+    [self initWithStartTime:nil
+                    endTime:nil
+                accruedCost:nil
+                participants:nil];
+
     return self;
 }
 
 - (id)initWithExampleValues {
     
-    [self initWithPerson1:[[Person alloc] 
-                           initWithName:@"Moe"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"8.55"]]
-                  person2:[[Person alloc] 
+    Person *tempPerson1 = [[Person alloc] 
+            initWithName:@"Moe"
+              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"8.55"]];
+
+    Person *tempPerson2 = [[Person alloc] 
                            initWithName:@"Larry"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"120.00"]]
-                  person3:[[Person alloc] 
-                           initWithName:@"Curly"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600.00"]]
-                  person4:[[Person alloc] 
-                           initWithName:@"Shemp"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"36000"]]
-     
-           person1Present:NO
-           person2Present:NO
-           person3Present:NO
-           person4Present:NO
-                startTime:nil
-                  endTime:nil
-              accruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]];
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"20"]];
+    
+    [self initWithStartTime:nil
+                    endTime:nil
+                accruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]
+               participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, nil] ];
+    
+    [tempPerson1 release];
+    [tempPerson2 release];
+    
     return self;
 }
 
-- (id)initWithPerson1:(Person*)aPerson1
-              person2:(Person*)aPerson2
-              person3:(Person*)aPerson3
-              person4:(Person*)aPerson4
-       person1Present:(BOOL)flag1
-       person2Present:(BOOL)flag2
-       person3Present:(BOOL)flag3
-       person4Present:(BOOL)flag4
-            startTime:(NSDate*)aStartTime
+- (id)initWithStartTime:(NSDate*)aStartTime
               endTime:(NSDate*)anEndTime
-          accruedCost:(NSDecimalNumber*)anAccruedCost {
+          accruedCost:(NSDecimalNumber*)anAccruedCost
+         participants:(NSMutableArray*)aParticipants{
     
     if (self = [super init]) {
-        [self setPerson1:aPerson1];
-        [self setPerson2:aPerson2];
-        [self setPerson3:aPerson3];
-        [self setPerson4:aPerson4];        
-        [self setPerson1Present:flag1];
-        [self setPerson2Present:flag2];
-        [self setPerson3Present:flag3];
-        [self setPerson4Present:flag4];
         [self setStartTime:aStartTime];
         [self setEndTime:anEndTime];
         [self setAccruedCost:anAccruedCost];
+        
+        [self setParticipants:aParticipants];
     }
     return self;
 }
@@ -89,72 +66,18 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (Person *)person1 {
-    return person1; 
-}
-- (void)setPerson1:(Person *)aPerson1 {
-    if (person1 != aPerson1) {
-        [person1 release];
-        person1 = [aPerson1 retain];
-    }
-}
 
-- (Person *)person2 {
-    return person2; 
-}
-- (void)setPerson2:(Person *)aPerson2 {
-    if (person2 != aPerson2) {
-        [person2 release];
-        person2 = [aPerson2 retain];
-    }
-}
 
-- (Person *)person3 {
-    return person3; 
-}
-- (void)setPerson3:(Person *)aPerson3 {
-    if (person3 != aPerson3) {
-        [person3 release];
-        person3 = [aPerson3 retain];
-    }
-}
-
-- (Person *)person4 {
-    return person4; 
-}
-- (void)setPerson4:(Person *)aPerson4 {
-    if (person4 != aPerson4) {
-        [person4 release];
-        person4 = [aPerson4 retain];
-    }
-}
-
-- (BOOL)person1Present {
-    return person1Present; 
-}
-- (void)setPerson1Present:(BOOL)flag {
-    person1Present = flag;
-}
-
-- (BOOL)person2Present {
-    return person2Present;
-}
-- (void)setPerson2Present:(BOOL)flag {
-    person2Present = flag;
-}
-
-- (BOOL)person3Present {
-    return person3Present;
-}
-- (void)setPerson3Present:(BOOL)flag {
-    person3Present = flag;
-}
-
-- (BOOL)person4Present {
-    return person4Present;
-}
-- (void)setPerson4Present:(BOOL)flag {
-    person4Present = flag;
+- (void)setParticipants:(NSMutableArray *)a {
+    if (a == participants)
+        return;
+    
+    // increment retain count on the object 'a' points to.  See Hillegass pg 69
+    [a retain];
+    [participants release];
+    
+    // now 'participants' points to the same object as 'a'
+    participants = a;
 }
 
 
@@ -206,14 +129,14 @@
     
     NSDecimalNumber* combinedHourlyRate = [NSDecimalNumber decimalNumberWithString:@"0.0"] ;
     
-    if (person1Present) 
-        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person1 hourlyRate]];
-    if (person2Present) 
-        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person2 hourlyRate]];
-    if (person3Present) 
-        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person3 hourlyRate]];
-    if (person4Present) 
-        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person4 hourlyRate]];
+//    if (person1Present) 
+//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person1 hourlyRate]];
+//    if (person2Present) 
+//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person2 hourlyRate]];
+//    if (person3Present) 
+//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person3 hourlyRate]];
+//    if (person4Present) 
+//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person4 hourlyRate]];
     return combinedHourlyRate;
 }
 
@@ -236,10 +159,8 @@
 }
 
 - (void)dealloc {
-    [person1 release], person1 = nil;
-    [person2 release], person2 = nil;
-    [person3 release], person3 = nil;
-    [person4 release], person4 = nil;
+    
+    [participants release], participants = nil;
     
     [startTime release], startTime = nil;
     [endTime release], endTime = nil;

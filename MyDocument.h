@@ -13,12 +13,17 @@
 //  TODO:  Check small potential errors due to rounding and time differences.
 
 #import <Cocoa/Cocoa.h>
+#import "Meeting.h"
 
 @interface MyDocument : NSDocument
 {
-    NSMutableArray *participants;
+//    NSMutableArray *participants;
+
+    Meeting *myMeeting;
 }
 
-- (void)setParticipants:(NSMutableArray *)a;
+//- (void)setParticipants:(NSMutableArray *)a;
+
+@property (retain, nonatomic) Meeting *myMeeting;
 
 @end
