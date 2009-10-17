@@ -69,7 +69,7 @@
     
     // increment retain count on the object 'a' points to.  See Hillegass pg 69
     [a retain];
-    [partiicpants release];
+    [participants release];
     
     // now 'participants' points to the same object as 'a'
     participants = a;

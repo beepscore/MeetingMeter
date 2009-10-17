@@ -16,7 +16,7 @@
 
 @interface MyDocument : NSDocument
 {
-    NSMutableArray *participants
+    NSMutableArray *participants;
 }
 
 - (void)setParticipants:(NSMutableArray *)a;
