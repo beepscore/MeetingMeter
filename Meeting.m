@@ -80,6 +80,8 @@
     
     // now 'participants' points to the same object as 'a'
     participants = a;
+    
+    //[self hourlyRate];
 }
 
 
@@ -129,10 +131,20 @@
 // calculate hourly rate for meeting
 - (NSDecimalNumber *) hourlyRate {
     
-    //NSDecimalNumber* combinedHourlyRate = [NSDecimalNumber decimalNumberWithString:@"0.0"] ;
     // ref Hillegass pg 120
     //return [participants valueForKeyPath:@"sum.hourlyRate"];
-    return [NSDecimalNumber decimalNumberWithString:@"99.99"];
+    
+    NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
+    
+    NSEnumerator *enumerator = [participants objectEnumerator];
+    Person* thisPerson;
+    
+    while (thisPerson = [enumerator nextObject]) {
+        
+        NSLog(@"hourlyRate = %@", thisPerson.hourlyRate);
+        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];       
+    }
+    return combinedHourlyRate;
 }
 
 - (NSDateComponents *) elapsedTime {
