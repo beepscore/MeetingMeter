@@ -38,8 +38,26 @@
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
     
-    [hourlyRateField setStringValue:[[myMeeting hourlyRate] stringValue]];
+    [self updateHourlyRateField];
+    
+    // TODO:  Update hourly rate field by observing when participants change
+    // register as observer.  Ref Hillegass pg 146
+//    [[myMeeting participants] addObserver:self
+//                             forKeyPath:@"myMeeting.participants"
+//                                options:NSKeyValueObservingOptionOld
+//                                context:NULL ];
 }
+
+// TODO:  Update hourly rate field by observing when participants change
+//- (void)observeValueForKeyPath:(NSString *)keyPath
+//                      ofObject:(id)object
+//                        change:(NSDictionary *)change
+//                       context:(void *)context {
+//    // update hourlyRateField
+//    if (object == [myMeeting participants]) {
+//        [self updateHourlyRateField];
+//    }
+//}
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
@@ -74,8 +92,15 @@
     NSLog(@"participants = %@", [myMeeting participants]);
 }
 
+- (void)updateHourlyRateField {
+    [hourlyRateField setStringValue:[[myMeeting hourlyRate] stringValue]]; 
+}
 
 - (void)dealloc{
+    
+    // TODO:  Update hourly rate field by observing when participants change
+    // remove observer.  Ref Hillegass pg 146-147
+//    [[myMeeting participants] removeObserver:self forKeyPath:@"myMeeting.participants"];
     
     [myMeeting release];
     

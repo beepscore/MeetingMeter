@@ -25,4 +25,6 @@
 
 - (IBAction)debugDump:(id)sender;
 
+- (void)updateHourlyRateField;
+
 @end
