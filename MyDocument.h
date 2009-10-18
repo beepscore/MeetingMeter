@@ -17,13 +17,11 @@
 
 @interface MyDocument : NSDocument
 {
-//    NSMutableArray *participants;
-
     Meeting *myMeeting;
 }
 
-//- (void)setParticipants:(NSMutableArray *)a;
-
 @property (retain, nonatomic) Meeting *myMeeting;
+
+- (IBAction)debugDump:(id)sender;
 
 @end

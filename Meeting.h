@@ -40,6 +40,7 @@
 #pragma mark -
 #pragma mark Accessors
 
+- (NSMutableArray *)participants;
 - (void)setParticipants:(NSMutableArray *)a;
 
 - (NSDate *)startTime;

@@ -66,7 +66,9 @@
 #pragma mark -
 #pragma mark Accessors
 
-
+- (NSMutableArray *)participants{
+    return participants;
+}
 
 - (void)setParticipants:(NSMutableArray *)a {
     if (a == participants)

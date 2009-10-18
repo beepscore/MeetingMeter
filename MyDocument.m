@@ -21,7 +21,6 @@
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
         
-        //participants = [[NSMutableArray alloc] init];
         myMeeting = [[Meeting alloc] initWithExampleValues];
     }
     return self;
@@ -68,20 +67,13 @@
     return YES;
 }
 
-//- (void)setParticipants:(NSMutableArray *)a {
-//    if (a == participants)
-//        return;
-//    
-//    // increment retain count on the object 'a' points to.  See Hillegass pg 69
-//    [a retain];
-//    [participants release];
-//    
-//    // now 'participants' points to the same object as 'a'
-//    participants = a;
-//}
+
+- (IBAction)debugDump:(id)sender {
+    NSLog(@"participants = %@", [myMeeting participants]);
+}
+
 
 - (void)dealloc{
-    //[self setParticipants:nil];
     
     [myMeeting release];
     
