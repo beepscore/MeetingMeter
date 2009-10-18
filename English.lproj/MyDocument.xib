@@ -419,13 +419,12 @@
 						<object class="NSTextField" id="631562270">
 							<reference key="NSNextResponder" ref="568628114"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{163, 363}, {38, 17}}</string>
+							<string key="NSFrame">{{143, 363}, {206, 17}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="678801610">
 								<int key="NSCellFlags">68288064</int>
-								<int key="NSCellFlags2">-1874852864</int>
-								<string key="NSContents">Label</string>
+								<int key="NSCellFlags2">272630784</int>
 								<reference key="NSSupport" ref="1067689752"/>
 								<object class="NSDateFormatter" key="NSFormatter" id="1013835370">
 									<object class="NSMutableDictionary" key="NS.attributes">
@@ -459,13 +458,13 @@
 						<object class="NSTextField" id="580283002">
 							<reference key="NSNextResponder" ref="568628114"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{163, 318}, {38, 17}}</string>
+							<string key="NSFrame">{{143, 318}, {206, 17}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="183157623">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">-1874852864</int>
-								<string key="NSContents">Label</string>
+								<string key="NSContents"/>
 								<reference key="NSSupport" ref="1067689752"/>
 								<object class="NSDateFormatter" key="NSFormatter" id="880407442">
 									<object class="NSMutableDictionary" key="NS.attributes">
@@ -494,7 +493,7 @@
 						<object class="NSTextField" id="394795867">
 							<reference key="NSNextResponder" ref="568628114"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{370, 362}, {90, 17}}</string>
+							<string key="NSFrame">{{378, 362}, {90, 17}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="258393242">
@@ -510,7 +509,7 @@
 						<object class="NSTextField" id="355149319">
 							<reference key="NSNextResponder" ref="568628114"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{370, 318}, {90, 17}}</string>
+							<string key="NSFrame">{{378, 318}, {90, 17}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="517313777">
@@ -526,7 +525,7 @@
 						<object class="NSTextField" id="747606479">
 							<reference key="NSNextResponder" ref="568628114"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{486, 363}, {130, 17}}</string>
+							<string key="NSFrame">{{494, 363}, {101, 17}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="787334756">
@@ -543,7 +542,7 @@
 						<object class="NSTextField" id="1055837072">
 							<reference key="NSNextResponder" ref="568628114"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{486, 318}, {101, 17}}</string>
+							<string key="NSFrame">{{494, 318}, {101, 17}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="954924405">
@@ -819,22 +818,6 @@
 					<int key="connectionID">100078</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: myMeeting.participants</string>
-						<reference key="source" ref="966153845"/>
-						<reference key="destination" ref="512844837"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="966153845"/>
-							<reference key="NSDestination" ref="512844837"/>
-							<string key="NSLabel">contentArray: myMeeting.participants</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">myMeeting.participants</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100081</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">debugDump:</string>
 						<reference key="source" ref="512844837"/>
@@ -849,6 +832,86 @@
 						<reference key="destination" ref="344501480"/>
 					</object>
 					<int key="connectionID">100086</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArray: meeting.participants</string>
+						<reference key="source" ref="966153845"/>
+						<reference key="destination" ref="512844837"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="966153845"/>
+							<reference key="NSDestination" ref="512844837"/>
+							<string key="NSLabel">contentArray: meeting.participants</string>
+							<string key="NSBinding">contentArray</string>
+							<string key="NSKeyPath">meeting.participants</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">100087</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">beginMeeting:</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="696532163"/>
+					</object>
+					<int key="connectionID">100088</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">endMeeting:</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="289565045"/>
+					</object>
+					<int key="connectionID">100089</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">startTimeField</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="631562270"/>
+					</object>
+					<int key="connectionID">100090</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">endTimeField</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="580283002"/>
+					</object>
+					<int key="connectionID">100091</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">elapsedTimeField</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="747606479"/>
+					</object>
+					<int key="connectionID">100092</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">accruedCostField</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="1055837072"/>
+					</object>
+					<int key="connectionID">100093</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">beginMeetingButton</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="696532163"/>
+					</object>
+					<int key="connectionID">100096</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">endMeetingButton</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="289565045"/>
+					</object>
+					<int key="connectionID">100097</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1381,7 +1444,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100086</int>
+			<int key="maxID">100097</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1390,12 +1453,42 @@
 					<string key="className">MyDocument</string>
 					<string key="superclassName">NSDocument</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">debugDump:</string>
-						<string key="NS.object.0">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>beginMeeting:</string>
+							<string>debugDump:</string>
+							<string>endMeeting:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">hourlyRateField</string>
-						<string key="NS.object.0">NSTextField</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>accruedCostField</string>
+							<string>beginMeetingButton</string>
+							<string>elapsedTimeField</string>
+							<string>endMeetingButton</string>
+							<string>endTimeField</string>
+							<string>hourlyRateField</string>
+							<string>startTimeField</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSTextField</string>
+							<string>NSButton</string>
+							<string>NSTextField</string>
+							<string>NSButton</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
+							<string>NSTextField</string>
+						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>

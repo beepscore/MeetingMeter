@@ -13,18 +13,44 @@
 //  TODO:  Check small potential errors due to rounding and time differences.
 
 #import <Cocoa/Cocoa.h>
-#import "Meeting.h"
+// When possible, use @class, not #import in header file.
+// #import requires recompile whenever imported file changes.
+@class Meeting;
 
 @interface MyDocument : NSDocument
 {
-    Meeting *myMeeting;
+    Meeting *meeting;
+    
+    NSTimer *timer;
+    NSDate *previousDate;
+    
+    IBOutlet NSButton *beginMeetingButton;
+    IBOutlet NSButton *endMeetingButton;
     IBOutlet NSTextField *hourlyRateField;
+
+    IBOutlet NSTextField *startTimeField;
+    IBOutlet NSTextField *endTimeField;
+    IBOutlet NSTextField *elapsedTimeField;
+    IBOutlet NSTextField *accruedCostField;    
 }
 
-@property (retain, nonatomic) Meeting *myMeeting;
+#pragma mark -
+#pragma mark Accessors
+@property (retain, nonatomic) Meeting *meeting;
 
+- (NSDate *)previousDate;
+- (void)setPreviousDate:(NSDate *)aPreviousDate;
+
+#pragma mark -
+#pragma mark IBActions
+- (IBAction)beginMeeting:(id)sender;
+- (IBAction)endMeeting:(id)sender;
 - (IBAction)debugDump:(id)sender;
 
+#pragma mark -
+#pragma mark Other methods
+- (void)stopGo;
+- (void)updateGUI:(NSTimer *)aTimer;
 - (void)updateHourlyRateField;
 
 @end

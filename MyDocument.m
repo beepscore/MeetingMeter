@@ -7,10 +7,13 @@
 //
 
 #import "MyDocument.h"
+#import "Meeting.h"
+
+#define SECONDS_PER_HOUR 3600
 
 @implementation MyDocument
 
-@synthesize myMeeting;
+@synthesize meeting;
 
 
 - (id)init
@@ -21,7 +24,7 @@
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
         
-        myMeeting = [[Meeting alloc] initWithExampleValues];
+        meeting = [[Meeting alloc] initWithExampleValues];
     }
     return self;
 }
@@ -42,8 +45,8 @@
     
     // TODO:  Update hourly rate field by observing when participants change
     // register as observer.  Ref Hillegass pg 146
-//    [[myMeeting participants] addObserver:self
-//                             forKeyPath:@"myMeeting.participants"
+//    [[meeting participants] addObserver:self
+//                             forKeyPath:@"meeting.participants"
 //                                options:NSKeyValueObservingOptionOld
 //                                context:NULL ];
 }
@@ -54,7 +57,7 @@
 //                        change:(NSDictionary *)change
 //                       context:(void *)context {
 //    // update hourlyRateField
-//    if (object == [myMeeting participants]) {
+//    if (object == [meeting participants]) {
 //        [self updateHourlyRateField];
 //    }
 //}
@@ -88,24 +91,136 @@
 }
 
 
-- (IBAction)debugDump:(id)sender {
-    NSLog(@"participants = %@", [myMeeting participants]);
-}
 
 - (void)updateHourlyRateField {
-    [hourlyRateField setStringValue:[[myMeeting hourlyRate] stringValue]]; 
+    [hourlyRateField setStringValue:[[meeting hourlyRate] stringValue]]; 
 }
+
+#pragma mark -
+#pragma mark Accessors
+- (NSDate *)previousDate {
+    return previousDate; 
+}
+- (void)setPreviousDate:(NSDate *)aPreviousDate {
+    if (previousDate != aPreviousDate) {
+        [previousDate release];
+        previousDate = [aPreviousDate retain];
+    }
+}
+
+
+#pragma mark -
+#pragma mark IBActions
+
+- (IBAction)beginMeeting:(id)sender{
+    // disable beginMeeting, enable endMeeting buttons
+    [beginMeetingButton setEnabled:NO];
+    [endMeetingButton setEnabled:YES];
+
+    // TODO:  may be able to eliminate this after implementing observing changes
+    [self updateHourlyRateField];
+    
+    // [[NSDate alloc] init] and [NSDate date] both return current date and time.
+    [meeting setStartTime:[NSDate date]];
+    
+    // Use IB formatter to display NSDate object in the text field
+    [startTimeField setObjectValue:[meeting startTime]];
+    [meeting setEndTime:nil];     
+    [endTimeField setStringValue:@"meeting still going..."]; 
+    
+    [self stopGo];
+}
+
+- (IBAction)endMeeting:(id)sender{
+    // disable endMeeting, enable beginMeeting buttons
+    [endMeetingButton setEnabled:NO];
+    [beginMeetingButton setEnabled:YES];
+    // [[NSDate alloc] init] and [NSDate date] both return current date and time.
+    [meeting setEndTime:[NSDate date]];     
+    [endTimeField setObjectValue:[meeting endTime]];
+    
+    [self stopGo];
+}
+
+- (IBAction)debugDump:(id)sender {
+    NSLog(@"participants = %@", [meeting participants]);
+}
+
+
+#pragma mark -
+#pragma mark Other methods
+
+// Timer method.  ref Hillegass pg 315
+- (void)stopGo {
+    
+    if (nil == timer) {
+        NSLog(@"Starting");
+        // Create a timer
+        timer = [[NSTimer scheduledTimerWithTimeInterval:1.0
+                                                  target:self
+                                                selector:@selector(updateGUI:)
+                                                userInfo:nil
+                                                 repeats:YES] retain];
+        [self setPreviousDate:[NSDate date]];
+        [meeting setAccruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]];
+        
+    } else {
+        NSLog(@"Stopping");
+        
+        // Invalidate and release the timer
+        [timer invalidate];
+        [timer release];
+        timer = nil;
+    }
+}
+
+-(void)updateGUI:(NSTimer *)aTimer {
+    // ref http://developer.apple.com/mac/library/documentation/Cocoa/Conceptual/DatesAndTimes/Articles/dtCalendricalCalculations.html#//apple_ref/doc/uid/TP40007836
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDate *currentDate = [NSDate date];
+    
+    NSDateComponents *components = [meeting elapsedTime];
+    
+    NSInteger hours = [components hour];
+    NSInteger minutes = [components minute];
+    // TODO:  Small potential error- integer seconds may be truncating second
+    NSInteger seconds = [components second];
+    
+    // TODO: Small potential error- displayed time differs slightly from time used to calculate cost.
+    [elapsedTimeField setStringValue:[NSString stringWithFormat:@"%2d:%2d:%2d", hours, minutes, seconds]];
+    
+    double incrementalTimeInHours = ([[NSDate date] timeIntervalSinceDate:previousDate] / SECONDS_PER_HOUR);
+    
+    NSDecimalNumber *incrementalTimeInHoursDecimal = 
+    [NSDecimalNumber decimalNumberWithDecimal:
+     [[NSNumber numberWithFloat:incrementalTimeInHours] decimalValue]];
+    
+    NSDecimalNumber *incrementalCost = 
+    [[meeting hourlyRate] decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
+    
+    [meeting setAccruedCost:[[meeting accruedCost] decimalNumberByAdding:incrementalCost]];
+    
+    [accruedCostField setObjectValue:[meeting accruedCost]];
+    
+    [self setPreviousDate:currentDate];    
+    [gregorian release];
+}
+
+
 
 - (void)dealloc{
     
     // TODO:  Update hourly rate field by observing when participants change
     // remove observer.  Ref Hillegass pg 146-147
-//    [[myMeeting participants] removeObserver:self forKeyPath:@"myMeeting.participants"];
-    
-    [myMeeting release];
-    
+//    [[meeting participants] removeObserver:self forKeyPath:@"meeting.participants"];
+
+    // Ref Hillegass Ch 04 pg 68
+    [meeting release]; meeting = nil;
+    [previousDate release], previousDate = nil;
+        
     [super dealloc];
 }
-
 
 @end
