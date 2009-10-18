@@ -31,19 +31,24 @@
     
     Person *tempPerson1 = [[Person alloc] 
             initWithName:@"Moe"
-              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"8.55"]];
+              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600.00"]];
 
     Person *tempPerson2 = [[Person alloc] 
                            initWithName:@"Larry"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"20"]];
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600"]];
+
+    Person *tempPerson3 = [[Person alloc] 
+                           initWithName:@"Curly"
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"60"]];
     
     [self initWithStartTime:nil
                     endTime:nil
                 accruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]
-               participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, nil] ];
+               participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil] ];
     
     [tempPerson1 release];
     [tempPerson2 release];
+    [tempPerson3 release];
     
     return self;
 }
@@ -128,11 +133,13 @@
     return;
 }
 
+// TODO: hourlyRate method doesn't work when manually editing rates in GUI
+// check info about not reusing an enumerator
 // calculate hourly rate for meeting
 - (NSDecimalNumber *) hourlyRate {
     
     // ref Hillegass pg 120
-    //return [participants valueForKeyPath:@"sum.hourlyRate"];
+    //NSDecimalNumber *combinedHourlyRate = [participants valueForKeyPath:@"sum.hourlyRate"];
     
     NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
     
@@ -140,10 +147,9 @@
     Person* thisPerson;
     
     while (thisPerson = [enumerator nextObject]) {
-        
-        NSLog(@"hourlyRate = %@", thisPerson.hourlyRate);
         combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];       
     }
+
     return combinedHourlyRate;
 }
 

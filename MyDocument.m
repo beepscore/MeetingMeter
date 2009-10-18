@@ -143,7 +143,7 @@
 }
 
 - (IBAction)debugDump:(id)sender {
-    NSLog(@"participants = %@", [meeting participants]);
+    NSLog(@"[meeting hourlyRate] = %@, participants = %@", [meeting hourlyRate], [meeting participants]);
 }
 
 

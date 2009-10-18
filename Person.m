@@ -20,10 +20,14 @@
 
 // init
 - (id)init {
-    NSDecimalNumber *minimumHourlyWage =
-        [NSDecimalNumber decimalNumberWithString:@"8.55"];
+
+//  NSDecimalNumber *minimumHourlyWage =
+//      [NSDecimalNumber decimalNumberWithString:@"8.55"];
+
+    NSDecimalNumber *defaultHourlyRate =
+    [NSDecimalNumber decimalNumberWithString:@"3600"];
     
-    [self initWithName:@"defaultName" hourlyRate:minimumHourlyWage];
+    [self initWithName:@"defaultName" hourlyRate:defaultHourlyRate];
     return self;
 }
 
