@@ -18,6 +18,7 @@
 @interface MyDocument : NSDocument
 {
     Meeting *myMeeting;
+    IBOutlet NSTextField *hourlyRateField;
 }
 
 @property (retain, nonatomic) Meeting *myMeeting;

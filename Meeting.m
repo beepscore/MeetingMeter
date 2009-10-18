@@ -129,17 +129,10 @@
 // calculate hourly rate for meeting
 - (NSDecimalNumber *) hourlyRate {
     
-    NSDecimalNumber* combinedHourlyRate = [NSDecimalNumber decimalNumberWithString:@"0.0"] ;
-    
-//    if (person1Present) 
-//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person1 hourlyRate]];
-//    if (person2Present) 
-//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person2 hourlyRate]];
-//    if (person3Present) 
-//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person3 hourlyRate]];
-//    if (person4Present) 
-//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[person4 hourlyRate]];
-    return combinedHourlyRate;
+    //NSDecimalNumber* combinedHourlyRate = [NSDecimalNumber decimalNumberWithString:@"0.0"] ;
+    // ref Hillegass pg 120
+    //return [participants valueForKeyPath:@"sum.hourlyRate"];
+    return [NSDecimalNumber decimalNumberWithString:@"99.99"];
 }
 
 - (NSDateComponents *) elapsedTime {

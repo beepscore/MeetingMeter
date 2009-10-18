@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="100068"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -842,6 +842,14 @@
 					</object>
 					<int key="connectionID">100082</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">hourlyRateField</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="344501480"/>
+					</object>
+					<int key="connectionID">100086</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1346,9 +1354,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{383, 373}, {640, 400}}</string>
+					<string>{{383, 89}, {640, 400}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{383, 373}, {640, 400}}</string>
+					<string>{{383, 89}, {640, 400}}</string>
 					<integer value="1"/>
 					<string>{{201, 387}, {507, 413}}</string>
 					<integer value="1"/>
@@ -1373,7 +1381,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100082</int>
+			<int key="maxID">100086</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1384,6 +1392,10 @@
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">debugDump:</string>
 						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">hourlyRateField</string>
+						<string key="NS.object.0">NSTextField</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
