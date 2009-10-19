@@ -9,8 +9,8 @@
 #import "Meeting.h"
 #import "Person.h"
 
-#define MINUTES_PER_HOUR 60
-#define SECONDS_PER_HOUR 3600
+#define MINUTES_PER_HOUR 60.
+#define SECONDS_PER_HOUR 3600.
 
 @implementation Meeting
 
@@ -20,7 +20,6 @@
 - (id)init {
 
     [self initWithStartTime:nil
-               previousTime:nil
                     endTime:nil
                 accruedCost:nil
                 participants:nil];
@@ -42,11 +41,10 @@
 
     Person *tempPerson3 = [[Person alloc] 
                            initWithName:@"Curly"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"60"]
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"36"]
                            hourlyRateTwo:60.00];
     
     [self initWithStartTime:nil
-               previousTime:nil
                     endTime:nil
                 accruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]
                participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil] ];
@@ -59,14 +57,12 @@
 }
 
 - (id)initWithStartTime:(NSDate*)aStartTime
-           previousTime:(NSDate*)aPreviousTime
                 endTime:(NSDate*)anEndTime
             accruedCost:(NSDecimalNumber*)anAccruedCost
            participants:(NSMutableArray*)aParticipants{
     
     if (self = [super init]) {
         [self setStartTime:aStartTime];
-        [self setPreviousTime:aPreviousTime];
         [self setEndTime:anEndTime];
         [self setAccruedCost:anAccruedCost];
         
@@ -111,16 +107,6 @@
     }
 }
 
-- (NSDate *)previousTime {
-    return previousTime; 
-}
-- (void)setPreviousTime:(NSDate *)aPreviousTime {
-    if (previousTime != aPreviousTime) {
-        [previousTime release];
-        previousTime = [aPreviousTime retain];
-    }
-}
-
 - (NSDate *)endTime {
     return endTime; 
 }
@@ -155,7 +141,6 @@
 }
 
 // TODO: hourlyRate method doesn't work when manually editing rates in GUI
-// check info about not reusing an enumerator
 // calculate hourly rate for meeting
 - (NSDecimalNumber *) hourlyRate {
     
@@ -197,8 +182,7 @@
     return combinedHourlyRate;
 }
 
-
-
+// I think elapsedTime truncates seconds at components:fromDate:toDate:options: method
 - (NSDateComponents *) elapsedTime {
     if (nil == startTime) {
         return 0;
@@ -217,12 +201,11 @@
     return components;
 }
 
+
 - (void)dealloc {
     
-    [participants release], participants = nil;
-    
+    [participants release], participants = nil;    
     [startTime release], startTime = nil;
-    [previousTime release], previousTime = nil;
     [endTime release], endTime = nil;
     [accruedCost release], accruedCost = nil;
     

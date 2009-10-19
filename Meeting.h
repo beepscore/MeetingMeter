@@ -16,7 +16,6 @@
     
     // declare instance variables
     NSDate *startTime;
-    NSDate *previousTime;
     NSDate *endTime;
     NSDecimalNumber *accruedCost;    
     NSMutableArray *participants;
@@ -28,7 +27,6 @@
 #pragma mark Initializers
 // designatedInitializer
 - (id)initWithStartTime:(NSDate*)aStartTime
-           previousTime:(NSDate*)aPreviousTime
                 endTime:(NSDate*)anEndTime
             accruedCost:(NSDecimalNumber*)anAccruedCost
            participants:(NSMutableArray*)aParticipants;
@@ -42,8 +40,6 @@
 
 - (NSDate *)startTime;
 - (void)setStartTime:(NSDate *)aStartTime;
-- (NSDate *)previousTime;
-- (void)setPreviousTime:(NSDate *)aPreviousTime;
 - (NSDate *)endTime;
 - (void)setEndTime:(NSDate *)anEndTime;
 
@@ -60,5 +56,4 @@
 - (float)hourlyRateTwo;
 
 - (NSDateComponents *)elapsedTime;
-
 @end

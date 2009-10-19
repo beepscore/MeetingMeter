@@ -9,12 +9,16 @@
 #import "MyDocument.h"
 #import "Meeting.h"
 
-#define SECONDS_PER_HOUR 3600
+#define SECONDS_PER_HOUR 3600.
+#define MINUTES_PER_HOUR 60.
+
 
 @implementation MyDocument
 
+#pragma mark -
+#pragma mark Accessors
 @synthesize meeting;
-
+@synthesize elapsedTimeOld;
 
 - (id)init
 {
@@ -25,6 +29,7 @@
         // If an error occurs here, send a [self release] message and return nil.
         
         meeting = [[Meeting alloc] initWithExampleValues];
+        elapsedTimeOld = [[NSDateComponents alloc] init];
     }
     return self;
 }
@@ -98,19 +103,6 @@
 }
 
 #pragma mark -
-#pragma mark Accessors
-- (NSDate *)previousDate {
-    return previousDate; 
-}
-- (void)setPreviousDate:(NSDate *)aPreviousDate {
-    if (previousDate != aPreviousDate) {
-        [previousDate release];
-        previousDate = [aPreviousDate retain];
-    }
-}
-
-
-#pragma mark -
 #pragma mark IBActions
 
 - (IBAction)beginMeeting:(id)sender{
@@ -148,7 +140,6 @@
           [meeting hourlyRate], [meeting hourlyRateTwo], [meeting participants]);
 }
 
-
 #pragma mark -
 #pragma mark Other methods
 
@@ -163,7 +154,8 @@
                                                 selector:@selector(updateGUI:)
                                                 userInfo:nil
                                                  repeats:YES] retain];
-        [self setPreviousDate:[NSDate date]];
+        
+        [self setElapsedTimeOld:[meeting elapsedTime]];
         [meeting setAccruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]];
         
     } else {
@@ -181,20 +173,24 @@
     NSCalendar *gregorian = [[NSCalendar alloc]
                              initWithCalendarIdentifier:NSGregorianCalendar];
     
-    NSDate *currentDate = [NSDate date];
-    
+    // use "components" to sample and hold current elapsedTime
+    // so value won't change during calculations
     NSDateComponents *components = [meeting elapsedTime];
+    NSInteger elapsedHours = [components hour];
+    NSInteger elapsedMinutes = [components minute];
+    // I think NSDateComponents* elapsedTime truncates seconds.
+    double elapsedSeconds = [components second];   
     
-    NSInteger hours = [components hour];
-    NSInteger minutes = [components minute];
-    // TODO:  Small potential error- integer seconds may be truncating second
-    NSInteger seconds = [components second];
-    
-    // TODO: Small potential error- displayed time differs slightly from time used to calculate cost.
-    [elapsedTimeField setStringValue:[NSString stringWithFormat:@"%2d:%2d:%2d", hours, minutes, seconds]];
-    
-    double incrementalTimeInHours = ([[NSDate date] timeIntervalSinceDate:previousDate] / SECONDS_PER_HOUR);
-    
+    [elapsedTimeField setStringValue:[NSString stringWithFormat:@"%02d:%02d:%04.1f", 
+                                      elapsedHours, elapsedMinutes, elapsedSeconds]];
+
+    double incrementalTimeInHours = 
+       ((elapsedHours - [elapsedTimeOld hour])
+        + ((elapsedMinutes - [elapsedTimeOld minute]) / MINUTES_PER_HOUR)
+        + ((elapsedSeconds - [elapsedTimeOld second]) / SECONDS_PER_HOUR));
+
+    [self setElapsedTimeOld:components];  
+
     NSDecimalNumber *incrementalTimeInHoursDecimal = 
     [NSDecimalNumber decimalNumberWithDecimal:
      [[NSNumber numberWithFloat:incrementalTimeInHours] decimalValue]];
@@ -206,10 +202,8 @@
     
     [accruedCostField setObjectValue:[meeting accruedCost]];
     
-    [self setPreviousDate:currentDate];    
     [gregorian release];
 }
-
 
 
 - (void)dealloc{
@@ -220,7 +214,7 @@
 
     // Ref Hillegass Ch 04 pg 68
     [meeting release]; meeting = nil;
-    [previousDate release], previousDate = nil;
+    [elapsedTimeOld release], elapsedTimeOld = nil;
         
     [super dealloc];
 }

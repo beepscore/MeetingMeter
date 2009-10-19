@@ -22,7 +22,7 @@
     Meeting *meeting;
     
     NSTimer *timer;
-    NSDate *previousDate;
+    NSDateComponents *elapsedTimeOld;
     
     IBOutlet NSButton *beginMeetingButton;
     IBOutlet NSButton *endMeetingButton;
@@ -37,9 +37,7 @@
 #pragma mark -
 #pragma mark Accessors
 @property (retain, nonatomic) Meeting *meeting;
-
-- (NSDate *)previousDate;
-- (void)setPreviousDate:(NSDate *)aPreviousDate;
+@property (retain, nonatomic) NSDateComponents *elapsedTimeOld;
 
 #pragma mark -
 #pragma mark IBActions
