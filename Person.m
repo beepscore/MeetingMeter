@@ -12,6 +12,7 @@
 
 @synthesize name;
 @synthesize hourlyRate;
+@synthesize hourlyRateTwo;
 
 
 #pragma mark -
@@ -27,15 +28,21 @@
     NSDecimalNumber *defaultHourlyRate =
     [NSDecimalNumber decimalNumberWithString:@"3600"];
     
-    [self initWithName:@"defaultName" hourlyRate:defaultHourlyRate];
+    [self initWithName:@"defaultName"
+            hourlyRate:defaultHourlyRate
+         hourlyRateTwo: 3600.00];
     return self;
 }
 
-- (id)initWithName:(NSString*)aName hourlyRate:(NSDecimalNumber*)anHourlyRate {
+- (id)initWithName:(NSString*)aName
+        hourlyRate:(NSDecimalNumber*)anHourlyRate
+     hourlyRateTwo:(float)anHourlyRateTwo{
+    
     if (![super init])
         return nil;
     [self setName:aName];
     [self setHourlyRate:anHourlyRate];
+    [self setHourlyRateTwo:anHourlyRateTwo];
     return self;
 }
 
@@ -45,13 +52,12 @@
 - (void)dealloc {
     [name release], name = nil;
     [hourlyRate release], hourlyRate = nil;
-    
     [super dealloc];
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"name = %@, rate = %@",
-            [self name], [self hourlyRate]];    
+    return [NSString stringWithFormat:@"name = %@, rate = %@ rate2 = %f",
+            [self name], [self hourlyRate], [self hourlyRateTwo]];    
 }
 
 @end

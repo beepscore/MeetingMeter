@@ -19,14 +19,11 @@
         
     NSDate *startTime;
     NSDate *endTime;
-    NSDecimalNumber *accruedCost;
-    
+    NSDecimalNumber *accruedCost;    
     NSMutableArray *participants;
-
 }
 
 // declare methods
-
 #pragma mark -
 #pragma mark Initializers
 // designatedInitializer
@@ -39,7 +36,6 @@
 
 #pragma mark -
 #pragma mark Accessors
-
 - (NSMutableArray *)participants;
 - (void)setParticipants:(NSMutableArray *)a;
 
@@ -58,6 +54,7 @@
 
 // calculated from people attending meeting
 - (NSDecimalNumber *)hourlyRate;
+- (float)hourlyRateTwo;
 
 - (NSDateComponents *)elapsedTime;
 

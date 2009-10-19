@@ -31,15 +31,18 @@
     
     Person *tempPerson1 = [[Person alloc] 
             initWithName:@"Moe"
-              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600.00"]];
+              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600.00"]
+                           hourlyRateTwo:3600.00];
 
     Person *tempPerson2 = [[Person alloc] 
                            initWithName:@"Larry"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600"]];
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600"]
+                           hourlyRateTwo:3600.00];
 
     Person *tempPerson3 = [[Person alloc] 
                            initWithName:@"Curly"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"60"]];
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"60"]
+                           hourlyRateTwo:60.00];
     
     [self initWithStartTime:nil
                     endTime:nil
@@ -86,7 +89,11 @@
     // now 'participants' points to the same object as 'a'
     participants = a;
     
-    //[self hourlyRate];
+    // TODO:  observe array controller?
+    [self willChangeValueForKey:@"hourlyRate"];
+    [self hourlyRate];
+    [self didChangeValueForKey:@"hourlyRate"];
+
 }
 
 
@@ -143,15 +150,40 @@
     
     NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
     
-    NSEnumerator *enumerator = [participants objectEnumerator];
-    Person* thisPerson;
+//    NSEnumerator *enumerator = [participants objectEnumerator];
+//    Person* thisPerson;
+//    
+//    while (thisPerson = [enumerator nextObject]) {
+//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];       
+//    }
     
-    while (thisPerson = [enumerator nextObject]) {
-        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];       
-    }
-
+    for (int i = 0; i < [participants count]; i++) {
+        NSLog(@"[[participants objectAtIndex:%d] hourlyRate] = %@", i, [[participants objectAtIndex:i] hourlyRate]);
+        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[[participants objectAtIndex:i] hourlyRate]];
+    } 
+    
+    // TODO: Observe text field, use it's value for hourlyRate???
     return combinedHourlyRate;
 }
+
+
+- (float) hourlyRateTwo {
+    
+    // ref Hillegass pg 120
+    //NSDecimalNumber *combinedHourlyRate = [participants valueForKeyPath:@"sum.hourlyRate"];
+    
+    float combinedHourlyRate = 0.00;
+        
+    for (int i = 0; i < [participants count]; i++) {
+        NSLog(@"[[participants objectAtIndex:%d] hourlyRateTwo] = %f",
+              i, [[participants objectAtIndex:i] hourlyRateTwo]);
+        
+        combinedHourlyRate = combinedHourlyRate + [[participants objectAtIndex:i] hourlyRateTwo];
+    }    
+    return combinedHourlyRate;
+}
+
+
 
 - (NSDateComponents *) elapsedTime {
     if (nil == startTime) {

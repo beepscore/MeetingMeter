@@ -93,7 +93,8 @@
 
 
 - (void)updateHourlyRateField {
-    [hourlyRateField setStringValue:[[meeting hourlyRate] stringValue]]; 
+//    [hourlyRateField setStringValue:[meeting hourlyRate]]; 
+//    [hourlyRateField setStringValue:[[meeting hourlyRate] stringValue]];
 }
 
 #pragma mark -
@@ -143,7 +144,8 @@
 }
 
 - (IBAction)debugDump:(id)sender {
-    NSLog(@"[meeting hourlyRate] = %@, participants = %@", [meeting hourlyRate], [meeting participants]);
+    NSLog(@"[meeting hourlyRate] = %@ \n [meeting hourlyRateTwo] = %f \n [meeting participants] = %@",
+          [meeting hourlyRate], [meeting hourlyRateTwo], [meeting participants]);
 }
 
 
