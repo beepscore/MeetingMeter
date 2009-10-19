@@ -48,24 +48,8 @@
     
     [self updateHourlyRateField];
     
-    // TODO:  Update hourly rate field by observing when participants change
-    // register as observer.  Ref Hillegass pg 146
-//    [[meeting participants] addObserver:self
-//                             forKeyPath:@"meeting.participants"
-//                                options:NSKeyValueObservingOptionOld
-//                                context:NULL ];
 }
 
-// TODO:  Update hourly rate field by observing when participants change
-//- (void)observeValueForKeyPath:(NSString *)keyPath
-//                      ofObject:(id)object
-//                        change:(NSDictionary *)change
-//                       context:(void *)context {
-//    // update hourlyRateField
-//    if (object == [meeting participants]) {
-//        [self updateHourlyRateField];
-//    }
-//}
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
@@ -98,9 +82,27 @@
 
 
 - (void)updateHourlyRateField {
-//    [hourlyRateField setStringValue:[meeting hourlyRate]]; 
-//    [hourlyRateField setStringValue:[[meeting hourlyRate] stringValue]];
+    // TODO:  Update hourly rate field by observing when participants change
+    // register as observer.  Ref Hillegass pg 146
+    //    [[meeting participants] addObserver:self
+    //                             forKeyPath:@"meeting.participants"
+    //                                options:NSKeyValueObservingOptionOld
+    //                                context:NULL ];
+    
+    [meeting hourlyRate];
 }
+
+// TODO:  Update hourly rate field by observing when participants change
+//- (void)observeValueForKeyPath:(NSString *)keyPath
+//                      ofObject:(id)object
+//                        change:(NSDictionary *)change
+//                       context:(void *)context {
+//    // update hourlyRateField
+//    if (object == [meeting participants]) {
+//        [self updateHourlyRateField];
+//    }
+//}
+
 
 #pragma mark -
 #pragma mark IBActions
@@ -136,8 +138,8 @@
 }
 
 - (IBAction)debugDump:(id)sender {
-    NSLog(@"[meeting hourlyRate] = %@ \n [meeting hourlyRateTwo] = %f \n [meeting participants] = %@",
-          [meeting hourlyRate], [meeting hourlyRateTwo], [meeting participants]);
+    NSLog(@"%@", [meeting description]);
+    NSLog(@"\n\n");
 }
 
 #pragma mark -

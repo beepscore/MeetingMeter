@@ -148,14 +148,7 @@
     //NSDecimalNumber *combinedHourlyRate = [participants valueForKeyPath:@"sum.hourlyRate"];
     
     NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
-    
-//    NSEnumerator *enumerator = [participants objectEnumerator];
-//    Person* thisPerson;
-//    
-//    while (thisPerson = [enumerator nextObject]) {
-//        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];       
-//    }
-    
+        
     for (int i = 0; i < [participants count]; i++) {
         NSLog(@"[[participants objectAtIndex:%d] hourlyRate] = %@", i, [[participants objectAtIndex:i] hourlyRate]);
         combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[[participants objectAtIndex:i] hourlyRate]];
@@ -199,6 +192,34 @@
                                                  options:0];
     [gregorian autorelease];
     return components;
+}
+
+- (NSString*)description {
+    NSEnumerator *enumerator = [participants objectEnumerator];
+    Person* thisPerson;
+    
+    NSString *descriptionString = @"\n";
+    descriptionString = [descriptionString stringByAppendingString:@"Participant, hourlyRate, hourlyRateTwo \n"];    
+    
+    while (thisPerson = [enumerator nextObject]) {
+        NSString *thisPersonNameString = [[NSString stringWithFormat:@"%@", [thisPerson name]]
+                                          stringByPaddingToLength: 15 withString: @" " startingAtIndex:0];
+        
+        descriptionString = [descriptionString stringByAppendingString:thisPersonNameString];    
+
+        NSString *thisPersonHourlyRateString = [NSString stringWithFormat:@"%20@, %10.2f \n",
+                                      [thisPerson hourlyRate], [thisPerson hourlyRateTwo]];
+        
+        descriptionString = [descriptionString stringByAppendingString:thisPersonHourlyRateString];    
+    }
+    
+    NSString *meetingRateString = 
+      [NSString stringWithFormat:@"        hourlyRate      hourlyRateTwo \n          %@        %10.2f \n",
+                                    [self hourlyRate], [self hourlyRateTwo]];
+
+    descriptionString = [descriptionString stringByAppendingString:meetingRateString];    
+
+    return descriptionString;
 }
 
 
