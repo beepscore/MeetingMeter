@@ -15,12 +15,12 @@
 @interface Meeting : NSObject {
     
     // declare instance variables
-    // TODO: replace separate person instances from homework 2 with an array
-        
     NSDate *startTime;
+    NSDate *previousTime;
     NSDate *endTime;
     NSDecimalNumber *accruedCost;    
     NSMutableArray *participants;
+
 }
 
 // declare methods
@@ -28,6 +28,7 @@
 #pragma mark Initializers
 // designatedInitializer
 - (id)initWithStartTime:(NSDate*)aStartTime
+           previousTime:(NSDate*)aPreviousTime
                 endTime:(NSDate*)anEndTime
             accruedCost:(NSDecimalNumber*)anAccruedCost
            participants:(NSMutableArray*)aParticipants;
@@ -41,6 +42,8 @@
 
 - (NSDate *)startTime;
 - (void)setStartTime:(NSDate *)aStartTime;
+- (NSDate *)previousTime;
+- (void)setPreviousTime:(NSDate *)aPreviousTime;
 - (NSDate *)endTime;
 - (void)setEndTime:(NSDate *)anEndTime;
 

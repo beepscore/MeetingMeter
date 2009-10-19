@@ -20,6 +20,7 @@
 - (id)init {
 
     [self initWithStartTime:nil
+               previousTime:nil
                     endTime:nil
                 accruedCost:nil
                 participants:nil];
@@ -45,6 +46,7 @@
                            hourlyRateTwo:60.00];
     
     [self initWithStartTime:nil
+               previousTime:nil
                     endTime:nil
                 accruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]
                participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil] ];
@@ -57,12 +59,14 @@
 }
 
 - (id)initWithStartTime:(NSDate*)aStartTime
-              endTime:(NSDate*)anEndTime
-          accruedCost:(NSDecimalNumber*)anAccruedCost
-         participants:(NSMutableArray*)aParticipants{
+           previousTime:(NSDate*)aPreviousTime
+                endTime:(NSDate*)anEndTime
+            accruedCost:(NSDecimalNumber*)anAccruedCost
+           participants:(NSMutableArray*)aParticipants{
     
     if (self = [super init]) {
         [self setStartTime:aStartTime];
+        [self setPreviousTime:aPreviousTime];
         [self setEndTime:anEndTime];
         [self setAccruedCost:anAccruedCost];
         
@@ -104,6 +108,16 @@
     if (startTime != aStartTime) {
         [startTime release];
         startTime = [aStartTime retain];
+    }
+}
+
+- (NSDate *)previousTime {
+    return previousTime; 
+}
+- (void)setPreviousTime:(NSDate *)aPreviousTime {
+    if (previousTime != aPreviousTime) {
+        [previousTime release];
+        previousTime = [aPreviousTime retain];
     }
 }
 
@@ -208,6 +222,7 @@
     [participants release], participants = nil;
     
     [startTime release], startTime = nil;
+    [previousTime release], previousTime = nil;
     [endTime release], endTime = nil;
     [accruedCost release], accruedCost = nil;
     
