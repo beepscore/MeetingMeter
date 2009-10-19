@@ -53,7 +53,6 @@
 
 // calculated from people attending meeting
 - (NSDecimalNumber *)hourlyRate;
-- (float)hourlyRateTwo;
 
 - (NSDateComponents *)elapsedTime;
 @end

@@ -12,8 +12,6 @@
 
 @synthesize name;
 @synthesize hourlyRate;
-@synthesize hourlyRateTwo;
-
 
 #pragma mark -
 #pragma mark Initializers
@@ -22,27 +20,21 @@
 // init
 - (id)init {
 
-//  NSDecimalNumber *minimumHourlyWage =
-//      [NSDecimalNumber decimalNumberWithString:@"8.55"];
-
     NSDecimalNumber *defaultHourlyRate =
-    [NSDecimalNumber decimalNumberWithString:@"3600"];
+     [NSDecimalNumber decimalNumberWithString:@"3600"];
     
     [self initWithName:@"defaultName"
-            hourlyRate:defaultHourlyRate
-         hourlyRateTwo: 3600.00];
+            hourlyRate:defaultHourlyRate];
     return self;
 }
 
 - (id)initWithName:(NSString*)aName
-        hourlyRate:(NSDecimalNumber*)anHourlyRate
-     hourlyRateTwo:(float)anHourlyRateTwo{
+        hourlyRate:(NSDecimalNumber*)anHourlyRate{
     
     if (![super init])
         return nil;
     [self setName:aName];
     [self setHourlyRate:anHourlyRate];
-    [self setHourlyRateTwo:anHourlyRateTwo];
     return self;
 }
 
@@ -56,8 +48,8 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"name = %@, rate = %@ rate2 = %f",
-            [self name], [self hourlyRate], [self hourlyRateTwo]];    
+    return [NSString stringWithFormat:@"name = %@, rate = %@",
+            [self name], [self hourlyRate]];    
 }
 
 @end

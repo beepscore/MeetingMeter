@@ -15,20 +15,16 @@
     // declare instance variables
     NSString *name;
     NSDecimalNumber *hourlyRate;
-    float hourlyRateTwo;
 }
 
 @property (readwrite, copy) NSString *name;
 
 @property (retain, nonatomic) NSDecimalNumber *hourlyRate;
 
-@property (readwrite) float hourlyRateTwo;
-
 #pragma mark -
 #pragma mark Initializers
 // designated initializer
 - (id)initWithName:(NSString*)aName
-        hourlyRate:(NSDecimalNumber*)anHourlyRate
-     hourlyRateTwo:(float)anHourlyRateTwo;
+        hourlyRate:(NSDecimalNumber*)anHourlyRate;
 
 @end

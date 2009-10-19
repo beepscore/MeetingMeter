@@ -158,7 +158,7 @@
                                                  repeats:YES] retain];
         
         [self setElapsedTimeOld:[meeting elapsedTime]];
-        [meeting setAccruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]];
+        [meeting setAccruedCost:[NSDecimalNumber zero]];
         
     } else {
         NSLog(@"Stopping");

@@ -31,22 +31,19 @@
     
     Person *tempPerson1 = [[Person alloc] 
             initWithName:@"Moe"
-              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600.00"]
-                           hourlyRateTwo:3600.00];
+              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600.00"]];
 
     Person *tempPerson2 = [[Person alloc] 
                            initWithName:@"Larry"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600"]
-                           hourlyRateTwo:3600.00];
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600"]];
 
     Person *tempPerson3 = [[Person alloc] 
                            initWithName:@"Curly"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"36"]
-                           hourlyRateTwo:60.00];
+                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"36"]];
     
     [self initWithStartTime:nil
                     endTime:nil
-                accruedCost:[NSDecimalNumber decimalNumberWithString:@"0"]
+                accruedCost:[NSDecimalNumber zero]
                participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil] ];
     
     [tempPerson1 release];
@@ -158,23 +155,6 @@
     return combinedHourlyRate;
 }
 
-
-- (float) hourlyRateTwo {
-    
-    // ref Hillegass pg 120
-    //NSDecimalNumber *combinedHourlyRate = [participants valueForKeyPath:@"sum.hourlyRate"];
-    
-    float combinedHourlyRate = 0.00;
-        
-    for (int i = 0; i < [participants count]; i++) {
-        NSLog(@"[[participants objectAtIndex:%d] hourlyRateTwo] = %f",
-              i, [[participants objectAtIndex:i] hourlyRateTwo]);
-        
-        combinedHourlyRate = combinedHourlyRate + [[participants objectAtIndex:i] hourlyRateTwo];
-    }    
-    return combinedHourlyRate;
-}
-
 // I think elapsedTime truncates seconds at components:fromDate:toDate:options: method
 - (NSDateComponents *) elapsedTime {
     if (nil == startTime) {
@@ -199,7 +179,7 @@
     Person* thisPerson;
     
     NSString *descriptionString = @"\n";
-    descriptionString = [descriptionString stringByAppendingString:@"Participant, hourlyRate, hourlyRateTwo \n"];    
+    descriptionString = [descriptionString stringByAppendingString:@"Participant, hourlyRate \n"];    
     
     while (thisPerson = [enumerator nextObject]) {
         NSString *thisPersonNameString = [[NSString stringWithFormat:@"%@", [thisPerson name]]
@@ -207,15 +187,14 @@
         
         descriptionString = [descriptionString stringByAppendingString:thisPersonNameString];    
 
-        NSString *thisPersonHourlyRateString = [NSString stringWithFormat:@"%20@, %10.2f \n",
-                                      [thisPerson hourlyRate], [thisPerson hourlyRateTwo]];
+        NSString *thisPersonHourlyRateString = [NSString stringWithFormat:@"%20@ \n",
+                                      [thisPerson hourlyRate]];
         
         descriptionString = [descriptionString stringByAppendingString:thisPersonHourlyRateString];    
     }
     
     NSString *meetingRateString = 
-      [NSString stringWithFormat:@"        hourlyRate      hourlyRateTwo \n          %@        %10.2f \n",
-                                    [self hourlyRate], [self hourlyRateTwo]];
+      [NSString stringWithFormat:@"  hourlyRate = %@\n", [self hourlyRate]];
 
     descriptionString = [descriptionString stringByAppendingString:meetingRateString];    
 
