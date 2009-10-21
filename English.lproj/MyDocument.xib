@@ -682,7 +682,7 @@
 									<bool key="NS.localized">NO</bool>
 									<bool key="NS.allowsfloats">YES</bool>
 								</object>
-								<string key="NSPlaceholderString">meeting rate</string>
+								<string key="NSPlaceholderString">meeting hourly rate</string>
 								<reference key="NSControlView" ref="344501480"/>
 								<reference key="NSBackgroundColor" ref="868031329"/>
 								<reference key="NSTextColor" ref="175396149"/>
@@ -898,22 +898,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.@sum.hourlyRate</string>
-						<reference key="source" ref="344501480"/>
-						<reference key="destination" ref="966153845"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="344501480"/>
-							<reference key="NSDestination" ref="966153845"/>
-							<string key="NSLabel">value: arrangedObjects.@sum.hourlyRate</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.@sum.hourlyRate</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100135</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">contentArray: meeting.participants</string>
 						<reference key="source" ref="966153845"/>
 						<reference key="destination" ref="512844837"/>
@@ -931,6 +915,22 @@
 						</object>
 					</object>
 					<int key="connectionID">100136</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: meeting.hourlyRate</string>
+						<reference key="source" ref="344501480"/>
+						<reference key="destination" ref="512844837"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="344501480"/>
+							<reference key="NSDestination" ref="512844837"/>
+							<string key="NSLabel">value: meeting.hourlyRate</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">meeting.hourlyRate</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">100139</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1463,7 +1463,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100136</int>
+			<int key="maxID">100139</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
