@@ -16,6 +16,7 @@
 // When possible, use @class, not #import in header file.
 // #import requires recompile whenever imported file changes.
 @class Meeting;
+@class Person;
 
 @interface MyDocument : NSDocument
 {
@@ -50,5 +51,13 @@
 - (void)stopGo;
 - (void)updateGUI:(NSTimer *)aTimer;
 - (void)updateHourlyRateField;
+
+#pragma mark -
+#pragma mark KVO related methods
+
+- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index;
+- (void)removeObjectFromParticipantsAtIndex: (int) index;
+- (void)startObservingPerson:(Person *)aPerson;
+- (void)stopObservingPerson:(Person *)aPerson;
 
 @end

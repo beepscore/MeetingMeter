@@ -221,4 +221,34 @@
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark KVO related methods
+
+// Ref Hillegass pg 144, 147
+- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index {
+    
+    [[[self meeting] participants] insertObject:aPerson atIndex:index];
+    [self startObservingPerson:aPerson];
+}
+
+- (void)removeObjectFromParticipantsAtIndex: (int) index {
+    Person *aPerson = [[[Person alloc] init] autorelease];
+    [self stopObservingPerson:aPerson];
+    [[[self meeting] participants] removeObjectAtIndex:index];
+}
+
+- (void)startObservingPerson:(Person *)aPerson {
+    
+    [aPerson addObserver:self
+              forKeyPath:@"hourlyRate"
+                 options:NSKeyValueObservingOptionOld
+                 context:NULL];
+}
+
+- (void)stopObservingPerson:(Person *)aPerson {
+    
+    [aPerson removeObserver:self forKeyPath:@"hourlyRate"];
+}
+
+
 @end
