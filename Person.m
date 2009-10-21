@@ -15,7 +15,7 @@
 
 #pragma mark -
 #pragma mark Initializers
-// use Accessorizer to generate accessor method implementations
+// used Accessorizer to generate accessor method implementations
 
 // init
 - (id)init {
@@ -31,10 +31,10 @@
 - (id)initWithName:(NSString*)aName
         hourlyRate:(NSDecimalNumber*)anHourlyRate{
     
-    if (![super init])
-        return nil;
-    [self setName:aName];
-    [self setHourlyRate:anHourlyRate];
+    if (self = [super init]) {
+        [self setName:aName];
+        [self setHourlyRate:anHourlyRate];        
+    }
     return self;
 }
 

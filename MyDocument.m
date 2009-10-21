@@ -22,8 +22,7 @@
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
     
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
