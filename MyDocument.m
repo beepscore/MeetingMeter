@@ -79,28 +79,10 @@
 }
 
 
-
 - (void)updateHourlyRateField {
-    // TODO:  Update hourly rate field by observing when participants change
-    // register as observer.  Ref Hillegass pg 146
-    //    [[meeting participants] addObserver:self
-    //                             forKeyPath:@"meeting.participants"
-    //                                options:NSKeyValueObservingOptionOld
-    //                                context:NULL ];
-    
+
     [meeting hourlyRate];
 }
-
-// TODO:  Update hourly rate field by observing when participants change
-//- (void)observeValueForKeyPath:(NSString *)keyPath
-//                      ofObject:(id)object
-//                        change:(NSDictionary *)change
-//                       context:(void *)context {
-//    // update hourlyRateField
-//    if (object == [meeting participants]) {
-//        [self updateHourlyRateField];
-//    }
-//}
 
 
 #pragma mark -
@@ -209,10 +191,8 @@
 
 - (void)dealloc{
     
-    // TODO:  Update hourly rate field by observing when participants change
     // remove observer.  Ref Hillegass pg 146-147
-//    [[meeting participants] removeObserver:self forKeyPath:@"meeting.participants"];
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Ref Hillegass Ch 04 pg 68
     [meeting release]; meeting = nil;
     [elapsedTimeOld release], elapsedTimeOld = nil;
@@ -248,6 +228,28 @@
     
     [aPerson removeObserver:self forKeyPath:@"hourlyRate"];
 }
+
+// TODO:  implement this, test if meeting hourlyRate updates when participant rates are edited
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
+    
+	if ([key isEqualToString:@"meeting.hourlyRate"])
+		//return [NSSet setWithObjects:@"length", @"width", @"height", nil];
+        // TODO:  supply array of participants to set, or use a similar method
+        
+        return [NSSet setWithObjects:nil];
+    
+	return [super keyPathsForValuesAffectingValueForKey:key];  
+    
+}
+
+// TODO:  Update hourly rate field by observing when participants change
+// probably don't need this.
+//- (void)observeValueForKeyPath:(NSString *)keyPath
+//                      ofObject:(id)object
+//                        change:(NSDictionary *)change
+//                       context:(void *)context {
+//}
+
 
 
 @end
