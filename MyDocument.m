@@ -138,8 +138,8 @@
                                                 userInfo:nil
                                                  repeats:YES] retain];
         
-        [self setElapsedTimeOld:[meeting elapsedTime]];
-        [meeting setAccruedCost:[NSDecimalNumber zero]];
+        [self setElapsedTimeOld:[[self meeting] elapsedTime]];
+        [[self meeting] setAccruedCost:[NSDecimalNumber zero]];
         
     } else {
         NSLog(@"Stopping");
@@ -219,23 +219,35 @@
 - (void)startObservingPerson:(Person *)aPerson {
     
     [aPerson addObserver:self
-              forKeyPath:@"hourlyRate"
+              forKeyPath:@"meeting.participants.hourlyRate"
                  options:NSKeyValueObservingOptionOld
                  context:NULL];
 }
 
-// don't need this????????
 - (void)stopObservingPerson:(Person *)aPerson {
     
-    [aPerson removeObserver:self forKeyPath:@"hourlyRate"];
+    [aPerson removeObserver:self forKeyPath:@"meeting.participants.hourlyRate"];
 }
 
 // TODO:  Send notification when values for any person in participants changes
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
     
 	if ([key isEqualToString:@"meeting.hourlyRate"]) {
+        
+//        Compiler warned class method may not respond to instance variables
+//        NSMutableSet *personRatePaths = [[[NSMutableSet alloc] init] autorelease];
+//        NSEnumerator *enumerator = [[[self meeting] participants] objectEnumerator];
+//        Person* thisPerson;        
+//        
+//        while (thisPerson = [enumerator nextObject]) {
+//            [personRatePaths addObject:[thisPerson keyPath]];
+//        }
+//		return personRatePaths;   
 
-		return [NSSet setWithObjects:@"meeting.participants.person.hourlyRate", nil]; 
+//      return [NSSet setWithArray:[[self meeting] participants]];
+//		return [NSSet setWithObjects:@"Meeting.Participants.Person.hourlyRate", nil];
+        return [NSSet setWithObjects:@"meeting.participants.person.hourlyRate", nil];        
+
     }
 	return [super keyPathsForValuesAffectingValueForKey:key];      
 }

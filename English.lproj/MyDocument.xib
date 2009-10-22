@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="100025"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -724,6 +724,7 @@
 					<object class="NSMutableString">
 						<characters key="NS.bytes">hourlyRateTwo</characters>
 					</object>
+					<string>meeting.participants.hourlyRate</string>
 				</object>
 				<string key="NSObjectClassName">Person</string>
 				<bool key="NSEditable">YES</bool>
@@ -878,26 +879,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.hourlyRate</string>
-						<reference key="source" ref="865840781"/>
-						<reference key="destination" ref="966153845"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="865840781"/>
-							<reference key="NSDestination" ref="966153845"/>
-							<string key="NSLabel">value: arrangedObjects.hourlyRate</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.hourlyRate</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSContinuouslyUpdatesValue</string>
-								<boolean value="YES" key="NS.object.0"/>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">100113</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">contentArray: meeting.participants</string>
 						<reference key="source" ref="966153845"/>
 						<reference key="destination" ref="512844837"/>
@@ -918,6 +899,26 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.hourlyRate</string>
+						<reference key="source" ref="865840781"/>
+						<reference key="destination" ref="966153845"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="865840781"/>
+							<reference key="NSDestination" ref="966153845"/>
+							<string key="NSLabel">value: arrangedObjects.hourlyRate</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.hourlyRate</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSContinuouslyUpdatesValue</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">100142</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: meeting.hourlyRate</string>
 						<reference key="source" ref="344501480"/>
 						<reference key="destination" ref="512844837"/>
@@ -930,7 +931,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">100139</int>
+					<int key="connectionID">100144</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1463,7 +1464,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100139</int>
+			<int key="maxID">100144</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
