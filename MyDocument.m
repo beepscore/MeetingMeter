@@ -224,32 +224,21 @@
                  context:NULL];
 }
 
+// don't need this????????
 - (void)stopObservingPerson:(Person *)aPerson {
     
     [aPerson removeObserver:self forKeyPath:@"hourlyRate"];
 }
 
-// TODO:  implement this, test if meeting hourlyRate updates when participant rates are edited
+// TODO:  Send notification when values for any person in participants changes
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
     
-	if ([key isEqualToString:@"meeting.hourlyRate"])
-		//return [NSSet setWithObjects:@"length", @"width", @"height", nil];
-        // TODO:  supply array of participants to set, or use a similar method
-        
-        return [NSSet setWithObjects:nil];
-    
-	return [super keyPathsForValuesAffectingValueForKey:key];  
-    
+	if ([key isEqualToString:@"meeting.hourlyRate"]) {
+
+		return [NSSet setWithObjects:@"meeting.participants.person.hourlyRate", nil]; 
+    }
+	return [super keyPathsForValuesAffectingValueForKey:key];      
 }
-
-// TODO:  Update hourly rate field by observing when participants change
-// probably don't need this.
-//- (void)observeValueForKeyPath:(NSString *)keyPath
-//                      ofObject:(id)object
-//                        change:(NSDictionary *)change
-//                       context:(void *)context {
-//}
-
 
 
 @end

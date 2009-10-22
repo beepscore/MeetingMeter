@@ -86,11 +86,9 @@
     // now 'participants' points to the same object as 'a'
     participants = a;
     
-    // TODO:  observe array controller?
     [self willChangeValueForKey:@"hourlyRate"];
     [self hourlyRate];
     [self didChangeValueForKey:@"hourlyRate"];
-
 }
 
 
@@ -137,12 +135,9 @@
     return;
 }
 
-// TODO: hourlyRate method doesn't work when manually editing rates in GUI
+// TODO: meeting hourlyRate method doesn't work when manually editing a person's rate in GUI
 // calculate hourly rate for meeting
 - (NSDecimalNumber *) hourlyRate {
-    
-    // ref Hillegass pg 120
-    //NSDecimalNumber *combinedHourlyRate = [participants valueForKeyPath:@"sum.hourlyRate"];
     
     NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
         
@@ -150,8 +145,6 @@
         NSLog(@"[[participants objectAtIndex:%d] hourlyRate] = %@", i, [[participants objectAtIndex:i] hourlyRate]);
         combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[[participants objectAtIndex:i] hourlyRate]];
     } 
-    
-    // TODO: Observe text field, use it's value for hourlyRate???
     return combinedHourlyRate;
 }
 
