@@ -51,6 +51,8 @@
 - (void)stopObservingPerson:(Person *)aPerson;
 - (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index;
 - (void)removeObjectFromParticipantsAtIndex: (int) index;
+- (void)changeKeyPath:(NSString *)keyPath ofObject:(id)obj toValue:(id)newValue;
+
 
 #pragma mark -
 #pragma mark Other methods
@@ -61,4 +63,6 @@
 - (NSDecimalNumber *)hourlyRate;
 
 - (NSDateComponents *)elapsedTime;
+
+    
 @end

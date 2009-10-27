@@ -100,8 +100,8 @@
     [meeting setStartTime:[NSDate date]];
     
     // Use IB formatter to display NSDate object in the text field
-    [startTimeField setObjectValue:[meeting startTime]];
-    [meeting setEndTime:nil];     
+    [startTimeField setObjectValue:[[self meeting] startTime]];
+    [[self meeting] setEndTime:nil];     
     [endTimeField setStringValue:@"meeting still going..."]; 
     
     [self stopGo];
@@ -112,14 +112,14 @@
     [endMeetingButton setEnabled:NO];
     [beginMeetingButton setEnabled:YES];
     // [[NSDate alloc] init] and [NSDate date] both return current date and time.
-    [meeting setEndTime:[NSDate date]];     
+    [[self meeting] setEndTime:[NSDate date]];     
     [endTimeField setObjectValue:[meeting endTime]];
     
     [self stopGo];
 }
 
 - (IBAction)debugDump:(id)sender {
-    NSLog(@"%@", [meeting description]);
+    NSLog(@"%@", [[self meeting] description]);
     NSLog(@"\n\n");
 }
 
@@ -179,11 +179,11 @@
      [[NSNumber numberWithFloat:incrementalTimeInHours] decimalValue]];
     
     NSDecimalNumber *incrementalCost = 
-    [[meeting hourlyRate] decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
+    [[[self meeting] hourlyRate] decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
     
-    [meeting setAccruedCost:[[meeting accruedCost] decimalNumberByAdding:incrementalCost]];
+    [[self meeting] setAccruedCost:[[[self meeting] accruedCost] decimalNumberByAdding:incrementalCost]];
     
-    [accruedCostField setObjectValue:[meeting accruedCost]];
+    [accruedCostField setObjectValue:[[self meeting] accruedCost]];
     
     [gregorian release];
 }
@@ -199,30 +199,5 @@
         
     [super dealloc];
 }
-
-
-// TODO:  Send notification when values for any person in participants changes
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
-    
-	if ([key isEqualToString:@"meeting.hourlyRate"]) {
-        
-//        Compiler warned class method may not respond to instance variables
-//        NSMutableSet *personRatePaths = [[[NSMutableSet alloc] init] autorelease];
-//        NSEnumerator *enumerator = [[[self meeting] participants] objectEnumerator];
-//        Person* thisPerson;        
-//        
-//        while (thisPerson = [enumerator nextObject]) {
-//            [personRatePaths addObject:[thisPerson keyPath]];
-//        }
-//		return personRatePaths;   
-
-//      return [NSSet setWithArray:[[self meeting] participants]];
-//		return [NSSet setWithObjects:@"Meeting.Participants.Person.hourlyRate", nil];
-        return [NSSet setWithObjects:@"meeting.participants.person.hourlyRate", nil];        
-
-    }
-	return [super keyPathsForValuesAffectingValueForKey:key];      
-}
-
 
 @end

@@ -94,9 +94,9 @@
         [self startObservingPerson:person];
     }    
     
-    //    [self willChangeValueForKey:@"hourlyRate"];
-    //    [self hourlyRate];
-    //    [self didChangeValueForKey:@"hourlyRate"];
+//        [self willChangeValueForKey:@"hourlyRate"];
+//        [self hourlyRate];
+//        [self didChangeValueForKey:@"hourlyRate"];
     
 }
 
@@ -144,21 +144,22 @@
     return;
 }
 
-// TODO: meeting hourlyRate method doesn't work when manually editing a person's rate in GUI
+// TODO: meeting hourlyRate method doesn't get called when manually editing a person's rate in GUI
 // calculate hourly rate for meeting
 - (NSDecimalNumber *) hourlyRate {
     
     NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
-        
-    for (int i = 0; i < [participants count]; i++) {
-        NSLog(@"[[participants objectAtIndex:%d] hourlyRate] = %@", i, [[participants objectAtIndex:i] hourlyRate]);
-        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[[participants objectAtIndex:i] hourlyRate]];
-    } 
+    NSEnumerator *enumerator = [participants objectEnumerator];
+    
+    for (Person *thisPerson in enumerator) {
+        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];
+    }
+    NSLog(@"meeting hourlyRate = %@", combinedHourlyRate);
     return combinedHourlyRate;
 }
 
 // I think elapsedTime truncates seconds at components:fromDate:toDate:options: method
-- (NSDateComponents *) elapsedTime {
+- (NSDateComponents *)elapsedTime {
     if (nil == startTime) {
         return 0;
     }
@@ -249,19 +250,25 @@
     [[self participants] removeObjectAtIndex:index];
 }
 
+// observeValueForKeyPath called whenever a person is edited,
+// not when added or deleted.  Ref Hillegass pg 148
 -(void)observeValueForKeyPath:(NSString *)keyPath
                      ofObject:(id)object
                        change:(NSDictionary *)change
                       context:(void *)context {
-    // TODO:  call update hourly rate here?????
-    [self hourlyRate];
+        
     id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
     
     // NSNull objects are used to represent nil in a dictionary
     if (oldValue == [NSNull null]) {
         oldValue = nil;
     }
-    NSLog(@"oldValue = %@", oldValue);
+    NSLog(@"in observeValueForKeyPath. oldValue = %@", oldValue);
+    
+    // TODO:  call update hourly rate here?????
+    //[self hourlyRate];
+
+    
 //    [[meetUndoManager prepareWithInvocationTarget:self] changeKeyPath:keyPath
 //                                                             ofObject:object
 //                                                              toValue:oldValue];
@@ -277,9 +284,17 @@
     [obj setValue:newValue forKeyPath:keyPath];
 }
 
+// TODO:  Send notification when values for any person in participants changes
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
+    
+	if ([key isEqualToString:@"hourlyRate"]) {
+        
+        return [NSSet setWithObjects:nil];        
+        
+    }
+	return [super keyPathsForValuesAffectingValueForKey:key];      
+}
 
-
-// ====================================================
 
 @end
 
