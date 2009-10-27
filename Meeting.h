@@ -19,7 +19,6 @@
     NSDate *endTime;
     NSDecimalNumber *accruedCost;    
     NSMutableArray *participants;
-
 }
 
 // declare methods
@@ -45,6 +44,13 @@
 
 - (NSDecimalNumber *)accruedCost;
 - (void)setAccruedCost:(NSDecimalNumber *)anAccruedCost;
+
+#pragma mark -
+#pragma mark KVO related methods
+- (void)startObservingPerson:(Person *)aPerson;
+- (void)stopObservingPerson:(Person *)aPerson;
+- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index;
+- (void)removeObjectFromParticipantsAtIndex: (int) index;
 
 #pragma mark -
 #pragma mark Other methods

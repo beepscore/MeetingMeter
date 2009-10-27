@@ -83,12 +83,21 @@
     [a retain];
     [participants release];
     
-    // now 'participants' points to the same object as 'a'
+    for (Person *person in [self participants]) {
+        [self stopObservingPerson:person];
+    }
+    
+    // point 'participants' to the same object as 'a'
     participants = a;
     
-    [self willChangeValueForKey:@"hourlyRate"];
-    [self hourlyRate];
-    [self didChangeValueForKey:@"hourlyRate"];
+    for (Person *person in [self participants]) {
+        [self startObservingPerson:person];
+    }    
+    
+    //    [self willChangeValueForKey:@"hourlyRate"];
+    //    [self hourlyRate];
+    //    [self didChangeValueForKey:@"hourlyRate"];
+    
 }
 
 
@@ -168,29 +177,29 @@
 }
 
 - (NSString*)description {
-    NSEnumerator *enumerator = [participants objectEnumerator];
-    Person* thisPerson;
     
     NSString *descriptionString = @"\n";
     descriptionString = [descriptionString stringByAppendingString:@"Participant, hourlyRate \n"];    
     
-    while (thisPerson = [enumerator nextObject]) {
+    NSEnumerator *enumerator = [[self participants] objectEnumerator];
+    
+    for (Person *thisPerson in enumerator) {
         NSString *thisPersonNameString = [[NSString stringWithFormat:@"%@", [thisPerson name]]
                                           stringByPaddingToLength: 15 withString: @" " startingAtIndex:0];
         
         descriptionString = [descriptionString stringByAppendingString:thisPersonNameString];    
-
-        NSString *thisPersonHourlyRateString = [NSString stringWithFormat:@"%20@ \n",
-                                      [thisPerson hourlyRate]];
         
-        descriptionString = [descriptionString stringByAppendingString:thisPersonHourlyRateString];    
+        NSString *thisPersonHourlyRateString = [NSString stringWithFormat:@"%20@ \n",
+                                                [thisPerson hourlyRate]];
+        
+        descriptionString = [descriptionString stringByAppendingString:thisPersonHourlyRateString];            
     }
     
     NSString *meetingRateString = 
-      [NSString stringWithFormat:@"  hourlyRate = %@\n", [self hourlyRate]];
-
+    [NSString stringWithFormat:@"  hourlyRate = %@\n", [self hourlyRate]];
+    
     descriptionString = [descriptionString stringByAppendingString:meetingRateString];    
-
+    
     return descriptionString;
 }
 
@@ -204,4 +213,73 @@
     
     [super dealloc];
 }
+
+// ====================================================
+
+#pragma mark -
+#pragma mark KVO related methods
+- (void)startObservingPerson:(Person *)aPerson {
+    
+    [aPerson addObserver:self
+              forKeyPath:@"name"
+                 options:NSKeyValueObservingOptionOld
+                 context:NULL];
+    
+    [aPerson addObserver:self
+              forKeyPath:@"hourlyRate"
+                 options:NSKeyValueObservingOptionOld
+                 context:NULL];
+}
+
+- (void)stopObservingPerson:(Person *)aPerson {
+    
+    [aPerson removeObserver:self forKeyPath:@"name"];
+    [aPerson removeObserver:self forKeyPath:@"hourlyRate"];
+}
+
+// Ref Hillegass pg 144, 147
+- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index {
+    [self startObservingPerson:aPerson];    
+    [[self participants] insertObject:aPerson atIndex:index];
+}
+
+- (void)removeObjectFromParticipantsAtIndex:(int)index {
+    Person *aPerson = [[self participants] objectAtIndex:index];
+    [self stopObservingPerson:aPerson];
+    [[self participants] removeObjectAtIndex:index];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath
+                     ofObject:(id)object
+                       change:(NSDictionary *)change
+                      context:(void *)context {
+    // TODO:  call update hourly rate here?????
+    [self hourlyRate];
+    id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+    
+    // NSNull objects are used to represent nil in a dictionary
+    if (oldValue == [NSNull null]) {
+        oldValue = nil;
+    }
+    NSLog(@"oldValue = %@", oldValue);
+//    [[meetUndoManager prepareWithInvocationTarget:self] changeKeyPath:keyPath
+//                                                             ofObject:object
+//                                                              toValue:oldValue];
+//    [meetUndoManager setActionName:@"Edit"];
+}
+
+
+- (void)changeKeyPath:(NSString *)keyPath
+             ofObject:(id)obj
+              toValue:(id)newValue {
+    // setValue:forKeyPath: will cause the key-value observing method
+    // to be called, which takes care of the undo stuff
+    [obj setValue:newValue forKeyPath:keyPath];
+}
+
+
+
+// ====================================================
+
 @end
+

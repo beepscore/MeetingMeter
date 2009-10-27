@@ -18,7 +18,6 @@
 }
 
 @property (readwrite, copy) NSString *name;
-
 @property (retain, nonatomic) NSDecimalNumber *hourlyRate;
 
 #pragma mark -
