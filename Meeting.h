@@ -10,6 +10,7 @@
 #import <Cocoa/Cocoa.h>
 // When possible, use @class, not #import in header file.
 // #import requires recompile whenever imported file changes.
+#import "BSGlobalValues.h"
 #import "Person.h"
 
 @interface Meeting : NSObject {

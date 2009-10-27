@@ -9,8 +9,6 @@
 #import "Meeting.h"
 #import "Person.h"
 
-#define MINUTES_PER_HOUR 60.
-#define SECONDS_PER_HOUR 3600.
 
 @implementation Meeting
 
@@ -154,7 +152,7 @@
     for (Person *thisPerson in enumerator) {
         combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];
     }
-    NSLog(@"meeting hourlyRate = %@", combinedHourlyRate);
+    DLog(@"meeting hourlyRate = %@", combinedHourlyRate);
     return combinedHourlyRate;
 }
 
@@ -263,7 +261,7 @@
     if (oldValue == [NSNull null]) {
         oldValue = nil;
     }
-    NSLog(@"in observeValueForKeyPath = %@, oldValue = %@", keyPath, oldValue);
+    DLog(@"in observeValueForKeyPath = %@, oldValue = %@", keyPath, oldValue);
      
     // TODO:  call update hourly rate here?????
     //[self hourlyRate];

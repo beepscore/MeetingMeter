@@ -9,10 +9,6 @@
 #import "MyDocument.h"
 #import "Meeting.h"
 
-#define SECONDS_PER_HOUR 3600.
-#define MINUTES_PER_HOUR 60.
-
-
 @implementation MyDocument
 
 #pragma mark -
@@ -120,8 +116,8 @@
 }
 
 - (IBAction)debugDump:(id)sender {
-    NSLog(@"%@", [[self meeting] description]);
-    NSLog(@"\n\n");
+    DLog(@"%@", [[self meeting] description]);
+    DLog(@"\n\n");
 }
 
 #pragma mark -

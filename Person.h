@@ -9,7 +9,7 @@
 //  Use MVC controller such as MeetingMeterAppDelegate to update view.
 
 #import <Foundation/Foundation.h>
-
+#import "BSGlobalValues.h"
 
 @interface Person : NSObject {
     // declare instance variables

@@ -12,6 +12,7 @@
 //  Cost appears accurate within approximately 0.25%.
 
 #import <Cocoa/Cocoa.h>
+#import "BSGlobalValues.h"
 // When possible, use @class, not #import in header file.
 // #import requires recompile whenever imported file changes.
 @class Meeting;
