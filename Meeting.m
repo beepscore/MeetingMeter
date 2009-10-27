@@ -149,7 +149,7 @@
 - (NSDecimalNumber *) hourlyRate {
     
     NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
-    NSEnumerator *enumerator = [participants objectEnumerator];
+    NSEnumerator *enumerator = [[self participants] objectEnumerator];
     
     for (Person *thisPerson in enumerator) {
         combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];
@@ -263,8 +263,8 @@
     if (oldValue == [NSNull null]) {
         oldValue = nil;
     }
-    NSLog(@"in observeValueForKeyPath. oldValue = %@", oldValue);
-    
+    NSLog(@"in observeValueForKeyPath = %@, oldValue = %@", keyPath, oldValue);
+     
     // TODO:  call update hourly rate here?????
     //[self hourlyRate];
 

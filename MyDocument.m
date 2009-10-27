@@ -45,6 +45,7 @@
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
     
+    // TODO: need this??
     [self updateHourlyRateField];
     
 }
@@ -81,7 +82,7 @@
 
 - (void)updateHourlyRateField {
 
-    [meeting hourlyRate];
+    [[self meeting] hourlyRate];
 }
 
 
