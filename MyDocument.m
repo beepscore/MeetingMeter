@@ -179,9 +179,7 @@
     [[[self meeting] hourlyRate] decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
     
     [[self meeting] setAccruedCost:[[[self meeting] accruedCost] decimalNumberByAdding:incrementalCost]];
-    
-    [accruedCostField setObjectValue:[[self meeting] accruedCost]];
-    
+        
     [gregorian release];
 }
 

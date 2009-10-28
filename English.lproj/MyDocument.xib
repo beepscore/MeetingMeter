@@ -931,6 +931,22 @@
 					</object>
 					<int key="connectionID">100172</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: self.meeting.accruedCost</string>
+						<reference key="source" ref="1055837072"/>
+						<reference key="destination" ref="512844837"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1055837072"/>
+							<reference key="NSDestination" ref="512844837"/>
+							<string key="NSLabel">value: self.meeting.accruedCost</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">self.meeting.accruedCost</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">100175</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1462,7 +1478,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100172</int>
+			<int key="maxID">100175</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
