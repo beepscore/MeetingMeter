@@ -79,11 +79,11 @@
     
     // increment retain count on the object 'a' points to.  See Hillegass pg 69
     [a retain];
-    [participants release];
     
     for (Person *person in [self participants]) {
         [self stopObservingPerson:person];
     }
+    [participants release];
     
     // point 'participants' to the same object as 'a'
     participants = a;
@@ -151,6 +151,7 @@
     
     for (Person *thisPerson in enumerator) {
         combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];
+        DLog(@"this person hourlyRate = %@", [thisPerson hourlyRate]);
     }
     DLog(@"meeting hourlyRate = %@", combinedHourlyRate);
     return combinedHourlyRate;
@@ -183,19 +184,11 @@
     NSEnumerator *enumerator = [[self participants] objectEnumerator];
     
     for (Person *thisPerson in enumerator) {
-        NSString *thisPersonNameString = [[NSString stringWithFormat:@"%@", [thisPerson name]]
-                                          stringByPaddingToLength: 15 withString: @" " startingAtIndex:0];
-        
-        descriptionString = [descriptionString stringByAppendingString:thisPersonNameString];    
-        
-        NSString *thisPersonHourlyRateString = [NSString stringWithFormat:@"%20@ \n",
-                                                [thisPerson hourlyRate]];
-        
-        descriptionString = [descriptionString stringByAppendingString:thisPersonHourlyRateString];            
+        descriptionString = [descriptionString stringByAppendingString:[thisPerson description]];    
     }
     
     NSString *meetingRateString = 
-    [NSString stringWithFormat:@"  hourlyRate = %@\n", [self hourlyRate]];
+        [NSString stringWithFormat:@"  hourlyRate = %@\n", [self hourlyRate]];
     
     descriptionString = [descriptionString stringByAppendingString:meetingRateString];    
     
@@ -240,12 +233,14 @@
 - (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index {
     [self startObservingPerson:aPerson];    
     [[self participants] insertObject:aPerson atIndex:index];
+    [self hourlyRate];
 }
 
 - (void)removeObjectFromParticipantsAtIndex:(int)index {
     Person *aPerson = [[self participants] objectAtIndex:index];
     [self stopObservingPerson:aPerson];
     [[self participants] removeObjectAtIndex:index];
+    [self hourlyRate];
 }
 
 // observeValueForKeyPath called whenever a person is edited,
@@ -264,7 +259,7 @@
     DLog(@"in observeValueForKeyPath = %@, oldValue = %@", keyPath, oldValue);
      
     // TODO:  call update hourly rate here?????
-    //[self hourlyRate];
+    [self hourlyRate];
 
     
 //    [[meetUndoManager prepareWithInvocationTarget:self] changeKeyPath:keyPath

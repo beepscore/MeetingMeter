@@ -94,7 +94,7 @@
     [self updateHourlyRateField];
     
     // [[NSDate alloc] init] and [NSDate date] both return current date and time.
-    [meeting setStartTime:[NSDate date]];
+    [[self meeting] setStartTime:[NSDate date]];
     
     // Use IB formatter to display NSDate object in the text field
     [startTimeField setObjectValue:[[self meeting] startTime]];

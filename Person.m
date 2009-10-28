@@ -48,8 +48,20 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"name = %@, rate = %@",
-            [self name], [self hourlyRate]];    
+    
+    NSString *descriptionString = @"";
+
+    NSString *NameString = [[NSString stringWithFormat:@"%@", [self name]]
+                                      stringByPaddingToLength: 15 withString: @" " startingAtIndex:0];
+    
+    descriptionString = [descriptionString stringByAppendingString:NameString];    
+    
+    NSString *HourlyRateString = [NSString stringWithFormat:@"%20@ \n",
+                                            [self hourlyRate]];
+    
+    descriptionString = [descriptionString stringByAppendingString:HourlyRateString];            
+    
+    return descriptionString;    
 }
 
 @end
