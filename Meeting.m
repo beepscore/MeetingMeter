@@ -29,16 +29,16 @@
     
     Person *tempPerson1 = [[Person alloc] 
             initWithName:@"Moe"
-              hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600.00"]];
+              hourlyRate:3600.00];
 
     Person *tempPerson2 = [[Person alloc] 
                            initWithName:@"Larry"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"3600"]];
+                           hourlyRate:3600.00];
 
     Person *tempPerson3 = [[Person alloc] 
                            initWithName:@"Curly"
-                           hourlyRate:[NSDecimalNumber decimalNumberWithString:@"36"]];
-    
+                           hourlyRate:36.00];
+                           
     [self initWithStartTime:nil
                     endTime:nil
                 accruedCost:[NSDecimalNumber zero]
@@ -142,7 +142,6 @@
     return;
 }
 
-// TODO: meeting hourlyRate method doesn't get called when manually editing a person's rate in GUI
 // calculate hourly rate for meeting
 - (NSDecimalNumber *) hourlyRate {
     
@@ -150,8 +149,9 @@
     NSEnumerator *enumerator = [[self participants] objectEnumerator];
     
     for (Person *thisPerson in enumerator) {
-        combinedHourlyRate = [combinedHourlyRate decimalNumberByAdding:[thisPerson hourlyRate]];
-        DLog(@"this person hourlyRate = %@", [thisPerson hourlyRate]);
+        combinedHourlyRate = [combinedHourlyRate 
+                              decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:
+                                                     [[NSNumber numberWithFloat:[thisPerson hourlyRate]] decimalValue]]];
     }
     DLog(@"meeting hourlyRate = %@", combinedHourlyRate);
     return combinedHourlyRate;
@@ -257,10 +257,8 @@
         oldValue = nil;
     }
     DLog(@"in observeValueForKeyPath = %@, oldValue = %@", keyPath, oldValue);
-     
-    // TODO:  call update hourly rate here?????
-    [self hourlyRate];
-
+    
+    DLog(@"%@", [self description]);
     
 //    [[meetUndoManager prepareWithInvocationTarget:self] changeKeyPath:keyPath
 //                                                             ofObject:object

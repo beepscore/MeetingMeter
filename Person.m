@@ -10,18 +10,19 @@
 
 @implementation Person
 
+
+#pragma mark -
+#pragma mark Accessors
 @synthesize name;
 @synthesize hourlyRate;
 
+// used Accessorizer to generate accessor method implementations
 #pragma mark -
 #pragma mark Initializers
-// used Accessorizer to generate accessor method implementations
-
 // init
 - (id)init {
 
-    NSDecimalNumber *defaultHourlyRate =
-     [NSDecimalNumber decimalNumberWithString:@"3600"];
+    float defaultHourlyRate = 3600.;
     
     [self initWithName:@"defaultName"
             hourlyRate:defaultHourlyRate];
@@ -29,7 +30,7 @@
 }
 
 - (id)initWithName:(NSString*)aName
-        hourlyRate:(NSDecimalNumber*)anHourlyRate{
+        hourlyRate:(float)anHourlyRate{
     
     if (self = [super init]) {
         [self setName:aName];
@@ -43,7 +44,6 @@
 
 - (void)dealloc {
     [name release], name = nil;
-    [hourlyRate release], hourlyRate = nil;
     [super dealloc];
 }
 
@@ -56,7 +56,7 @@
     
     descriptionString = [descriptionString stringByAppendingString:NameString];    
     
-    NSString *HourlyRateString = [NSString stringWithFormat:@"%20@ \n",
+    NSString *HourlyRateString = [NSString stringWithFormat:@"%20f \n",
                                             [self hourlyRate]];
     
     descriptionString = [descriptionString stringByAppendingString:HourlyRateString];            

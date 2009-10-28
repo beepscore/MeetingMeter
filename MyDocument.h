@@ -7,7 +7,7 @@
 //
 //  UW CP-120 Certificate in iPhone and Cocoa Development
 //  Q1 Intro to Programming in Objective-C and the Cocoa Framework.
-//  Homework assignment 3 due 23 Oct 09.
+//  Homework assignment 3
 //  The app adjusts rate as people enter and leave meeting.
 //  Cost appears accurate within approximately 0.25%.
 
