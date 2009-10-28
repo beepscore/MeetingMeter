@@ -89,7 +89,6 @@
     // disable beginMeeting, enable endMeeting buttons
     [beginMeetingButton setEnabled:NO];
     [endMeetingButton setEnabled:YES];
-
     [[self meeting] startMeeting];
     
     [self stopGo];
@@ -99,9 +98,8 @@
     // disable endMeeting, enable beginMeeting buttons
     [endMeetingButton setEnabled:NO];
     [beginMeetingButton setEnabled:YES];
-    // [[NSDate alloc] init] and [NSDate date] both return current date and time.
-    [[self meeting] setEndTime:[NSDate date]];     
-    
+
+    [[self meeting] stopMeeting];
     [self stopGo];
 }
 
