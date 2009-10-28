@@ -90,16 +90,11 @@
     [beginMeetingButton setEnabled:NO];
     [endMeetingButton setEnabled:YES];
 
-    // TODO:  may be able to eliminate this after implementing observing changes
-    [self updateHourlyRateField];
-    
     // [[NSDate alloc] init] and [NSDate date] both return current date and time.
     [[self meeting] setStartTime:[NSDate date]];
     
     // Use IB formatter to display NSDate object in the text field
-    [startTimeField setObjectValue:[[self meeting] startTime]];
     [[self meeting] setEndTime:nil];     
-    [endTimeField setStringValue:@"meeting still going..."]; 
     
     [self stopGo];
 }
@@ -110,7 +105,6 @@
     [beginMeetingButton setEnabled:YES];
     // [[NSDate alloc] init] and [NSDate date] both return current date and time.
     [[self meeting] setEndTime:[NSDate date]];     
-    [endTimeField setObjectValue:[meeting endTime]];
     
     [self stopGo];
 }

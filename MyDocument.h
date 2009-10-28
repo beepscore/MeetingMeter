@@ -29,10 +29,7 @@
     IBOutlet NSButton *endMeetingButton;
     IBOutlet NSTextField *hourlyRateField;
 
-    IBOutlet NSTextField *startTimeField;
-    IBOutlet NSTextField *endTimeField;
     IBOutlet NSTextField *elapsedTimeField;
-    IBOutlet NSTextField *accruedCostField;    
 }
 
 #pragma mark -
