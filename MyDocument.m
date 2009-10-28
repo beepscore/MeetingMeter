@@ -90,11 +90,7 @@
     [beginMeetingButton setEnabled:NO];
     [endMeetingButton setEnabled:YES];
 
-    // [[NSDate alloc] init] and [NSDate date] both return current date and time.
-    [[self meeting] setStartTime:[NSDate date]];
-    
-    // Use IB formatter to display NSDate object in the text field
-    [[self meeting] setEndTime:nil];     
+    [[self meeting] startMeeting];
     
     [self stopGo];
 }

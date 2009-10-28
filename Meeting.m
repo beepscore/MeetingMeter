@@ -134,11 +134,17 @@
 #pragma mark Other methods
 
 // start the meeting
-- (IBAction)startMeeting {
+- (void)startMeeting {
+    // [[NSDate alloc] init] and [NSDate date] both return current date and time.
+    [self setStartTime:[NSDate date]];
+    
+    // Use IB formatter to display NSDate object in the text field
+    [self setEndTime:nil];     
+    
     return;
 }
 
-- (IBAction)stopMeeting {
+- (void)stopMeeting {
     return;
 }
 
