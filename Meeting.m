@@ -91,13 +91,7 @@
     for (Person *person in [self participants]) {
         [self startObservingPerson:person];
     }    
-    
-//        [self willChangeValueForKey:@"hourlyRate"];
-//        [self hourlyRate];
-//        [self didChangeValueForKey:@"hourlyRate"];
-    
 }
-
 
 - (NSDate *)startTime {
     return startTime; 
@@ -210,10 +204,10 @@
     [super dealloc];
 }
 
-// ====================================================
 
 #pragma mark -
 #pragma mark KVO related methods
+// This adds self (the meeting) as an observer of changes to aPerson's hourlyRate.
 - (void)startObservingPerson:(Person *)aPerson {
     
     [aPerson addObserver:self
@@ -233,6 +227,8 @@
     [aPerson removeObserver:self forKeyPath:@"hourlyRate"];
 }
 
+// insertObject: and removeObject: add or remove a person from the participants array.
+// They use KVC methods, which in turn use the Meeting -setParticipants accessor.
 // Ref Hillegass pg 144, 147
 - (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index {
     [self startObservingPerson:aPerson];    
@@ -247,29 +243,27 @@
     [self hourlyRate];
 }
 
-// observeValueForKeyPath called whenever a person is edited,
-// not when added or deleted.  Ref Hillegass pg 148
+// KVO sends observeValueForKeyPath message to the meeting when an object
+// the meeting is observing has changed.
+// By default in KVO, changing a person’s hourlyRate does not count as a change
+// to the participant array, and doesn’t trigger the participant array to send a notification.
 -(void)observeValueForKeyPath:(NSString *)keyPath
                      ofObject:(id)object
                        change:(NSDictionary *)change
                       context:(void *)context {
-        
-    id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+    DLog(@"%@ in observeValueForKeyPath = %@", self, keyPath);
     
-    // NSNull objects are used to represent nil in a dictionary
-    if (oldValue == [NSNull null]) {
-        oldValue = nil;
+    // If the meeting is being notified that a person's hourlyRate has changed,
+    // the meeting will send a notification that meeting hourlyRate has changed.
+    if ([keyPath isEqualToString:@"hourlyRate"]) { // the Person's hourlyRate
+        [self willChangeValueForKey:@"hourlyRate"]; // the Meeting's hourlyRate
+        [self didChangeValueForKey:@"hourlyRate"];// the Meeting's hourlyRate
     }
-    DLog(@"in observeValueForKeyPath = %@, oldValue = %@", keyPath, oldValue);
-    
-    DLog(@"%@", [self description]);
-    
 //    [[meetUndoManager prepareWithInvocationTarget:self] changeKeyPath:keyPath
 //                                                             ofObject:object
 //                                                              toValue:oldValue];
 //    [meetUndoManager setActionName:@"Edit"];
 }
-
 
 - (void)changeKeyPath:(NSString *)keyPath
              ofObject:(id)obj
@@ -279,17 +273,20 @@
     [obj setValue:newValue forKeyPath:keyPath];
 }
 
-// TODO:  Send notification when values for any person in participants changes
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
+// Send notification when values for any person in participants changes
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)keyInQuestion {
     
-	if ([key isEqualToString:@"hourlyRate"]) {
-        
-        return [NSSet setWithObjects:nil];        
-        
+    // Hal's comment - What methods impact keyInQuestion?
+    
+    // This states that the meeting hourlyRate is dependent on the participants array.
+    // When the participants array is changed, the program will send a notification
+    // that meeting hourlyRate has changed.
+    // The View hourly rate text field is observing meeting hourlyRate, and is notified.
+	if ([keyInQuestion isEqualToString:@"hourlyRate"]) {
+        return [NSSet setWithObjects:@"participants", nil];  
     }
-	return [super keyPathsForValuesAffectingValueForKey:key];      
+	return [super keyPathsForValuesAffectingValueForKey:keyInQuestion];      
 }
-
 
 @end
 
