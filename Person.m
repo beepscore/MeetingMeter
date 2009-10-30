@@ -64,4 +64,25 @@
     return descriptionString;    
 }
 
+// Ref Hillegass pg 155-156
+// Use global constant to use in forKey: argument, compiler warns if misspelled
+- (void)encodeWithCoder:(NSCoder *)coder {
+    // Hal recommends don't access ivar directly, always use accessor
+    // e.g. don't use name, use setter self.name or [self name]
+    [coder encodeObject:self.name forKey:BSNameKey];
+    [coder encodeFloat:self.hourlyRate forKey:BSHourlyRateKey];
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    // don't call superclass initwithcoder, because NSObject doesn't have one.
+    // Ref Hillegass pg 156
+    [super init];
+    
+    // Right hand side uses setter, which will retain assigned value
+    self.name = [[coder decodeObjectForKey:BSNameKey] retain];
+    self.hourlyRate = [coder decodeFloatForKey:BSHourlyRateKey];
+    return self;
+}
+
+
 @end

@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "BSGlobalValues.h"
 
-@interface Person : NSObject {
+@interface Person : NSObject <NSCoding> {
     // declare instance variables
     NSString *name;
     float hourlyRate;

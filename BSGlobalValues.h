@@ -16,6 +16,9 @@
 extern NSString * const BNRTableBgColorKey;
 extern NSString * const BNREmptyDocKey;
 
+extern NSString * BSNameKey;
+extern NSString * BSHourlyRateKey;
+
 #pragma mark -
 // Ref http://iphoneincubator.com/blog/debugging/the-evolution-of-a-replacement-for-nslog
 // Ref in Project/Edit Project Settings/Build/GCC 4.2 Preprocessing/Preprocessor macros add DEBUG=1
