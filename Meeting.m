@@ -246,7 +246,7 @@
 // KVO sends observeValueForKeyPath message to the meeting when an object
 // the meeting is observing has changed.
 // By default in KVO, changing a person’s hourlyRate does not count as a change
-// to the participant array, and doesn’t trigger the participant array to send a notification.
+// to the participants array, and doesn’t trigger the participants array to send a notification.
 -(void)observeValueForKeyPath:(NSString *)keyPath
                      ofObject:(id)object
                        change:(NSDictionary *)change
