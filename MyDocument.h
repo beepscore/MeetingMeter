@@ -28,8 +28,11 @@
     IBOutlet NSButton *beginMeetingButton;
     IBOutlet NSButton *endMeetingButton;
     IBOutlet NSTextField *hourlyRateField;
-
     IBOutlet NSTextField *elapsedTimeField;
+
+    // TODO:  Hillegass pg 162 doesn't mention needing an outlet??
+    // connect to table view in MyDocument.xib
+    IBOutlet NSTableView *tableView;
 }
 
 #pragma mark -
