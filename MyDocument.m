@@ -23,7 +23,9 @@
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
         
-        meeting = [[Meeting alloc] initWithExampleValues];
+        NSUndoManager *anUndoManager = [self undoManager];
+        // Pass MyDocument's undo manager to Meeting for Meeting to use
+        meeting = [[Meeting alloc] initWithExampleValues:anUndoManager];
         elapsedTimeOld = [[NSDateComponents alloc] init];
     }
     return self;

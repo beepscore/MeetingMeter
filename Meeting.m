@@ -20,12 +20,13 @@
     [self initWithStartTime:nil
                     endTime:nil
                 accruedCost:nil
-                participants:nil];
+                participants:nil
+            meetUndoManager:nil ];
 
     return self;
 }
 
-- (id)initWithExampleValues {
+- (id)initWithExampleValues:(NSUndoManager *)anUndoManager {
     
     Person *tempPerson1 = [[Person alloc] 
             initWithName:@"Moe"
@@ -42,7 +43,8 @@
     [self initWithStartTime:nil
                     endTime:nil
                 accruedCost:[NSDecimalNumber zero]
-               participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil] ];
+               participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil]
+            meetUndoManager:anUndoManager];
     
     [tempPerson1 release];
     [tempPerson2 release];
@@ -54,7 +56,8 @@
 - (id)initWithStartTime:(NSDate*)aStartTime
                 endTime:(NSDate*)anEndTime
             accruedCost:(NSDecimalNumber*)anAccruedCost
-           participants:(NSMutableArray*)aParticipants{
+           participants:(NSMutableArray*)aParticipants
+        meetUndoManager:anUndoManager {
     
     if (self = [super init]) {
         [self setStartTime:aStartTime];
@@ -62,6 +65,8 @@
         [self setAccruedCost:anAccruedCost];
         
         [self setParticipants:aParticipants];
+        [self setMeetUndoManager:anUndoManager];
+
     }
     return self;
 }
@@ -122,6 +127,21 @@
         [accruedCost release];
         accruedCost = [anAccruedCost retain];
     }
+}
+
+@synthesize meetUndoManager;
+
+- (void)dealloc {
+    // after release, best practice is set object = nil;
+    // then if someone accidentally calls it,
+    // they will get nil instead of a bad reference.
+    [participants release], participants = nil;    
+    [startTime release], startTime = nil;
+    [endTime release], endTime = nil;
+    [accruedCost release], accruedCost = nil;
+    [meetUndoManager release], meetUndoManager = nil;
+    
+    [super dealloc];
 }
 
 #pragma mark -
@@ -194,17 +214,6 @@
 }
 
 
-- (void)dealloc {
-    
-    [participants release], participants = nil;    
-    [startTime release], startTime = nil;
-    [endTime release], endTime = nil;
-    [accruedCost release], accruedCost = nil;
-    
-    [super dealloc];
-}
-
-
 #pragma mark -
 #pragma mark KVO related methods
 // This adds self (the meeting) as an observer of changes to aPerson's hourlyRate.
@@ -231,14 +240,37 @@
 // They use KVC methods, which in turn use the Meeting -setParticipants accessor.
 // Ref Hillegass pg 144, 147
 - (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index {
+    
+    
+    DLog(@"adding %@ to %@", aPerson, [self participants]);
+    // Add the inverse of this operation to the undo stack
+    [[meetUndoManager prepareWithInvocationTarget:self]
+     removeObjectFromParticipantsAtIndex:index];
+    if (![[self meetUndoManager] isUndoing]) {
+        [[self meetUndoManager] setActionName:@"Insert Person"];
+    }
+    
     [self startObservingPerson:aPerson];    
+    // Add the person to the array
     [[self participants] insertObject:aPerson atIndex:index];
     [self hourlyRate];
 }
 
 - (void)removeObjectFromParticipantsAtIndex:(int)index {
+    
+    
     Person *aPerson = [[self participants] objectAtIndex:index];
+    DLog(@"removing %@ from %@", aPerson, [self participants]);
+    
+    // Add the inverse of this operation to the undo stack
+    [[[self meetUndoManager] prepareWithInvocationTarget:self] insertObject:aPerson
+                                                      inParticipantsAtIndex:index];
+    if (![[self meetUndoManager] isUndoing]) {
+        [[self meetUndoManager] setActionName:@"Delete Person"];
+    }
+    
     [self stopObservingPerson:aPerson];
+    // Remove the person from the array
     [[self participants] removeObjectAtIndex:index];
     [self hourlyRate];
 }

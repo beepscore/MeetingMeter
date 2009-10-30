@@ -20,6 +20,7 @@
     NSDate *endTime;
     NSDecimalNumber *accruedCost;    
     NSMutableArray *participants;
+    NSUndoManager *meetUndoManager;
 }
 
 // declare methods
@@ -29,9 +30,10 @@
 - (id)initWithStartTime:(NSDate*)aStartTime
                 endTime:(NSDate*)anEndTime
             accruedCost:(NSDecimalNumber*)anAccruedCost
-           participants:(NSMutableArray*)aParticipants;
+           participants:(NSMutableArray*)aParticipants
+        meetUndoManager:(NSUndoManager*)anUndoManager;
 
-- (id)initWithExampleValues;
+- (id)initWithExampleValues:(NSUndoManager*)anUndoManager;
 
 #pragma mark -
 #pragma mark Accessors
@@ -45,6 +47,8 @@
 
 - (NSDecimalNumber *)accruedCost;
 - (void)setAccruedCost:(NSDecimalNumber *)anAccruedCost;
+
+@property (readwrite, retain) NSUndoManager *meetUndoManager;
 
 #pragma mark -
 #pragma mark KVO related methods
