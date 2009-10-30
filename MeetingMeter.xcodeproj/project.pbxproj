@@ -17,6 +17,7 @@
 		DE605094109B629700B7A79E /* BSGlobalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = DE605093109B629700B7A79E /* BSGlobalValues.m */; };
 		DEC88DE11089A608009178B1 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC88DE01089A608009178B1 /* Person.m */; };
 		DED214661089AA700072063F /* Meeting.m in Sources */ = {isa = PBXBuildFile; fileRef = DED214651089AA6F0072063F /* Meeting.m */; };
+		DED294EF109B7BEA00D79D06 /* beepscoreIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DED294EE109B7BEA00D79D06 /* beepscoreIcon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		DEC88DE01089A608009178B1 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		DED214641089AA6F0072063F /* Meeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meeting.h; sourceTree = "<group>"; };
 		DED214651089AA6F0072063F /* Meeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Meeting.m; sourceTree = "<group>"; };
+		DED294EE109B7BEA00D79D06 /* beepscoreIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = beepscoreIcon.icns; sourceTree = "<group>"; };
 		DEDF793D1097B5A5005D466B /* BSGlobalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGlobalValues.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DED294EE109B7BEA00D79D06 /* beepscoreIcon.icns */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				8D15AC360486D014006FF6A4 /* MeetingMeter-Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
@@ -184,6 +187,7 @@
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				1DDD582C0DA1D0D100B32029 /* MyDocument.xib in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
+				DED294EF109B7BEA00D79D06 /* beepscoreIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
