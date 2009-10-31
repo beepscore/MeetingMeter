@@ -15,6 +15,7 @@
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		DE605094109B629700B7A79E /* BSGlobalValues.m in Sources */ = {isa = PBXBuildFile; fileRef = DE605093109B629700B7A79E /* BSGlobalValues.m */; };
+		DE8B9101109BE46C0099E24C /* About.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE8B9100109BE46C0099E24C /* About.xib */; };
 		DEA1FEBE109BDF1000496663 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEA1FEBD109BDF1000496663 /* Preferences.xib */; };
 		DEA834E3109BD06A00FCE965 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA834E2109BD06A00FCE965 /* AppController.m */; };
 		DEA834FC109BD2C600FCE965 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA834FB109BD2C600FCE965 /* PreferenceController.m */; };
@@ -39,6 +40,7 @@
 		8D15AC360486D014006FF6A4 /* MeetingMeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MeetingMeter-Info.plist"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* MeetingMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE605093109B629700B7A79E /* BSGlobalValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSGlobalValues.m; sourceTree = "<group>"; };
+		DE8B9100109BE46C0099E24C /* About.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = About.xib; sourceTree = "<group>"; };
 		DEA1FEBD109BDF1000496663 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		DEA834E1109BD06A00FCE965 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		DEA834E2109BD06A00FCE965 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DE8B9100109BE46C0099E24C /* About.xib */,
 				DED294EE109B7BEA00D79D06 /* beepscoreIcon.icns */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				8D15AC360486D014006FF6A4 /* MeetingMeter-Info.plist */,
@@ -202,6 +205,7 @@
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
 				DED294EF109B7BEA00D79D06 /* beepscoreIcon.icns in Resources */,
 				DEA1FEBE109BDF1000496663 /* Preferences.xib in Resources */,
+				DE8B9101109BE46C0099E24C /* About.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
