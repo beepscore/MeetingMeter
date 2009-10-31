@@ -283,6 +283,7 @@
                      ofObject:(id)object
                        change:(NSDictionary *)change
                       context:(void *)context {
+    
     DLog(@"%@ in observeValueForKeyPath = %@", self, keyPath);
     
     // If the meeting is being notified that a person's hourlyRate has changed,
@@ -291,11 +292,22 @@
         [self willChangeValueForKey:BSMeetingHourlyRateKey]; // the Meeting's hourlyRate
         [self didChangeValueForKey:BSMeetingHourlyRateKey];// the Meeting's hourlyRate
     }
-//    [[meetUndoManager prepareWithInvocationTarget:self] changeKeyPath:keyPath
-//                                                             ofObject:object
-//                                                              toValue:oldValue];
-//    [meetUndoManager setActionName:@"Edit"];
+    
+    // Undo Person Edits.  Ref Hillegass pg 148
+    id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+    
+    // NSNull objects are used to represent nil in a dictionary
+    if (oldValue == [NSNull null]) {
+        oldValue = nil;
+    }
+    DLog(@"oldValue = %@", oldValue);    
+    [[[self meetUndoManager] prepareWithInvocationTarget:self] changeKeyPath:keyPath
+                                                             ofObject:object
+                                                              toValue:oldValue];
+    [[self meetUndoManager] setActionName:@"Edit"];
 }
+
+
 
 - (void)changeKeyPath:(NSString *)keyPath
              ofObject:(id)obj
