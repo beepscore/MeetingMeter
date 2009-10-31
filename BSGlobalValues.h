@@ -21,6 +21,7 @@ extern NSString * const BSParticipantsKey;
 // Ref Hillegass pg 202
 extern NSString * const BNRTableBgColorKey;
 extern NSString * const BNREmptyDocKey;
+extern NSString * const BNRColorChangedNotification;
 
 #pragma mark -
 // Ref http://iphoneincubator.com/blog/debugging/the-evolution-of-a-replacement-for-nslog

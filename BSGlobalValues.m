@@ -19,6 +19,8 @@ NSString * const BSParticipantsKey = @"participants";
 
 NSString * const BNRTableBgColorKey = @"TableBackgroundColor";
 NSString * const BNREmptyDocKey = @"EmptyDocumentFlag";
+NSString * const BNRColorChangedNotification = @"BNRColorChanged";
+
 
 
 

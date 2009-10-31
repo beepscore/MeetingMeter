@@ -27,6 +27,14 @@
         // Pass MyDocument's undo manager to Meeting for Meeting to use
         meeting = [[Meeting alloc] initWithExampleValues:anUndoManager];
         elapsedTimeOld = [[NSDateComponents alloc] init];
+
+        // Ref Hillegass pg 213
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self
+               selector:@selector(handleColorChange:)
+                   name:BNRColorChangedNotification
+                 object:nil];
+        DLog(@"Registered with notification center");
     }
     return self;
 }
@@ -48,9 +56,6 @@
     colorAsData = [defaults objectForKey:BNRTableBgColorKey];
     
     [tableView setBackgroundColor:[NSKeyedUnarchiver unarchiveObjectWithData:colorAsData]];
-    
-    // TODO: need this??
-    //[self updateHourlyRateField];
 }
 
 
@@ -183,11 +188,18 @@
     [gregorian release];
 }
 
+// Ref Hillegass pg 214
+- (void)handleColorChange:(NSNotification *)note {
+    NSLog(@"Received notification: %@", note);
+    NSColor *color = [[note userInfo] objectForKey:@"color"];
+    [tableView setBackgroundColor:color];
+}
 
 - (void)dealloc{
-    
-    // remove observer.  Ref Hillegass pg 146-147, 209
+    // remove observer.  Ref Hillegass pg 209, 214
+    DLog(@"in MyDocument -dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     // Ref Hillegass Ch 04 pg 68
     [meeting release]; meeting = nil;
     [elapsedTimeOld release], elapsedTimeOld = nil;

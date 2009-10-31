@@ -73,6 +73,7 @@
 
 #pragma mark -
 #pragma mark Accessors
+@synthesize meetUndoManager;
 
 - (NSMutableArray *)participants{
     return participants;
@@ -129,26 +130,26 @@
     }
 }
 
-@synthesize meetUndoManager;
 
+#pragma mark -
+#pragma mark Other methods
 - (void)dealloc {
+    
+    DLog(@"in Meeting -dealloc");
     // remove observer.  Ref Hillegass pg 146-147, 209
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     // after release, best practice is set object = nil;
     // then if someone accidentally calls it,
     // they will get nil instead of a bad reference.
-    [participants release], participants = nil;    
+    [meetUndoManager release], meetUndoManager = nil;
     [startTime release], startTime = nil;
     [endTime release], endTime = nil;
     [accruedCost release], accruedCost = nil;
-    [meetUndoManager release], meetUndoManager = nil;
+    [participants release], participants = nil;    
     
     [super dealloc];
 }
-
-#pragma mark -
-#pragma mark Other methods
 
 - (void)startMeeting {
     // [[NSDate alloc] init] and [NSDate date] both return current date and time.
@@ -237,6 +238,8 @@
     // TODO:  If you close a file without saving, error says
     // instance of class person was deallocated while observers were still registered with it.
     // gives observer id#, says I can set a symbolic breakpoint on NSKVODeallocateBreak.
+    // menu File/Close call First Responder -performClose
+    // have -performClose call invalidate or similar method to remove observer
     [aPerson removeObserver:self forKeyPath:BSPersonNameKey];
     [aPerson removeObserver:self forKeyPath:BSPersonHourlyRateKey];
 }

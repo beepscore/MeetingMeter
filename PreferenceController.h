@@ -7,9 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-extern NSString * const BNRTableBgColorKey;
-extern NSString * const BNREmptyDocKey;
-
+#import "BSGlobalValues.h"
 
 @interface PreferenceController : NSWindowController {
     IBOutlet NSColorWell *colorWell;
