@@ -132,6 +132,9 @@
 @synthesize meetUndoManager;
 
 - (void)dealloc {
+    // remove observer.  Ref Hillegass pg 146-147, 209
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     // after release, best practice is set object = nil;
     // then if someone accidentally calls it,
     // they will get nil instead of a bad reference.
@@ -231,7 +234,9 @@
 }
 
 - (void)stopObservingPerson:(Person *)aPerson {
-    
+    // TODO:  If you close a file without saving, error says
+    // instance of class person was deallocated while observers were still registered with it.
+    // gives observer id#, says I can set a symbolic breakpoint on NSKVODeallocateBreak.
     [aPerson removeObserver:self forKeyPath:BSPersonNameKey];
     [aPerson removeObserver:self forKeyPath:BSPersonHourlyRateKey];
 }

@@ -43,9 +43,14 @@
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
     
-    // TODO: need this??
-    [self updateHourlyRateField];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *colorAsData;
+    colorAsData = [defaults objectForKey:BNRTableBgColorKey];
     
+    [tableView setBackgroundColor:[NSKeyedUnarchiver unarchiveObjectWithData:colorAsData]];
+    
+    // TODO: need this??
+    //[self updateHourlyRateField];
 }
 
 
@@ -181,7 +186,7 @@
 
 - (void)dealloc{
     
-    // remove observer.  Ref Hillegass pg 146-147
+    // remove observer.  Ref Hillegass pg 146-147, 209
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Ref Hillegass Ch 04 pg 68
     [meeting release]; meeting = nil;
