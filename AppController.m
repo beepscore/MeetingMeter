@@ -10,6 +10,8 @@
 #import "PreferenceController.h"
 
 @implementation AppController
+
+// Ref Hillegass pg 203
 + (void)initialize {
     // Create a dictionary
     NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];

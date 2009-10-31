@@ -9,13 +9,13 @@
 #import "BSGlobalValues.h"
 
 
-NSString *BSPersonNameKey = @"name";
+NSString * const BSPersonNameKey = @"name";
 // these are two different keys, but their strings are equivalent
-NSString * BSPersonHourlyRateKey = @"hourlyRate";
+NSString * const BSPersonHourlyRateKey = @"hourlyRate";
 
-NSString * BSMeetingHourlyRateKey = @"hourlyRate";
+NSString * const BSMeetingHourlyRateKey = @"hourlyRate";
 
-NSString * BSParticipantsKey = @"participants";
+NSString * const BSParticipantsKey = @"participants";
 
 NSString * const BNRTableBgColorKey = @"TableBackgroundColor";
 NSString * const BNREmptyDocKey = @"EmptyDocumentFlag";

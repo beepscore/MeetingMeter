@@ -13,10 +13,10 @@
 #define MINUTES_PER_HOUR 60.
 #define SECONDS_PER_HOUR 3600.
 
-extern NSString * BSPersonNameKey;
-extern NSString * BSPersonHourlyRateKey;
-extern NSString * BSMeetingHourlyRateKey;
-extern NSString * BSParticipantsKey;
+extern NSString * const BSPersonNameKey;
+extern NSString * const BSPersonHourlyRateKey;
+extern NSString * const BSMeetingHourlyRateKey;
+extern NSString * const BSParticipantsKey;
 
 // Ref Hillegass pg 202
 extern NSString * const BNRTableBgColorKey;
