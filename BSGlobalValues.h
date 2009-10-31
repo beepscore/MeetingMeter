@@ -13,13 +13,14 @@
 #define MINUTES_PER_HOUR 60.
 #define SECONDS_PER_HOUR 3600.
 
-extern NSString * const BNRTableBgColorKey;
-extern NSString * const BNREmptyDocKey;
-
 extern NSString * BSPersonNameKey;
 extern NSString * BSPersonHourlyRateKey;
 extern NSString * BSMeetingHourlyRateKey;
 extern NSString * BSParticipantsKey;
+
+// Ref Hillegass pg 202
+extern NSString * const BNRTableBgColorKey;
+extern NSString * const BNREmptyDocKey;
 
 #pragma mark -
 // Ref http://iphoneincubator.com/blog/debugging/the-evolution-of-a-replacement-for-nslog

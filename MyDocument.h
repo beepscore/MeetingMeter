@@ -30,8 +30,7 @@
     IBOutlet NSTextField *hourlyRateField;
     IBOutlet NSTextField *elapsedTimeField;
 
-    // TODO:  Hillegass pg 162 doesn't mention needing an outlet??
-    // connect to table view in MyDocument.xib
+    // Connect to table view in MyDocument.xib.  Ref Hillegass pg 149
     IBOutlet NSTableView *tableView;
 }
 
