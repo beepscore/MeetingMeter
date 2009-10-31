@@ -69,8 +69,8 @@
 - (void)encodeWithCoder:(NSCoder *)coder {
     // Hal recommends don't access ivar directly, always use accessor
     // e.g. don't use name, use setter self.name or [self name]
-    [coder encodeObject:self.name forKey:BSNameKey];
-    [coder encodeFloat:self.hourlyRate forKey:BSHourlyRateKey];
+    [coder encodeObject:self.name forKey:BSPersonNameKey];
+    [coder encodeFloat:self.hourlyRate forKey:BSPersonHourlyRateKey];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -79,8 +79,8 @@
     [super init];
     
     // Right hand side uses setter, which will retain assigned value
-    self.name = [[coder decodeObjectForKey:BSNameKey] retain];
-    self.hourlyRate = [coder decodeFloatForKey:BSHourlyRateKey];
+    self.name = [[coder decodeObjectForKey:BSPersonNameKey] retain];
+    self.hourlyRate = [coder decodeFloatForKey:BSPersonHourlyRateKey];
     return self;
 }
 

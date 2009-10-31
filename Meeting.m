@@ -220,20 +220,20 @@
 - (void)startObservingPerson:(Person *)aPerson {
     
     [aPerson addObserver:self
-              forKeyPath:@"name"
+              forKeyPath:BSPersonNameKey
                  options:NSKeyValueObservingOptionOld
                  context:NULL];
     
     [aPerson addObserver:self
-              forKeyPath:@"hourlyRate"
+              forKeyPath:BSPersonHourlyRateKey
                  options:NSKeyValueObservingOptionOld
                  context:NULL];
 }
 
 - (void)stopObservingPerson:(Person *)aPerson {
     
-    [aPerson removeObserver:self forKeyPath:@"name"];
-    [aPerson removeObserver:self forKeyPath:@"hourlyRate"];
+    [aPerson removeObserver:self forKeyPath:BSPersonNameKey];
+    [aPerson removeObserver:self forKeyPath:BSPersonHourlyRateKey];
 }
 
 // insertObject: and removeObject: add or remove a person from the participants array.
@@ -287,9 +287,9 @@
     
     // If the meeting is being notified that a person's hourlyRate has changed,
     // the meeting will send a notification that meeting hourlyRate has changed.
-    if ([keyPath isEqualToString:@"hourlyRate"]) { // the Person's hourlyRate
-        [self willChangeValueForKey:@"hourlyRate"]; // the Meeting's hourlyRate
-        [self didChangeValueForKey:@"hourlyRate"];// the Meeting's hourlyRate
+    if ([keyPath isEqualToString:BSPersonHourlyRateKey]) { // the Person's hourlyRate
+        [self willChangeValueForKey:BSMeetingHourlyRateKey]; // the Meeting's hourlyRate
+        [self didChangeValueForKey:BSMeetingHourlyRateKey];// the Meeting's hourlyRate
     }
 //    [[meetUndoManager prepareWithInvocationTarget:self] changeKeyPath:keyPath
 //                                                             ofObject:object
@@ -314,8 +314,8 @@
     // When the participants array is changed, the program will send a notification
     // that meeting hourlyRate has changed.
     // The View hourly rate text field is observing meeting hourlyRate, and is notified.
-	if ([keyInQuestion isEqualToString:@"hourlyRate"]) {
-        return [NSSet setWithObjects:@"participants", nil];  
+	if ([keyInQuestion isEqualToString:BSMeetingHourlyRateKey]) {
+        return [NSSet setWithObjects:BSParticipantsKey, nil];  
     }
 	return [super keyPathsForValuesAffectingValueForKey:keyInQuestion];      
 }

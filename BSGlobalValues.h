@@ -16,8 +16,10 @@
 extern NSString * const BNRTableBgColorKey;
 extern NSString * const BNREmptyDocKey;
 
-extern NSString * BSNameKey;
-extern NSString * BSHourlyRateKey;
+extern NSString * BSPersonNameKey;
+extern NSString * BSPersonHourlyRateKey;
+extern NSString * BSMeetingHourlyRateKey;
+extern NSString * BSParticipantsKey;
 
 #pragma mark -
 // Ref http://iphoneincubator.com/blog/debugging/the-evolution-of-a-replacement-for-nslog

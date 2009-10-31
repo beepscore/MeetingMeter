@@ -8,8 +8,13 @@
  */
 #import "BSGlobalValues.h"
 
-NSString *BSNameKey = @"name";
-NSString * BSHourlyRateKey = @"hourlyRate";
+NSString *BSPersonNameKey = @"name";
+// these are two different keys, but their strings are equivalent
+NSString * BSPersonHourlyRateKey = @"hourlyRate";
+
+NSString * BSMeetingHourlyRateKey = @"hourlyRate";
+
+NSString * BSParticipantsKey = @"participants";
 
 
 
