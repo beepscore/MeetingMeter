@@ -15,6 +15,7 @@
 #pragma mark Accessors
 @synthesize name;
 @synthesize hourlyRate;
+@synthesize defaultBillingRate;
 
 // used Accessorizer to generate accessor method implementations
 #pragma mark -
@@ -22,19 +23,31 @@
 // init
 - (id)init {
 
-    float defaultHourlyRate = 3600.;
+    // Ref Hillegass pg 213
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(handleDefaultBillingRateChange:)
+               name:defaultBillingRateKey
+             object:nil];
+    DLog(@"Registered with notification center");
+    
+
+//    float defaultHourlyRate = 3600.;
+    float defaultHourlyRate = [defaultBillingRate floatValue] ;
+
     
     [self initWithName:@"defaultName"
             hourlyRate:defaultHourlyRate];
     return self;
 }
 
+// designated initializer
 - (id)initWithName:(NSString*)aName
         hourlyRate:(float)anHourlyRate{
     
     if (self = [super init]) {
         [self setName:aName];
-        [self setHourlyRate:anHourlyRate];        
+        [self setHourlyRate:anHourlyRate];      
     }
     return self;
 }
@@ -43,7 +56,17 @@
 #pragma mark Other methods
 
 - (void)dealloc {
+
+    
+    // remove observer.  Ref Hillegass pg 209, 214
+    DLog(@"in Person -dealloc");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
+    
     [name release], name = nil;
+    [defaultBillingRate release], defaultBillingRate = nil;
+
     [super dealloc];
 }
 
@@ -83,6 +106,14 @@
     self.hourlyRate = [coder decodeFloatForKey:BSPersonHourlyRateKey];
     return self;
 }
+
+// Ref Hillegass pg 214
+- (void)handleDefaultBillingRateChange:(NSNotification *)note {
+    DLog(@"Received notification: %@", note);
+    NSNumber *tempRate = [[note userInfo] objectForKey:defaultBillingRateKey];
+    [self setDefaultBillingRate:tempRate];
+}
+
 
 
 @end

@@ -10,16 +10,19 @@
 
 #import <Foundation/Foundation.h>
 #import "BSGlobalValues.h"
+#import "PreferenceController.h"
 
 @interface Person : NSObject <NSCoding> {
     // declare instance variables
     NSString *name;
     float hourlyRate;
+    NSNumber *defaultBillingRate;
 }
 
 #pragma mark -
 #pragma mark Accessors
 @property (readwrite, copy) NSString *name;
+@property (readwrite, retain) NSNumber *defaultBillingRate;
 
 // TODO:  Previously Person hourlyRate was NSDecimal *
 // This displayed correctly in MyDocument's view array controller.
@@ -36,5 +39,7 @@
 // designated initializer
 - (id)initWithName:(NSString*)aName
         hourlyRate:(float)anHourlyRate;
+
+- (void)handleDefaultBillingRateChange:(NSNotification *)note;
 
 @end
