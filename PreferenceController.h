@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "BSGlobalValues.h"
 
+extern NSString * const defaultBillingRateKey;
+
+
 @interface PreferenceController : NSWindowController {
     IBOutlet NSColorWell *colorWell;
     IBOutlet NSButton *checkbox;

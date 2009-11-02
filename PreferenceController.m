@@ -7,6 +7,7 @@
 //
 
 #import "PreferenceController.h"
+NSString * const defaultBillingRateKey = @"defaultBillingRate";
 
 @implementation PreferenceController
 
