@@ -190,14 +190,13 @@
 
 // Ref Hillegass pg 214
 - (void)handleColorChange:(NSNotification *)note {
-    NSLog(@"Received notification: %@", note);
+    DLog(@"Received notification: %@", note);
     NSColor *color = [[note userInfo] objectForKey:@"color"];
     [tableView setBackgroundColor:color];
 }
 
 - (void)dealloc{
     // remove observer.  Ref Hillegass pg 209, 214
-    DLog(@"in MyDocument -dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     // Ref Hillegass Ch 04 pg 68

@@ -135,9 +135,10 @@
 #pragma mark Other methods
 - (void)dealloc {
     
-    DLog(@"in Meeting -dealloc");
     // remove observer.  Ref Hillegass pg 146-147, 209
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    for (Person *person in [self participants]) {
+        [self stopObservingPerson:person];
+    }
     
     // after release, best practice is set object = nil;
     // then if someone accidentally calls it,
@@ -168,14 +169,12 @@
 - (NSDecimalNumber *) hourlyRate {
     
     NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
-    NSEnumerator *enumerator = [[self participants] objectEnumerator];
-    
-    for (Person *thisPerson in enumerator) {
+    for (Person *thisPerson in [self participants]) {
         combinedHourlyRate = [combinedHourlyRate 
                               decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:
                                                      [[NSNumber numberWithFloat:[thisPerson hourlyRate]] decimalValue]]];
     }
-    DLog(@"meeting hourlyRate = %@", combinedHourlyRate);
+    DLog(@"meeting hourlyRate = %8.2@", combinedHourlyRate);
     return combinedHourlyRate;
 }
 
@@ -201,16 +200,14 @@
 - (NSString*)description {
     
     NSString *descriptionString = @"\n";
-    descriptionString = [descriptionString stringByAppendingString:@"Participant, hourlyRate \n"];    
+    descriptionString = [descriptionString stringByAppendingString:@"Participant       hourlyRate \n"];    
     
-    NSEnumerator *enumerator = [[self participants] objectEnumerator];
-    
-    for (Person *thisPerson in enumerator) {
+    for (Person *thisPerson in [self participants]) {
         descriptionString = [descriptionString stringByAppendingString:[thisPerson description]];    
     }
     
     NSString *meetingRateString = 
-        [NSString stringWithFormat:@"  hourlyRate = %@\n", [self hourlyRate]];
+        [NSString stringWithFormat:@"  hourlyRate =    %14.2@\n", [self hourlyRate]];
     
     descriptionString = [descriptionString stringByAppendingString:meetingRateString];    
     
@@ -235,11 +232,6 @@
 }
 
 - (void)stopObservingPerson:(Person *)aPerson {
-    // TODO:  If you close a file without saving, error says
-    // instance of class person was deallocated while observers were still registered with it.
-    // gives observer id#, says I can set a symbolic breakpoint on NSKVODeallocateBreak.
-    // menu File/Close call First Responder -performClose
-    // have -performClose call invalidate or similar method to remove observer
     [aPerson removeObserver:self forKeyPath:BSPersonNameKey];
     [aPerson removeObserver:self forKeyPath:BSPersonHourlyRateKey];
 }
@@ -248,8 +240,7 @@
 // They use KVC methods, which in turn use the Meeting -setParticipants accessor.
 // Ref Hillegass pg 144, 147
 - (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index {
-    
-    
+
     DLog(@"adding %@ to %@", aPerson, [self participants]);
     // Add the inverse of this operation to the undo stack
     [[meetUndoManager prepareWithInvocationTarget:self]
@@ -268,7 +259,7 @@
     
     
     Person *aPerson = [[self participants] objectAtIndex:index];
-    DLog(@"removing %@ from %@", aPerson, [self participants]);
+    DLog(@"removing %@ from participants", aPerson.name);
     
     // Add the inverse of this operation to the undo stack
     [[[self meetUndoManager] prepareWithInvocationTarget:self] insertObject:aPerson
@@ -308,14 +299,12 @@
     if (oldValue == [NSNull null]) {
         oldValue = nil;
     }
-    DLog(@"oldValue = %@", oldValue);    
+
     [[[self meetUndoManager] prepareWithInvocationTarget:self] changeKeyPath:keyPath
                                                              ofObject:object
                                                               toValue:oldValue];
     [[self meetUndoManager] setActionName:@"Edit"];
 }
-
-
 
 - (void)changeKeyPath:(NSString *)keyPath
              ofObject:(id)obj

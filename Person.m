@@ -56,14 +56,6 @@
 #pragma mark Other methods
 
 - (void)dealloc {
-
-    
-    // remove observer.  Ref Hillegass pg 209, 214
-    DLog(@"in Person -dealloc");
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    
-    
     [name release], name = nil;
     [defaultBillingRate release], defaultBillingRate = nil;
 
@@ -79,7 +71,7 @@
     
     descriptionString = [descriptionString stringByAppendingString:NameString];    
     
-    NSString *HourlyRateString = [NSString stringWithFormat:@"%20f \n",
+    NSString *HourlyRateString = [NSString stringWithFormat:@"%10.2f \n",
                                             [self hourlyRate]];
     
     descriptionString = [descriptionString stringByAppendingString:HourlyRateString];            
