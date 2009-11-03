@@ -15,7 +15,8 @@
 
 @interface Meeting : NSObject {
     
-    // declare instance variables
+#pragma mark -
+#pragma mark Instance variables
     NSDate *startTime;
     NSDate *endTime;
     NSDecimalNumber *accruedCost;    
@@ -23,7 +24,16 @@
     NSUndoManager *meetUndoManager;
 }
 
-// declare methods
+#pragma mark -
+#pragma mark Accessors
+@property (nonatomic, retain) NSDate *startTime;
+@property (nonatomic, retain) NSDate *endTime;
+@property (nonatomic, retain) NSDecimalNumber *accruedCost;
+@property (nonatomic, retain) NSUndoManager *meetUndoManager;
+
+- (NSMutableArray *)participants;
+- (void)setParticipants:(NSMutableArray *)a;
+
 #pragma mark -
 #pragma mark Initializers
 // designatedInitializer
@@ -36,28 +46,12 @@
 - (id)initWithExampleValues:(NSUndoManager*)anUndoManager;
 
 #pragma mark -
-#pragma mark Accessors
-- (NSMutableArray *)participants;
-- (void)setParticipants:(NSMutableArray *)a;
-
-- (NSDate *)startTime;
-- (void)setStartTime:(NSDate *)aStartTime;
-- (NSDate *)endTime;
-- (void)setEndTime:(NSDate *)anEndTime;
-
-- (NSDecimalNumber *)accruedCost;
-- (void)setAccruedCost:(NSDecimalNumber *)anAccruedCost;
-
-@property (readwrite, retain) NSUndoManager *meetUndoManager;
-
-#pragma mark -
 #pragma mark KVO related methods
 - (void)startObservingPerson:(Person *)aPerson;
 - (void)stopObservingPerson:(Person *)aPerson;
 - (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index;
 - (void)removeObjectFromParticipantsAtIndex: (int) index;
 - (void)changeKeyPath:(NSString *)keyPath ofObject:(id)obj toValue:(id)newValue;
-
 
 #pragma mark -
 #pragma mark Other methods
@@ -66,8 +60,6 @@
 
 // calculated from people attending meeting
 - (NSDecimalNumber *)hourlyRate;
-
 - (NSDateComponents *)elapsedTime;
 
-    
 @end

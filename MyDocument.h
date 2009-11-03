@@ -20,6 +20,8 @@
 
 @interface MyDocument : NSDocument
 {
+#pragma mark -
+#pragma mark Instance variables
     Meeting *meeting;
     
     NSTimer *timer;

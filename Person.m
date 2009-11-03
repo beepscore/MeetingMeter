@@ -10,14 +10,22 @@
 
 @implementation Person
 
-
 #pragma mark -
 #pragma mark Accessors
 @synthesize name;
 @synthesize hourlyRate;
 @synthesize defaultBillingRate;
 
-// used Accessorizer to generate accessor method implementations
+#pragma mark -
+- (void)dealloc {
+//    [name release], name = nil;
+//    [defaultBillingRate release], defaultBillingRate = nil;
+    self.name = nil;
+    self.defaultBillingRate = nil;
+
+    [super dealloc];
+}
+
 #pragma mark -
 #pragma mark Initializers
 // init
@@ -54,14 +62,6 @@
 
 #pragma mark -
 #pragma mark Other methods
-
-- (void)dealloc {
-    [name release], name = nil;
-    [defaultBillingRate release], defaultBillingRate = nil;
-
-    [super dealloc];
-}
-
 - (NSString *)description {
     
     NSString *descriptionString = @"";
@@ -105,7 +105,5 @@
     NSNumber *tempRate = [[note userInfo] objectForKey:defaultBillingRateKey];
     [self setDefaultBillingRate:tempRate];
 }
-
-
 
 @end

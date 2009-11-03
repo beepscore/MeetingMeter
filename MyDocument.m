@@ -16,6 +16,20 @@
 @synthesize meeting;
 @synthesize elapsedTimeOld;
 
+#pragma mark -
+- (void)dealloc{
+    // remove observer.  Ref Hillegass pg 209, 214
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    // Ref Hillegass Ch 04 pg 68
+    self.meeting = nil;
+    self.elapsedTimeOld = nil;
+    
+    [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Initializers
 - (id)init
 {
     if (self = [super init]) {
@@ -37,6 +51,98 @@
         DLog(@"Registered with notification center");
     }
     return self;
+}
+
+#pragma mark -
+#pragma mark IBActions
+- (IBAction)beginMeeting:(id)sender{
+    // disable beginMeeting, enable endMeeting buttons
+    [beginMeetingButton setEnabled:NO];
+    [endMeetingButton setEnabled:YES];
+    [[self meeting] startMeeting];
+    
+    [self stopGo];
+}
+
+- (IBAction)endMeeting:(id)sender{
+    // disable endMeeting, enable beginMeeting buttons
+    [endMeetingButton setEnabled:NO];
+    [beginMeetingButton setEnabled:YES];
+    
+    [[self meeting] stopMeeting];
+    [self stopGo];
+}
+
+- (IBAction)debugDump:(id)sender {
+    DLog(@"%@", [[self meeting] description]);
+    DLog(@"\n\n");
+}
+
+#pragma mark -
+#pragma mark Other methods
+- (void)updateHourlyRateField {
+    
+    [[self meeting] hourlyRate];
+}
+
+-(void)updateGUI:(NSTimer *)aTimer {
+    // ref http://developer.apple.com/mac/library/documentation/Cocoa/Conceptual/DatesAndTimes/Articles/dtCalendricalCalculations.html#//apple_ref/doc/uid/TP40007836
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    // use "components" to sample and hold current elapsedTime
+    // so value won't change during calculations
+    NSDateComponents *components = [meeting elapsedTime];
+    NSInteger elapsedHours = [components hour];
+    NSInteger elapsedMinutes = [components minute];
+    // I think NSDateComponents* elapsedTime truncates seconds.
+    double elapsedSeconds = [components second];   
+    
+    [elapsedTimeField setStringValue:[NSString stringWithFormat:@"%02d:%02d:%04.1f", 
+                                      elapsedHours, elapsedMinutes, elapsedSeconds]];
+    
+    double incrementalTimeInHours = 
+    ((elapsedHours - [elapsedTimeOld hour])
+     + ((elapsedMinutes - [elapsedTimeOld minute]) / MINUTES_PER_HOUR)
+     + ((elapsedSeconds - [elapsedTimeOld second]) / SECONDS_PER_HOUR));
+    
+    [self setElapsedTimeOld:components];  
+    
+    NSDecimalNumber *incrementalTimeInHoursDecimal = 
+    [NSDecimalNumber decimalNumberWithDecimal:
+     [[NSNumber numberWithFloat:incrementalTimeInHours] decimalValue]];
+    
+    NSDecimalNumber *incrementalCost = 
+    [[[self meeting] hourlyRate] decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
+    
+    [[self meeting] setAccruedCost:[[[self meeting] accruedCost] decimalNumberByAdding:incrementalCost]];
+    
+    [gregorian release];
+}
+
+// Timer method.  ref Hillegass pg 315
+- (void)stopGo {
+    
+    if (nil == timer) {
+        NSLog(@"Starting");
+        // Create a timer
+        timer = [[NSTimer scheduledTimerWithTimeInterval:1.0
+                                                  target:self
+                                                selector:@selector(updateGUI:)
+                                                userInfo:nil
+                                                 repeats:YES] retain];
+        
+        [self setElapsedTimeOld:[[self meeting] elapsedTime]];
+        [[self meeting] setAccruedCost:[NSDecimalNumber zero]];
+        
+    } else {
+        NSLog(@"Stopping");
+        
+        // Invalidate and release the timer
+        [timer invalidate];
+        [timer release];
+        timer = nil;
+    }
 }
 
 - (NSString *)windowNibName
@@ -93,117 +199,11 @@
     return YES;
 }
 
-- (void)updateHourlyRateField {
-
-    [[self meeting] hourlyRate];
-}
-
-
-#pragma mark -
-#pragma mark IBActions
-
-- (IBAction)beginMeeting:(id)sender{
-    // disable beginMeeting, enable endMeeting buttons
-    [beginMeetingButton setEnabled:NO];
-    [endMeetingButton setEnabled:YES];
-    [[self meeting] startMeeting];
-    
-    [self stopGo];
-}
-
-- (IBAction)endMeeting:(id)sender{
-    // disable endMeeting, enable beginMeeting buttons
-    [endMeetingButton setEnabled:NO];
-    [beginMeetingButton setEnabled:YES];
-
-    [[self meeting] stopMeeting];
-    [self stopGo];
-}
-
-- (IBAction)debugDump:(id)sender {
-    DLog(@"%@", [[self meeting] description]);
-    DLog(@"\n\n");
-}
-
-#pragma mark -
-#pragma mark Other methods
-
-// Timer method.  ref Hillegass pg 315
-- (void)stopGo {
-    
-    if (nil == timer) {
-        NSLog(@"Starting");
-        // Create a timer
-        timer = [[NSTimer scheduledTimerWithTimeInterval:1.0
-                                                  target:self
-                                                selector:@selector(updateGUI:)
-                                                userInfo:nil
-                                                 repeats:YES] retain];
-        
-        [self setElapsedTimeOld:[[self meeting] elapsedTime]];
-        [[self meeting] setAccruedCost:[NSDecimalNumber zero]];
-        
-    } else {
-        NSLog(@"Stopping");
-        
-        // Invalidate and release the timer
-        [timer invalidate];
-        [timer release];
-        timer = nil;
-    }
-}
-
--(void)updateGUI:(NSTimer *)aTimer {
-    // ref http://developer.apple.com/mac/library/documentation/Cocoa/Conceptual/DatesAndTimes/Articles/dtCalendricalCalculations.html#//apple_ref/doc/uid/TP40007836
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
-    
-    // use "components" to sample and hold current elapsedTime
-    // so value won't change during calculations
-    NSDateComponents *components = [meeting elapsedTime];
-    NSInteger elapsedHours = [components hour];
-    NSInteger elapsedMinutes = [components minute];
-    // I think NSDateComponents* elapsedTime truncates seconds.
-    double elapsedSeconds = [components second];   
-    
-    [elapsedTimeField setStringValue:[NSString stringWithFormat:@"%02d:%02d:%04.1f", 
-                                      elapsedHours, elapsedMinutes, elapsedSeconds]];
-
-    double incrementalTimeInHours = 
-       ((elapsedHours - [elapsedTimeOld hour])
-        + ((elapsedMinutes - [elapsedTimeOld minute]) / MINUTES_PER_HOUR)
-        + ((elapsedSeconds - [elapsedTimeOld second]) / SECONDS_PER_HOUR));
-
-    [self setElapsedTimeOld:components];  
-
-    NSDecimalNumber *incrementalTimeInHoursDecimal = 
-    [NSDecimalNumber decimalNumberWithDecimal:
-     [[NSNumber numberWithFloat:incrementalTimeInHours] decimalValue]];
-    
-    NSDecimalNumber *incrementalCost = 
-    [[[self meeting] hourlyRate] decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
-    
-    [[self meeting] setAccruedCost:[[[self meeting] accruedCost] decimalNumberByAdding:incrementalCost]];
-        
-    [gregorian release];
-}
-
 // Ref Hillegass pg 214
 - (void)handleColorChange:(NSNotification *)note {
     DLog(@"Received notification: %@", note);
     NSColor *color = [[note userInfo] objectForKey:@"color"];
     [tableView setBackgroundColor:color];
-}
-
-- (void)dealloc{
-    // remove observer.  Ref Hillegass pg 209, 214
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    // Ref Hillegass Ch 04 pg 68
-    [meeting release]; meeting = nil;
-    [elapsedTimeOld release], elapsedTimeOld = nil;
-        
-    [super dealloc];
 }
 
 @end
