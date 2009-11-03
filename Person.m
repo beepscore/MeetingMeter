@@ -18,8 +18,6 @@
 
 #pragma mark -
 - (void)dealloc {
-//    [name release], name = nil;
-//    [defaultBillingRate release], defaultBillingRate = nil;
     self.name = nil;
     self.defaultBillingRate = nil;
 
