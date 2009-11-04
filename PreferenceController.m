@@ -37,18 +37,11 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
     return [defaults boolForKey:BNREmptyDocKey];
 }
 
-//- (float)defaultBillingRate{
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    DLog(@"in -defaultBillingRate")
-//    return [defaults floatForKey:defaultBillingRateKey];
-//}
-
 - (NSNumber *)defaultBillingRate{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     DLog(@"in -defaultBillingRate")
     return [defaults objectForKey:defaultBillingRateKey];
 }
-
 
 - (void)windowDidLoad {
     [colorWell setColor:[self tableBgColor]];
@@ -73,33 +66,6 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
                       object:self 
                     userInfo:d];
 }
-
-// Ref Hillegass pg 215
-//- (IBAction)changeDefaultBillingRate:(id)sender {
-    
-//    NSNumber *tempBillRate = [NSNumber numberWithFloat:[defaultBillingRateTextField floatValue]];
-//    
-//    NSData *defaultBillingRateAsData;
-//    defaultBillingRateAsData = [NSKeyedArchiver archivedDataWithRootObject:tempBillRate];
-//    [[NSUserDefaults standardUserDefaults]
-//     setObject:defaultBillingRateAsData
-//     forKey:defaultBillingRateKey];
-//    
-//    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-//    DLog(@"Sending defaultBillingRate notification");
-//    NSDictionary *d = [NSDictionary dictionaryWithObject:tempBillRate forKey:defaultBillingRateKey];
-//    [nc postNotificationName:defaultBillingRateChangedNotification 
-//                      object:self 
-//                    userInfo:d];
-//    NSNumber *tempBillRate = [NSNumber numberWithFloat:[defaultBillingRateTextField floatValue]];
-
-    
-    
-//    float defaultBillRateFloat = [defaultBillingRateTextField floatValue];
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setFloat:defaultBillRateFloat forKey:defaultBillingRateKey];
-//}
-
 
 - (IBAction)changeNewEmptyDoc:(id)sender {
     

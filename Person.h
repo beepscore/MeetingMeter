@@ -15,9 +15,6 @@
 @interface Person : NSObject <NSCoding> {
     // declare instance variables
     NSString *name;
-    
-//    float hourlyRate;
-//    float defaultBillingRate;
     NSNumber *hourlyRate;
     NSNumber *defaultBillingRate;
 }
@@ -25,9 +22,7 @@
 #pragma mark -
 #pragma mark Accessors
 @property (readwrite, copy) NSString *name;
-
 @property (nonatomic, retain) NSNumber *defaultBillingRate;
-//@property float defaultBillingRate;
 
 // TODO:  Previously Person hourlyRate was NSDecimal *
 // This displayed correctly in MyDocument's view array controller.
@@ -35,19 +30,14 @@
 // However the array controller changed the hourlyRate's type to NSCFNumber?
 // This caused the Meeting -hourlyRate calculation to return garbage.
 // I tried converting type in the getter, but it conflicted with the declared type.
-// So declare hourlyRate as float.
-// Possibly revisit this some day, or possibly change Meeting -hourlyRate type also.
-//@property (readwrite) float hourlyRate;
-
+// So declare hourlyRate as NSNumber *.
+// Possibly revisit this some day.
 @property (readwrite, copy) NSNumber *hourlyRate;
 
 
 #pragma mark -
 #pragma mark Initializers
 // designated initializer
-//- (id)initWithName:(NSString*)aName
-//        hourlyRate:(float)anHourlyRate;
-
 - (id)initWithName:(NSString*)aName
         hourlyRate:(NSNumber *)anHourlyRate;
 

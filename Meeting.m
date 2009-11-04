@@ -132,22 +132,6 @@
 }
 
 // calculate hourly rate for meeting
-//- (NSDecimalNumber *) hourlyRate {
-//    
-//    NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
-//    for (Person *thisPerson in [self participants]) {
-////        combinedHourlyRate = [combinedHourlyRate 
-////                              decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:
-////                                                     [[NSNumber numberWithFloat:[thisPerson hourlyRate]] decimalValue]]];
-//        combinedHourlyRate = [combinedHourlyRate 
-//                              decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:
-//                                                     [[thisPerson hourlyRate] decimalValue]]];
-//    }
-//    DLog(@"meeting hourlyRate = %8.2@", combinedHourlyRate);
-//    return combinedHourlyRate;
-//}
-
-// calculate hourly rate for meeting
 - (NSNumber *) hourlyRate { 
     
     NSNumber *combinedHourlyRate = [NSNumber numberWithFloat:0.0];

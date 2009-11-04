@@ -29,12 +29,8 @@ extern NSString * const defaultBillingRateChangedNotification;
 - (IBAction)changeBackgroundColor:(id)sender;
 - (IBAction)changeNewEmptyDoc:(id)sender;
 
-// TODO: don't need this?
-//- (IBAction)changeDefaultBillingRate:(id)sender;
-
 - (NSColor *)tableBgColor;
 - (BOOL)emptyDoc;
 - (NSNumber *)defaultBillingRate;
-//- (float)defaultBillingRate;
 
 @end

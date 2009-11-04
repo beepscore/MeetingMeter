@@ -19,6 +19,7 @@
 #pragma mark -
 - (void)dealloc {
     self.name = nil;
+    self.hourlyRate = nil;
     self.defaultBillingRate = nil;
 
     [super dealloc];
@@ -37,15 +38,13 @@
              object:nil];
     DLog(@"Registered with notification center");
     
-// TODO: add dictionary stuff from preferences fun example    
+    // Ref: Hal's preferences fun example    
     [self setHourlyRate: 
      [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
 
 //    [self setName: 
 //     [[NSUserDefaults standardUserDefaults] valueForKey:defaultUserNameKey]];
 
-//    NSNumber* defaultHourlyRate = defaultBillingRate;
-    
     [self initWithName:@"defaultName"
             hourlyRate:hourlyRate];
     return self;
@@ -106,7 +105,6 @@
 // Ref Hillegass pg 214
 - (void)handleDefaultBillingRateChange:(NSNotification *)note {
     DLog(@"Received notification: %@", note);
-//    float tempRate = [[[note userInfo] objectForKey:defaultBillingRateKey] floatValue];
     [self setHourlyRate:[[note userInfo] objectForKey:defaultBillingRateKey]];
 }
 

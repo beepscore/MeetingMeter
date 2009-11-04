@@ -25,17 +25,15 @@
     [defaultValues setObject:[NSNumber numberWithBool:YES] 
                       forKey:BNREmptyDocKey];
     
-// TODO: check this numberWithFloat argument   
+// TODO: doesn't matter, isn't getting used?? 
     [defaultValues setValue:[NSNumber numberWithFloat:42.24]
                      forKey:defaultBillingRateKey];
 
-    
     // Register the dictionary of defaults
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 
 // TODO: not necessary?
-  	[[NSUserDefaultsController sharedUserDefaultsController] 
-	 setInitialValues:defaultValues];
+  	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:defaultValues];
 	// what they are right now
     
     DLog(@"registered defaults: %@", defaultValues);
