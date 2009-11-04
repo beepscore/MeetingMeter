@@ -25,13 +25,10 @@
     [defaultValues setObject:[NSNumber numberWithBool:YES] 
                       forKey:BNREmptyDocKey];
     
-#pragma mark TODO: Add the name and hourly rate stuff...    
-    // Put defaults in the dictionary
-//    [defaultValues setObject:colorAsData forKey:BNRTableBgColorKey];
-//    [defaultValues setObject:[NSNumber numberWithBool:YES] 
-//                      forKey:BNREmptyDocKey];
-    
-    
+// TODO: check this numberWithFloat argument   
+    [defaultValues setValue:[NSNumber numberWithFloat:42.24]
+                     forKey:defaultBillingRateKey];
+
     
     // Register the dictionary of defaults
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];

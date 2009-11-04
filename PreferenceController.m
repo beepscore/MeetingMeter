@@ -37,18 +37,23 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
     return [defaults boolForKey:BNREmptyDocKey];
 }
 
-- (float)defaultBillingRate{
+//- (float)defaultBillingRate{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    DLog(@"in -defaultBillingRate")
+//    return [defaults floatForKey:defaultBillingRateKey];
+//}
+
+- (NSNumber *)defaultBillingRate{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     DLog(@"in -defaultBillingRate")
-//    return [defaults objectForKey:defaultBillingRateKey];
-    return [defaults floatForKey:defaultBillingRateKey];
-
+    return [defaults objectForKey:defaultBillingRateKey];
 }
+
 
 - (void)windowDidLoad {
     [colorWell setColor:[self tableBgColor]];
     [checkbox setState:[self emptyDoc]];
-    [defaultBillingRateTextField setFloatValue:[self defaultBillingRate]];
+    [defaultBillingRateTextField setFloatValue:[[self defaultBillingRate] floatValue]];
 }
 
 // Ref Hillegass pg 215

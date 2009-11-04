@@ -75,15 +75,16 @@
     
     Person *tempPerson1 = [[Person alloc] 
                            initWithName:@"Moe"
-                           hourlyRate:3600.00];
+//                           hourlyRate:3600.00];
+                           hourlyRate:[NSNumber numberWithFloat:3600.00]];
     
     Person *tempPerson2 = [[Person alloc] 
                            initWithName:@"Larry"
-                           hourlyRate:3600.00];
+                           hourlyRate:[NSNumber numberWithFloat:3600.00]];
     
     Person *tempPerson3 = [[Person alloc] 
                            initWithName:@"Curly"
-                           hourlyRate:36.00];
+                           hourlyRate:[NSNumber numberWithFloat:36.00]];
     
     [self initWithStartTime:nil
                     endTime:nil
@@ -131,17 +132,33 @@
 }
 
 // calculate hourly rate for meeting
-- (NSDecimalNumber *) hourlyRate {
+//- (NSDecimalNumber *) hourlyRate {
+//    
+//    NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
+//    for (Person *thisPerson in [self participants]) {
+////        combinedHourlyRate = [combinedHourlyRate 
+////                              decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:
+////                                                     [[NSNumber numberWithFloat:[thisPerson hourlyRate]] decimalValue]]];
+//        combinedHourlyRate = [combinedHourlyRate 
+//                              decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:
+//                                                     [[thisPerson hourlyRate] decimalValue]]];
+//    }
+//    DLog(@"meeting hourlyRate = %8.2@", combinedHourlyRate);
+//    return combinedHourlyRate;
+//}
+
+// calculate hourly rate for meeting
+- (NSNumber *) hourlyRate { 
     
-    NSDecimalNumber *combinedHourlyRate = [NSDecimalNumber zero];
+    NSNumber *combinedHourlyRate = [NSNumber numberWithFloat:0.0];
     for (Person *thisPerson in [self participants]) {
-        combinedHourlyRate = [combinedHourlyRate 
-                              decimalNumberByAdding:[NSDecimalNumber decimalNumberWithDecimal:
-                                                     [[NSNumber numberWithFloat:[thisPerson hourlyRate]] decimalValue]]];
+        combinedHourlyRate = [NSNumber numberWithFloat:
+                              ([combinedHourlyRate floatValue] + [[thisPerson hourlyRate] floatValue])];
     }
     DLog(@"meeting hourlyRate = %8.2@", combinedHourlyRate);
     return combinedHourlyRate;
 }
+
 
 // I think elapsedTime truncates seconds at components:fromDate:toDate:options: method
 - (NSDateComponents *)elapsedTime {

@@ -58,7 +58,8 @@
 - (void)stopMeeting;
 
 // calculated from people attending meeting
-- (NSDecimalNumber *)hourlyRate;
+//- (NSDecimalNumber *)hourlyRate;
+- (NSNumber *)hourlyRate;
 - (NSDateComponents *)elapsedTime;
 
 @end

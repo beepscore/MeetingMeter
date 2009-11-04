@@ -304,22 +304,6 @@
 					<int key="connectionID">12</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">changeDefaultBillingRate:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="946279589"/>
-					</object>
-					<int key="connectionID">18</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">defaultBillingRateTextField</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="946279589"/>
-					</object>
-					<int key="connectionID">19</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: values.defaultBillingRate</string>
 						<reference key="source" ref="946279589"/>
@@ -534,12 +518,10 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changeBackgroundColor:</string>
-							<string>changeDefaultBillingRate:</string>
 							<string>changeNewEmptyDoc:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>

@@ -19,6 +19,7 @@
 #pragma mark -
 - (void)dealloc {
     self.name = nil;
+    self.defaultBillingRate = nil;
 
     [super dealloc];
 }
@@ -36,27 +37,23 @@
              object:nil];
     DLog(@"Registered with notification center");
     
-#pragma mark TODO add dictionary stuff from preferences fun example
-//    [self setBillingRate: 
-//     [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
-//    
+// TODO: add dictionary stuff from preferences fun example    
+    [self setHourlyRate: 
+     [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
+
 //    [self setName: 
 //     [[NSUserDefaults standardUserDefaults] valueForKey:defaultUserNameKey]];
 
-    
-
-//    float defaultHourlyRate = 3600.;
-    float defaultHourlyRate = defaultBillingRate;
-
+//    NSNumber* defaultHourlyRate = defaultBillingRate;
     
     [self initWithName:@"defaultName"
-            hourlyRate:defaultHourlyRate];
+            hourlyRate:hourlyRate];
     return self;
 }
 
 // designated initializer
 - (id)initWithName:(NSString*)aName
-        hourlyRate:(float)anHourlyRate{
+        hourlyRate:(NSNumber*)anHourlyRate{
     
     if (self = [super init]) {
         [self setName:aName];
@@ -77,7 +74,7 @@
     descriptionString = [descriptionString stringByAppendingString:NameString];    
     
     NSString *HourlyRateString = [NSString stringWithFormat:@"%10.2f \n",
-                                            [self hourlyRate]];
+                                            [[self hourlyRate] floatValue]];
     
     descriptionString = [descriptionString stringByAppendingString:HourlyRateString];            
     
@@ -90,7 +87,8 @@
     // Hal recommends don't access ivar directly, always use accessor
     // e.g. don't use name, use setter self.name or [self name]
     [coder encodeObject:self.name forKey:BSPersonNameKey];
-    [coder encodeFloat:self.hourlyRate forKey:BSPersonHourlyRateKey];
+    //[coder encodeFloat:self.hourlyRate forKey:BSPersonHourlyRateKey];
+    [coder encodeObject:self.hourlyRate forKey:BSPersonHourlyRateKey];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -100,16 +98,16 @@
     
     // Right hand side uses setter, which will retain assigned value
     self.name = [[coder decodeObjectForKey:BSPersonNameKey] retain];
-    self.hourlyRate = [coder decodeFloatForKey:BSPersonHourlyRateKey];
+    //self.hourlyRate = [coder decodeFloatForKey:BSPersonHourlyRateKey];
+    self.hourlyRate = [coder decodeObjectForKey:BSPersonHourlyRateKey];
     return self;
 }
 
 // Ref Hillegass pg 214
 - (void)handleDefaultBillingRateChange:(NSNotification *)note {
     DLog(@"Received notification: %@", note);
-//    NSNumber *tempRate = [[note userInfo] objectForKey:defaultBillingRateKey];
-    float tempRate = [[[note userInfo] objectForKey:defaultBillingRateKey] floatValue];
-    [self setDefaultBillingRate:tempRate];
+//    float tempRate = [[[note userInfo] objectForKey:defaultBillingRateKey] floatValue];
+    [self setHourlyRate:[[note userInfo] objectForKey:defaultBillingRateKey]];
 }
 
 @end

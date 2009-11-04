@@ -15,16 +15,19 @@
 @interface Person : NSObject <NSCoding> {
     // declare instance variables
     NSString *name;
-    float hourlyRate;
-//    NSNumber *defaultBillingRate;
-    float defaultBillingRate;
+    
+//    float hourlyRate;
+//    float defaultBillingRate;
+    NSNumber *hourlyRate;
+    NSNumber *defaultBillingRate;
 }
 
 #pragma mark -
 #pragma mark Accessors
 @property (readwrite, copy) NSString *name;
-//@property (readwrite, retain) NSNumber *defaultBillingRate;
-@property float defaultBillingRate;
+
+@property (nonatomic, retain) NSNumber *defaultBillingRate;
+//@property float defaultBillingRate;
 
 // TODO:  Previously Person hourlyRate was NSDecimal *
 // This displayed correctly in MyDocument's view array controller.
@@ -34,13 +37,19 @@
 // I tried converting type in the getter, but it conflicted with the declared type.
 // So declare hourlyRate as float.
 // Possibly revisit this some day, or possibly change Meeting -hourlyRate type also.
-@property (readwrite) float hourlyRate;
+//@property (readwrite) float hourlyRate;
+
+@property (readwrite, copy) NSNumber *hourlyRate;
+
 
 #pragma mark -
 #pragma mark Initializers
 // designated initializer
+//- (id)initWithName:(NSString*)aName
+//        hourlyRate:(float)anHourlyRate;
+
 - (id)initWithName:(NSString*)aName
-        hourlyRate:(float)anHourlyRate;
+        hourlyRate:(NSNumber *)anHourlyRate;
 
 - (void)handleDefaultBillingRateChange:(NSNotification *)note;
 

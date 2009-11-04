@@ -112,8 +112,11 @@
     [NSDecimalNumber decimalNumberWithDecimal:
      [[NSNumber numberWithFloat:incrementalTimeInHours] decimalValue]];
     
-    NSDecimalNumber *incrementalCost = 
-    [[[self meeting] hourlyRate] decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
+    NSDecimalNumber *hourlyRateDecimal = [NSDecimalNumber decimalNumberWithDecimal:
+    [[[self meeting] hourlyRate] decimalValue]];
+    
+    NSDecimalNumber *incrementalCost = [hourlyRateDecimal
+                                        decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
     
     [[self meeting] setAccruedCost:[[[self meeting] accruedCost] decimalNumberByAdding:incrementalCost]];
     
