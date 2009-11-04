@@ -25,8 +25,22 @@
     [defaultValues setObject:[NSNumber numberWithBool:YES] 
                       forKey:BNREmptyDocKey];
     
+#pragma mark TODO: Add the name and hourly rate stuff...    
+    // Put defaults in the dictionary
+//    [defaultValues setObject:colorAsData forKey:BNRTableBgColorKey];
+//    [defaultValues setObject:[NSNumber numberWithBool:YES] 
+//                      forKey:BNREmptyDocKey];
+    
+    
+    
     // Register the dictionary of defaults
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+
+// TODO: not necessary?
+  	[[NSUserDefaultsController sharedUserDefaultsController] 
+	 setInitialValues:defaultValues];
+	// what they are right now
+    
     DLog(@"registered defaults: %@", defaultValues);
 }
 

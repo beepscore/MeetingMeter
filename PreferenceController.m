@@ -70,7 +70,7 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 }
 
 // Ref Hillegass pg 215
-- (IBAction)changeDefaultBillingRate:(id)sender {
+//- (IBAction)changeDefaultBillingRate:(id)sender {
     
 //    NSNumber *tempBillRate = [NSNumber numberWithFloat:[defaultBillingRateTextField floatValue]];
 //    
@@ -87,11 +87,13 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 //                      object:self 
 //                    userInfo:d];
 //    NSNumber *tempBillRate = [NSNumber numberWithFloat:[defaultBillingRateTextField floatValue]];
+
     
-    float defaultBillRateFloat = [defaultBillingRateTextField floatValue];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setFloat:defaultBillRateFloat forKey:defaultBillingRateKey];
-}
+    
+//    float defaultBillRateFloat = [defaultBillingRateTextField floatValue];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setFloat:defaultBillRateFloat forKey:defaultBillingRateKey];
+//}
 
 
 - (IBAction)changeNewEmptyDoc:(id)sender {

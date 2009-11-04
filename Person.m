@@ -36,6 +36,14 @@
              object:nil];
     DLog(@"Registered with notification center");
     
+#pragma mark TODO add dictionary stuff from preferences fun example
+//    [self setBillingRate: 
+//     [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
+//    
+//    [self setName: 
+//     [[NSUserDefaults standardUserDefaults] valueForKey:defaultUserNameKey]];
+
+    
 
 //    float defaultHourlyRate = 3600.;
     float defaultHourlyRate = defaultBillingRate;
