@@ -19,7 +19,6 @@
 #pragma mark -
 - (void)dealloc {
     self.name = nil;
-    self.defaultBillingRate = nil;
 
     [super dealloc];
 }
@@ -39,7 +38,7 @@
     
 
 //    float defaultHourlyRate = 3600.;
-    float defaultHourlyRate = [defaultBillingRate floatValue] ;
+    float defaultHourlyRate = defaultBillingRate;
 
     
     [self initWithName:@"defaultName"
@@ -100,7 +99,8 @@
 // Ref Hillegass pg 214
 - (void)handleDefaultBillingRateChange:(NSNotification *)note {
     DLog(@"Received notification: %@", note);
-    NSNumber *tempRate = [[note userInfo] objectForKey:defaultBillingRateKey];
+//    NSNumber *tempRate = [[note userInfo] objectForKey:defaultBillingRateKey];
+    float tempRate = [[[note userInfo] objectForKey:defaultBillingRateKey] floatValue];
     [self setDefaultBillingRate:tempRate];
 }
 

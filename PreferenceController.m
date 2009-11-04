@@ -12,6 +12,11 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 
 @implementation PreferenceController
 
+#pragma mark -
+#pragma mark Accessors
+
+#pragma mark -
+
 - (id)init {
     if (![super initWithWindowNibName:@"Preferences"])
         return nil;
@@ -32,17 +37,18 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
     return [defaults boolForKey:BNREmptyDocKey];
 }
 
-- (NSNumber *)defaultBillingRate{
-    
+- (float)defaultBillingRate{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults objectForKey:defaultBillingRateKey];
+    DLog(@"in -defaultBillingRate")
+//    return [defaults objectForKey:defaultBillingRateKey];
+    return [defaults floatForKey:defaultBillingRateKey];
+
 }
 
-
 - (void)windowDidLoad {
-    
     [colorWell setColor:[self tableBgColor]];
     [checkbox setState:[self emptyDoc]];
+    [defaultBillingRateTextField setFloatValue:[self defaultBillingRate]];
 }
 
 // Ref Hillegass pg 215
@@ -56,7 +62,7 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
      forKey:BNRTableBgColorKey];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    NSLog(@"Sending color notification");
+    DLog(@"Sending color notification");
     NSDictionary *d = [NSDictionary dictionaryWithObject:color forKey:@"color"];
     [nc postNotificationName:BNRColorChangedNotification 
                       object:self 
@@ -66,22 +72,26 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 // Ref Hillegass pg 215
 - (IBAction)changeDefaultBillingRate:(id)sender {
     
-    // TODO: Check the value of defaultBillingRate here
-    NSNumber *defaultBillingRate = [defaultBillingRateTextField objectValue];
-    NSData *defaultBillingRateAsData;
-    defaultBillingRateAsData = [NSKeyedArchiver archivedDataWithRootObject:defaultBillingRate];
-    [[NSUserDefaults standardUserDefaults]
-     setObject:defaultBillingRateAsData
-     forKey:defaultBillingRateKey];
+//    NSNumber *tempBillRate = [NSNumber numberWithFloat:[defaultBillingRateTextField floatValue]];
+//    
+//    NSData *defaultBillingRateAsData;
+//    defaultBillingRateAsData = [NSKeyedArchiver archivedDataWithRootObject:tempBillRate];
+//    [[NSUserDefaults standardUserDefaults]
+//     setObject:defaultBillingRateAsData
+//     forKey:defaultBillingRateKey];
+//    
+//    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+//    DLog(@"Sending defaultBillingRate notification");
+//    NSDictionary *d = [NSDictionary dictionaryWithObject:tempBillRate forKey:defaultBillingRateKey];
+//    [nc postNotificationName:defaultBillingRateChangedNotification 
+//                      object:self 
+//                    userInfo:d];
+//    NSNumber *tempBillRate = [NSNumber numberWithFloat:[defaultBillingRateTextField floatValue]];
     
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    NSLog(@"Sending defaultBillingRate notification");
-    NSDictionary *d = [NSDictionary dictionaryWithObject:defaultBillingRate forKey:defaultBillingRateKey];
-    [nc postNotificationName:defaultBillingRateChangedNotification 
-                      object:self 
-                    userInfo:d];
+    float defaultBillRateFloat = [defaultBillingRateTextField floatValue];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setFloat:defaultBillRateFloat forKey:defaultBillingRateKey];
 }
-
 
 
 - (IBAction)changeNewEmptyDoc:(id)sender {

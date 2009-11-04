@@ -16,13 +16,15 @@
     // declare instance variables
     NSString *name;
     float hourlyRate;
-    NSNumber *defaultBillingRate;
+//    NSNumber *defaultBillingRate;
+    float defaultBillingRate;
 }
 
 #pragma mark -
 #pragma mark Accessors
 @property (readwrite, copy) NSString *name;
-@property (readwrite, retain) NSNumber *defaultBillingRate;
+//@property (readwrite, retain) NSNumber *defaultBillingRate;
+@property float defaultBillingRate;
 
 // TODO:  Previously Person hourlyRate was NSDecimal *
 // This displayed correctly in MyDocument's view array controller.

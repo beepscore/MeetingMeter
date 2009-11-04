@@ -13,8 +13,7 @@
 #import "BSGlobalValues.h"
 #import "Person.h"
 
-@interface Meeting : NSObject {
-    
+@interface Meeting : NSObject {    
 #pragma mark -
 #pragma mark Instance variables
     NSDate *startTime;

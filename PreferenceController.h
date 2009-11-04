@@ -14,17 +14,25 @@ extern NSString * const defaultBillingRateChangedNotification;
 
 
 @interface PreferenceController : NSWindowController {
+#pragma mark -
+#pragma mark Instance variables
     IBOutlet NSColorWell *colorWell;
     IBOutlet NSButton *checkbox;
     IBOutlet NSTextField *defaultBillingRateTextField;
 
 }
+#pragma mark -
+#pragma mark Accessors
+
+#pragma mark -
+#pragma mark IBActions
 - (IBAction)changeBackgroundColor:(id)sender;
 - (IBAction)changeNewEmptyDoc:(id)sender;
 - (IBAction)changeDefaultBillingRate:(id)sender;
 
 - (NSColor *)tableBgColor;
 - (BOOL)emptyDoc;
-- (NSNumber *)defaultBillingRate;
+//- (NSNumber *)defaultBillingRate;
+- (float)defaultBillingRate;
 
 @end
