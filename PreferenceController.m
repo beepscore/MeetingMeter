@@ -7,6 +7,8 @@
 //
 
 #import "PreferenceController.h"
+NSString * const defaultNameKey = @"defaultName";
+NSString * const defaultNameChangedNotification = @"defaultNameChanged";
 NSString * const defaultBillingRateKey = @"defaultBillingRate";
 NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateChanged";
 
@@ -24,6 +26,18 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
     return self;
 }
 
+- (NSString *)defaultName{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DLog(@"in -defaultName")
+    return [defaults valueForKey:defaultNameKey];
+}
+
+- (NSNumber *)defaultBillingRate{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DLog(@"in -defaultBillingRate")
+    return [defaults objectForKey:defaultBillingRateKey];
+}
+
 - (NSColor *)tableBgColor{
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -37,16 +51,13 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
     return [defaults boolForKey:BNREmptyDocKey];
 }
 
-- (NSNumber *)defaultBillingRate{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    DLog(@"in -defaultBillingRate")
-    return [defaults objectForKey:defaultBillingRateKey];
-}
-
 - (void)windowDidLoad {
+    // TODO: check this
+    [defaultNameTextField setValue:[self defaultName]];
+    
+    [defaultBillingRateTextField setFloatValue:[[self defaultBillingRate] floatValue]];
     [colorWell setColor:[self tableBgColor]];
     [checkbox setState:[self emptyDoc]];
-    [defaultBillingRateTextField setFloatValue:[[self defaultBillingRate] floatValue]];
 }
 
 // Ref Hillegass pg 215

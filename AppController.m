@@ -13,30 +13,30 @@
 
 // Ref Hillegass pg 203
 + (void)initialize {
+    
     // Create a dictionary
     NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
-    
+
     // Archive the color object
     NSData *colorAsData = [NSKeyedArchiver archivedDataWithRootObject:
                            [NSColor yellowColor]];
     
     // Put defaults in the dictionary
+    // TODO:  Investigate difference between shared user defaults and standard user defaults
+    [defaultValues setValue:@"Anonymous Participant" forKey:defaultNameKey];    
+    [defaultValues setValue:[NSNumber numberWithFloat:36.00] forKey:defaultBillingRateKey];
+    
     [defaultValues setObject:colorAsData forKey:BNRTableBgColorKey];
     [defaultValues setObject:[NSNumber numberWithBool:YES] 
                       forKey:BNREmptyDocKey];
     
-// TODO: doesn't matter, isn't getting used?? 
-    [defaultValues setValue:[NSNumber numberWithFloat:42.24]
-                     forKey:defaultBillingRateKey];
-
-    // Register the dictionary of defaults
+    // Register the dictionary of standard user defaults
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
-
-// TODO: not necessary?
-  	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:defaultValues];
-	// what they are right now
-    
     DLog(@"registered defaults: %@", defaultValues);
+
+    // shared user defaults
+  	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:defaultValues];
+    
 }
 
 - (id)init {

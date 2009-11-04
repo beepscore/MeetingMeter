@@ -14,12 +14,15 @@
 #pragma mark Accessors
 @synthesize name;
 @synthesize hourlyRate;
+@synthesize defaultName;
 @synthesize defaultBillingRate;
 
 #pragma mark -
 - (void)dealloc {
+    // TODO:  removeObserver from notification center?    
     self.name = nil;
     self.hourlyRate = nil;
+    self.defaultName = nil;
     self.defaultBillingRate = nil;
 
     [super dealloc];
@@ -27,25 +30,29 @@
 
 #pragma mark -
 #pragma mark Initializers
-// init
 - (id)init {
-
     // Ref Hillegass pg 213
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(handleDefaultNameChange:)
+               name:defaultNameKey
+             object:nil];
+    
     [nc addObserver:self
            selector:@selector(handleDefaultBillingRateChange:)
                name:defaultBillingRateKey
              object:nil];
+        
     DLog(@"Registered with notification center");
     
-    // Ref: Hal's preferences fun example    
+    // Ref: Hal's preferences fun example 
+    [self setName: 
+     [[NSUserDefaults standardUserDefaults] valueForKey:defaultNameKey]];
+
     [self setHourlyRate: 
      [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
 
-//    [self setName: 
-//     [[NSUserDefaults standardUserDefaults] valueForKey:defaultUserNameKey]];
-
-    [self initWithName:@"defaultName"
+    [self initWithName:name
             hourlyRate:hourlyRate];
     return self;
 }
@@ -86,7 +93,6 @@
     // Hal recommends don't access ivar directly, always use accessor
     // e.g. don't use name, use setter self.name or [self name]
     [coder encodeObject:self.name forKey:BSPersonNameKey];
-    //[coder encodeFloat:self.hourlyRate forKey:BSPersonHourlyRateKey];
     [coder encodeObject:self.hourlyRate forKey:BSPersonHourlyRateKey];
 }
 
@@ -97,15 +103,21 @@
     
     // Right hand side uses setter, which will retain assigned value
     self.name = [[coder decodeObjectForKey:BSPersonNameKey] retain];
-    //self.hourlyRate = [coder decodeFloatForKey:BSPersonHourlyRateKey];
     self.hourlyRate = [coder decodeObjectForKey:BSPersonHourlyRateKey];
     return self;
 }
 
 // Ref Hillegass pg 214
+- (void)handleDefaultNameChange:(NSNotification *)note {
+    DLog(@"Received default name change notification: %@", note);
+    [self setDefaultName:[[note userInfo] objectForKey:defaultNameKey]];
+}
+
+// Ref Hillegass pg 214
 - (void)handleDefaultBillingRateChange:(NSNotification *)note {
-    DLog(@"Received notification: %@", note);
-    [self setHourlyRate:[[note userInfo] objectForKey:defaultBillingRateKey]];
+    DLog(@"Received default billing rate change notification: %@", note);
+    //[self setHourlyRate:[[note userInfo] objectForKey:defaultBillingRateKey]];
+    [self setDefaultBillingRate:[[note userInfo] objectForKey:defaultBillingRateKey]];
 }
 
 @end

@@ -16,12 +16,14 @@
     // declare instance variables
     NSString *name;
     NSNumber *hourlyRate;
+    NSString *defaultName;
     NSNumber *defaultBillingRate;
 }
 
 #pragma mark -
 #pragma mark Accessors
-@property (readwrite, copy) NSString *name;
+@property (readwrite, retain) NSString *name;
+@property (nonatomic, retain) NSString *defaultName;
 @property (nonatomic, retain) NSNumber *defaultBillingRate;
 
 // TODO:  Previously Person hourlyRate was NSDecimal *
@@ -32,8 +34,7 @@
 // I tried converting type in the getter, but it conflicted with the declared type.
 // So declare hourlyRate as NSNumber *.
 // Possibly revisit this some day.
-@property (readwrite, copy) NSNumber *hourlyRate;
-
+@property (readwrite, retain) NSNumber *hourlyRate;
 
 #pragma mark -
 #pragma mark Initializers
@@ -41,6 +42,7 @@
 - (id)initWithName:(NSString*)aName
         hourlyRate:(NSNumber *)anHourlyRate;
 
+- (void)handleDefaultNameChange:(NSNotification *)note;
 - (void)handleDefaultBillingRateChange:(NSNotification *)note;
 
 @end
