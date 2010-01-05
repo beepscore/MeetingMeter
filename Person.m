@@ -20,10 +20,10 @@
 #pragma mark -
 - (void)dealloc {
     // TODO:  removeObserver from notification center?    
-    self.name = nil;
-    self.hourlyRate = nil;
-    self.defaultName = nil;
-    self.defaultBillingRate = nil;
+    [name release], name = nil;
+    [hourlyRate release], hourlyRate = nil;
+    [defaultName release], defaultName = nil;
+    [defaultBillingRate release], defaultBillingRate = nil;
 
     [super dealloc];
 }

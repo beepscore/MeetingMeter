@@ -22,8 +22,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     // Ref Hillegass Ch 04 pg 68
-    self.meeting = nil;
-    self.elapsedTimeOld = nil;
+    [meeting release], meeting = nil;
+    [elapsedTimeOld release], elapsedTimeOld = nil;
     
     [super dealloc];
 }

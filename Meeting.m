@@ -49,11 +49,11 @@
     // after release, best practice is set object = nil;
     // then if someone accidentally calls it,
     // they will get nil instead of a bad reference.   
-    self.meetUndoManager = nil;
-    self.startTime = nil;
-    self.endTime = nil;
-    self.accruedCost = nil;
-    self.participants = nil;    
+    [meetUndoManager release], meetUndoManager = nil;
+    [startTime release], startTime = nil;
+    [endTime release], endTime = nil;
+    [accruedCost release], accruedCost = nil;
+    [participants release], participants = nil;    
     
     [super dealloc];
 }
