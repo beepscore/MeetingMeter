@@ -22,8 +22,8 @@
 
 #pragma mark -
 #pragma mark Accessors
-@property (readwrite, retain) NSString *name;
-@property (nonatomic, retain) NSString *defaultName;
+@property (readwrite, copy) NSString *name;
+@property (nonatomic, copy) NSString *defaultName;
 @property (nonatomic, retain) NSNumber *defaultBillingRate;
 
 // TODO:  Previously Person hourlyRate was NSDecimal *
