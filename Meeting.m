@@ -204,7 +204,7 @@
 // insertObject: and removeObject: add or remove a person from the participants array.
 // They use KVC methods, which in turn use the Meeting -setParticipants accessor.
 // Ref Hillegass pg 144, 147
-- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index {
+- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(NSUInteger)index {
     
     DLog(@"adding %@ to %@", aPerson, [self participants]);
     // Add the inverse of this operation to the undo stack
@@ -220,7 +220,7 @@
     [self hourlyRate];
 }
 
-- (void)removeObjectFromParticipantsAtIndex:(int)index {
+- (void)removeObjectFromParticipantsAtIndex:(NSUInteger)index {
     
     Person *aPerson = [[self participants] objectAtIndex:index];
     DLog(@"removing %@ from participants", aPerson.name);

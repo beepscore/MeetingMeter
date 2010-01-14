@@ -80,7 +80,7 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 
 - (IBAction)changeNewEmptyDoc:(id)sender {
     
-    int state = [checkbox state];
+    NSInteger state = [checkbox state];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:state forKey:BNREmptyDocKey];
 }

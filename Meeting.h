@@ -48,8 +48,8 @@
 #pragma mark KVO related methods
 - (void)startObservingPerson:(Person *)aPerson;
 - (void)stopObservingPerson:(Person *)aPerson;
-- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(int)index;
-- (void)removeObjectFromParticipantsAtIndex: (int) index;
+- (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(NSUInteger)index;
+- (void)removeObjectFromParticipantsAtIndex: (NSUInteger) index;
 - (void)changeKeyPath:(NSString *)keyPath ofObject:(id)obj toValue:(id)newValue;
 
 #pragma mark -
