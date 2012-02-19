@@ -19,51 +19,49 @@
 
 #pragma mark -
 - (void)dealloc {
-    // TODO:  removeObserver from notification center?    
+    // TODO:  removeObserver from notification center?
     [name release], name = nil;
     [hourlyRate release], hourlyRate = nil;
     [defaultName release], defaultName = nil;
     [defaultBillingRate release], defaultBillingRate = nil;
-
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Initializers
+#pragma mark - Initializers
 - (id)init {
     // Ref Hillegass pg 213
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
-           selector:@selector(handleDefaultNameChange:)
-               name:defaultNameKey
-             object:nil];
-    
+	   selector:@selector(handleDefaultNameChange:)
+	       name:defaultNameKey
+	     object:nil];
+
     [nc addObserver:self
-           selector:@selector(handleDefaultBillingRateChange:)
-               name:defaultBillingRateKey
-             object:nil];
-        
+	   selector:@selector(handleDefaultBillingRateChange:)
+	       name:defaultBillingRateKey
+	     object:nil];
+
     DLog(@"Registered with notification center");
-    
-    // Ref: Hal's preferences fun example 
-    [self setName: 
+
+    // Ref: Hal's preferences fun example
+    [self setName:
      [[NSUserDefaults standardUserDefaults] valueForKey:defaultNameKey]];
 
-    [self setHourlyRate: 
+    [self setHourlyRate:
      [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
 
     [self initWithName:name
-            hourlyRate:hourlyRate];
+	    hourlyRate:hourlyRate];
     return self;
 }
 
 // designated initializer
 - (id)initWithName:(NSString*)aName
-        hourlyRate:(NSNumber*)anHourlyRate{
-    
+	hourlyRate:(NSNumber*)anHourlyRate{
+
     if (self = [super init]) {
-        [self setName:aName];
-        [self setHourlyRate:anHourlyRate];      
+	[self setName:aName];
+	[self setHourlyRate:anHourlyRate];
     }
     return self;
 }
@@ -71,20 +69,21 @@
 #pragma mark -
 #pragma mark Other methods
 - (NSString *)description {
-    
+
     NSString *descriptionString = @"";
 
-    NSString *NameString = [[NSString stringWithFormat:@"%@", [self name]]
-                                      stringByPaddingToLength: 15 withString: @" " startingAtIndex:0];
-    
-    descriptionString = [descriptionString stringByAppendingString:NameString];    
-    
+    NSString *NameString = [[NSString stringWithFormat:@"%@",
+			     [self name]] stringByPaddingToLength:15
+			    withString:@" "
+			    startingAtIndex:0];
+
+    descriptionString = [descriptionString stringByAppendingString:NameString];
     NSString *HourlyRateString = [NSString stringWithFormat:@"%10.2f \n",
-                                            [[self hourlyRate] floatValue]];
-    
-    descriptionString = [descriptionString stringByAppendingString:HourlyRateString];            
-    
-    return descriptionString;    
+				  [[self hourlyRate] floatValue]];
+
+    descriptionString = [descriptionString stringByAppendingString:HourlyRateString];
+
+    return descriptionString;
 }
 
 // Ref Hillegass pg 155-156
@@ -100,9 +99,9 @@
     // don't call superclass initwithcoder, because NSObject doesn't have one.
     // Ref Hillegass pg 156
     [super init];
-    
+
     // Right hand side uses setter, which will retain assigned value
-    self.name = [[coder decodeObjectForKey:BSPersonNameKey] retain];
+    self.name = [coder decodeObjectForKey:BSPersonNameKey];
     self.hourlyRate = [coder decodeObjectForKey:BSPersonHourlyRateKey];
     return self;
 }
