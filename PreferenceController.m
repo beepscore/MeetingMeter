@@ -21,8 +21,8 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 
 - (id)init {
     if (![super initWithWindowNibName:@"Preferences"])
-        return nil;
-    
+	return nil;
+
     return self;
 }
 
@@ -39,14 +39,14 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 }
 
 - (NSColor *)tableBgColor{
-    
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *colorAsData = [defaults objectForKey:BNRTableBgColorKey];
     return [NSKeyedUnarchiver unarchiveObjectWithData:colorAsData];
 }
 
 - (BOOL)emptyDoc{
-    
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults boolForKey:BNREmptyDocKey];
 }
@@ -54,7 +54,7 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 - (void)windowDidLoad {
     // TODO: check this
     [defaultNameTextField setValue:[self defaultName]];
-    
+
     [defaultBillingRateTextField setFloatValue:[[self defaultBillingRate] floatValue]];
     [colorWell setColor:[self tableBgColor]];
     [checkbox setState:[self emptyDoc]];
@@ -62,24 +62,24 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 
 // Ref Hillegass pg 215
 - (IBAction)changeBackgroundColor:(id)sender {
-    
+
     NSColor *color = [sender color];
     NSData *colorAsData;
     colorAsData = [NSKeyedArchiver archivedDataWithRootObject:color];
     [[NSUserDefaults standardUserDefaults]
      setObject:colorAsData
      forKey:BNRTableBgColorKey];
-    
+
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     DLog(@"Sending color notification");
     NSDictionary *d = [NSDictionary dictionaryWithObject:color forKey:@"color"];
-    [nc postNotificationName:BNRColorChangedNotification 
-                      object:self 
-                    userInfo:d];
+    [nc postNotificationName:BNRColorChangedNotification
+		      object:self
+		    userInfo:d];
 }
 
 - (IBAction)changeNewEmptyDoc:(id)sender {
-    
+
     NSInteger state = [checkbox state];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:state forKey:BNREmptyDocKey];
