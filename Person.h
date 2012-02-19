@@ -40,7 +40,7 @@
 #pragma mark Initializers
 // designated initializer
 - (id)initWithName:(NSString*)aName
-	hourlyRate:(NSNumber *)anHourlyRate;
+        hourlyRate:(NSNumber *)anHourlyRate;
 
 - (void)handleDefaultNameChange:(NSNotification *)note;
 - (void)handleDefaultBillingRateChange:(NSNotification *)note;
