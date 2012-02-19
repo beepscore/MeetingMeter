@@ -3,7 +3,7 @@
 //  MeetingMeter
 //
 //  Created by Steve Baker on 10/10/09.
-//  Copyright 2009 Beepscore LLC. All rights reserved.
+//  Copyright 2009 Beepscore LLC. All rights reserved. 
 //
 
 #import "Meeting.h"
@@ -75,7 +75,7 @@
     
     Person *tempPerson1 = [[Person alloc] 
                            initWithName:@"Moe"
-//                           hourlyRate:3600.00];
+                           //                           hourlyRate:3600.00];
                            hourlyRate:[NSNumber numberWithFloat:3600.00]];
     
     Person *tempPerson2 = [[Person alloc] 
@@ -139,7 +139,7 @@
         combinedHourlyRate = [NSNumber numberWithFloat:
                               ([combinedHourlyRate floatValue] + [[thisPerson hourlyRate] floatValue])];
     }
-    DLog(@"meeting hourlyRate = %8.2@", combinedHourlyRate);
+    DLog(@"meeting hourlyRate = %8.2g", [combinedHourlyRate floatValue]);
     return combinedHourlyRate;
 }
 
