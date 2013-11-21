@@ -98,8 +98,8 @@
     // I think NSDateComponents* elapsedTime truncates seconds.
     double elapsedSeconds = [components second];   
     
-    [elapsedTimeField setStringValue:[NSString stringWithFormat:@"%02d:%02d:%04.1f", 
-                                      elapsedHours, elapsedMinutes, elapsedSeconds]];
+    [elapsedTimeField setStringValue:[NSString stringWithFormat:@"%02ld:%02ld:%04.1f", 
+                                      (long)elapsedHours, (long)elapsedMinutes, elapsedSeconds]];
     
     double incrementalTimeInHours = 
     ((elapsedHours - [elapsedTimeOld hour])

@@ -167,7 +167,7 @@
     }
     
     NSString *meetingRateString = 
-    [NSString stringWithFormat:@"  hourlyRate =    %14.2@\n", [self hourlyRate]];
+    [NSString stringWithFormat:@"  hourlyRate =    %14.2ld\n", (long)[self hourlyRate]];
     
     descriptionString = [descriptionString stringByAppendingString:meetingRateString];    
     
