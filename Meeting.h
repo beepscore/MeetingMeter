@@ -25,10 +25,10 @@
 
 #pragma mark -
 #pragma mark Accessors
-@property (nonatomic, retain) NSDate *startTime;
-@property (nonatomic, retain) NSDate *endTime;
-@property (nonatomic, retain) NSDecimalNumber *accruedCost;
-@property (nonatomic, retain) NSUndoManager *meetUndoManager;
+@property (nonatomic, strong) NSDate *startTime;
+@property (nonatomic, strong) NSDate *endTime;
+@property (nonatomic, strong) NSDecimalNumber *accruedCost;
+@property (nonatomic, strong) NSUndoManager *meetUndoManager;
 
 - (NSMutableArray *)participants;
 - (void)setParticipants:(NSMutableArray *)a;
