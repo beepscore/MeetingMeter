@@ -22,10 +22,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     // Ref Hillegass Ch 04 pg 68
-    [meeting release], meeting = nil;
-    [elapsedTimeOld release], elapsedTimeOld = nil;
+    meeting = nil;
+    elapsedTimeOld = nil;
     
-    [super dealloc];
 }
 
 #pragma mark -
@@ -124,11 +123,11 @@
     if (nil == timer) {
         NSLog(@"Starting");
         // Create a timer
-        timer = [[NSTimer scheduledTimerWithTimeInterval:1.0
+        timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(updateGUI:)
                                                 userInfo:nil
-                                                 repeats:YES] retain];
+                                                 repeats:YES];
         
         [self setElapsedTimeOld:[[self meeting] elapsedTime]];
         [[self meeting] setAccruedCost:[NSDecimalNumber zero]];
@@ -138,7 +137,6 @@
         
         // Invalidate and release the timer
         [timer invalidate];
-        [timer release];
         timer = nil;
     }
 }

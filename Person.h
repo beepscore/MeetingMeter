@@ -24,7 +24,7 @@
 #pragma mark Accessors
 @property (readwrite, copy) NSString *name;
 @property (nonatomic, copy) NSString *defaultName;
-@property (nonatomic, retain) NSNumber *defaultBillingRate;
+@property (nonatomic, strong) NSNumber *defaultBillingRate;
 
 // TODO:  Previously Person hourlyRate was NSDecimal *
 // This displayed correctly in MyDocument's view array controller.
@@ -34,7 +34,7 @@
 // I tried converting type in the getter, but it conflicted with the declared type.
 // So declare hourlyRate as NSNumber *.
 // Possibly revisit this some day.
-@property (readwrite, retain) NSNumber *hourlyRate;
+@property (readwrite, strong) NSNumber *hourlyRate;
 
 #pragma mark -
 #pragma mark Initializers

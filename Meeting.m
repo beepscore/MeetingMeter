@@ -27,13 +27,9 @@
     if (a == participants)
         return;
     
-    // increment retain count on the object 'a' points to.  See Hillegass pg 69
-    [a retain];
-    
     for (Person *person in [self participants]) {
         [self stopObservingPerson:person];
     }
-    [participants release];
     
     // point 'participants' to the same object as 'a'
     participants = a;
@@ -46,16 +42,15 @@
 #pragma mark -
 - (void)dealloc {
     
-    // after release, best practice is set object = nil;
+    // best practice is set object = nil;
     // then if someone accidentally calls it,
     // they will get nil instead of a bad reference.   
-    [meetUndoManager release], meetUndoManager = nil;
-    [startTime release], startTime = nil;
-    [endTime release], endTime = nil;
-    [accruedCost release], accruedCost = nil;
-    [participants release], participants = nil;    
+    meetUndoManager = nil;
+    startTime = nil;
+    endTime = nil;
+    accruedCost = nil;
+    participants = nil;    
     
-    [super dealloc];
 }
 
 #pragma mark - Initializers
@@ -153,7 +148,6 @@
                                                 fromDate:startTime
                                                   toDate:[NSDate date]
                                                  options:0];
-    [gregorian autorelease];
     return components;
 }
 

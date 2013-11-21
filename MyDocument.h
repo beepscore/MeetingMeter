@@ -38,8 +38,8 @@
 
 #pragma mark -
 #pragma mark Accessors
-@property (retain, nonatomic) Meeting *meeting;
-@property (retain, nonatomic) NSDateComponents *elapsedTimeOld;
+@property (strong, nonatomic) Meeting *meeting;
+@property (strong, nonatomic) NSDateComponents *elapsedTimeOld;
 
 #pragma mark -
 #pragma mark IBActions
