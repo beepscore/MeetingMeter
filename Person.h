@@ -20,8 +20,7 @@
     NSNumber *defaultBillingRate;
 }
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 @property (readwrite, copy) NSString *name;
 @property (nonatomic, copy) NSString *defaultName;
 @property (nonatomic, strong) NSNumber *defaultBillingRate;

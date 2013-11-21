@@ -11,8 +11,7 @@
 
 @implementation MyDocument
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 @synthesize meeting;
 @synthesize elapsedTimeOld;
 
@@ -27,8 +26,7 @@
     
 }
 
-#pragma mark -
-#pragma mark Initializers
+#pragma mark - Initializers
 - (id)init
 {
     if (self = [super init]) {
@@ -52,8 +50,7 @@
     return self;
 }
 
-#pragma mark -
-#pragma mark IBActions
+#pragma mark - IBActions
 - (IBAction)beginMeeting:(id)sender{
     // disable beginMeeting, enable endMeeting buttons
     [beginMeetingButton setEnabled:NO];
@@ -78,7 +75,6 @@
 }
 
 #pragma mark -
-#pragma mark Other methods
 - (void)updateHourlyRateField {
     
     [[self meeting] hourlyRate];
@@ -159,7 +155,6 @@
     
     [tableView setBackgroundColor:[NSKeyedUnarchiver unarchiveObjectWithData:colorAsData]];
 }
-
 
 - (NSData *)dataOfType:(NSString *)aType
                  error:(NSError **)outError {

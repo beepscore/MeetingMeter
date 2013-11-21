@@ -14,8 +14,7 @@
 #import "Person.h"
 
 @interface Meeting : NSObject {    
-#pragma mark -
-#pragma mark Instance variables
+#pragma mark - Instance variables
     NSDate *startTime;
     NSDate *endTime;
     NSDecimalNumber *accruedCost;    
@@ -23,8 +22,7 @@
     NSUndoManager *meetUndoManager;
 }
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 @property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSDecimalNumber *accruedCost;
@@ -33,8 +31,7 @@
 - (NSMutableArray *)participants;
 - (void)setParticipants:(NSMutableArray *)a;
 
-#pragma mark -
-#pragma mark Initializers
+#pragma mark - Initializers
 // designatedInitializer
 - (id)initWithStartTime:(NSDate*)aStartTime
                 endTime:(NSDate*)anEndTime
@@ -44,8 +41,7 @@
 
 - (id)initWithExampleValues:(NSUndoManager*)anUndoManager;
 
-#pragma mark -
-#pragma mark KVO related methods
+#pragma mark - KVO related methods
 - (void)startObservingPerson:(Person *)aPerson;
 - (void)stopObservingPerson:(Person *)aPerson;
 - (void)insertObject:(Person *)aPerson inParticipantsAtIndex:(NSUInteger)index;
@@ -53,7 +49,6 @@
 - (void)changeKeyPath:(NSString *)keyPath ofObject:(id)obj toValue:(id)newValue;
 
 #pragma mark -
-#pragma mark Other methods
 - (void)startMeeting;
 - (void)stopMeeting;
 

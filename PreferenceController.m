@@ -15,9 +15,6 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 @implementation PreferenceController
 
 #pragma mark -
-#pragma mark Accessors
-
-#pragma mark -
 
 - (id)init {
     return [super initWithWindowNibName:@"Preferences"];

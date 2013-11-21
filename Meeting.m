@@ -12,8 +12,7 @@
 
 @implementation Meeting
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 @synthesize startTime;
 @synthesize endTime;
 @synthesize accruedCost;
@@ -106,7 +105,6 @@
 }
 
 #pragma mark -
-#pragma mark Other methods
 - (void)startMeeting {
     // [[NSDate alloc] init] and [NSDate date] both return current date and time.
     [self setStartTime:[NSDate date]];
@@ -168,8 +166,7 @@
     return descriptionString;
 }
 
-#pragma mark -
-#pragma mark KVO related methods
+#pragma mark - KVO related methods
 // This adds self (the meeting) as an observer of changes to aPerson's hourlyRate.
 - (void)startObservingPerson:(Person *)aPerson {
     

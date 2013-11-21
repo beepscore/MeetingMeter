@@ -10,8 +10,7 @@
 
 @implementation Person
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 @synthesize name;
 @synthesize hourlyRate;
 @synthesize defaultName;
@@ -74,7 +73,6 @@
 }
 
 #pragma mark -
-#pragma mark Other methods
 - (NSString *)description {
 
     NSString *descriptionString = @"";

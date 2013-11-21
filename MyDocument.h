@@ -20,8 +20,7 @@
 
 @interface MyDocument : NSDocument
 {
-#pragma mark -
-#pragma mark Instance variables
+#pragma mark - Instance variables
     Meeting *meeting;
     
     NSTimer *timer;
@@ -36,19 +35,16 @@
     IBOutlet NSTableView *tableView;
 }
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 @property (strong, nonatomic) Meeting *meeting;
 @property (strong, nonatomic) NSDateComponents *elapsedTimeOld;
 
-#pragma mark -
-#pragma mark IBActions
+#pragma mark - IBActions
 - (IBAction)beginMeeting:(id)sender;
 - (IBAction)endMeeting:(id)sender;
 - (IBAction)debugDump:(id)sender;
 
 #pragma mark -
-#pragma mark Other methods
 - (void)stopGo;
 - (void)updateGUI:(NSTimer *)aTimer;
 - (void)updateHourlyRateField;
