@@ -87,9 +87,6 @@
 
 -(void)updateGUI:(NSTimer *)aTimer {
     // ref http://developer.apple.com/mac/library/documentation/Cocoa/Conceptual/DatesAndTimes/Articles/dtCalendricalCalculations.html#//apple_ref/doc/uid/TP40007836
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
-    
     // use "components" to sample and hold current elapsedTime
     // so value won't change during calculations
     NSDateComponents *components = [meeting elapsedTime];
@@ -119,8 +116,6 @@
                                         decimalNumberByMultiplyingBy:incrementalTimeInHoursDecimal];
     
     [[self meeting] setAccruedCost:[[[self meeting] accruedCost] decimalNumberByAdding:incrementalCost]];
-    
-    [gregorian release];
 }
 
 // Timer method.  ref Hillegass pg 315
