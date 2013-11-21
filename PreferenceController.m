@@ -20,10 +20,7 @@ NSString * const defaultBillingRateChangedNotification = @"defaultBillingRateCha
 #pragma mark -
 
 - (id)init {
-    if (![super initWithWindowNibName:@"Preferences"])
-	return nil;
-
-    return self;
+    return [super initWithWindowNibName:@"Preferences"];
 }
 
 - (NSString *)defaultName{

@@ -58,17 +58,15 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Initializers
+#pragma mark - Initializers
+// override superclass' designated initializer. Ref Hillegass pg 57
 - (id)init {
-    
-    [self initWithStartTime:nil
-                    endTime:nil
-                accruedCost:nil
-               participants:nil
-            meetUndoManager:nil ];
-    
-    return self;
+    // call designated initializer
+    return [self initWithStartTime:nil
+                           endTime:nil
+                       accruedCost:nil
+                      participants:nil
+                   meetUndoManager:nil];
 }
 
 - (id)initWithExampleValues:(NSUndoManager *)anUndoManager {
@@ -86,17 +84,11 @@
                            initWithName:@"Curly"
                            hourlyRate:[NSNumber numberWithFloat:36.00]];
     
-    [self initWithStartTime:nil
-                    endTime:nil
-                accruedCost:[NSDecimalNumber zero]
-               participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil]
-            meetUndoManager:anUndoManager];
-    
-    [tempPerson1 release];
-    [tempPerson2 release];
-    [tempPerson3 release];
-    
-    return self;
+    return [self initWithStartTime:nil
+                           endTime:nil
+                       accruedCost:[NSDecimalNumber zero]
+                      participants:[NSMutableArray arrayWithObjects:tempPerson1, tempPerson2, tempPerson3, nil]
+                   meetUndoManager:anUndoManager];
 }
 
 // designatedInitializer
@@ -105,8 +97,10 @@
             accruedCost:(NSDecimalNumber*)anAccruedCost
            participants:(NSMutableArray*)aParticipants
         meetUndoManager:anUndoManager {
-    
-    if (self = [super init]) {
+
+    // call super's designated intializer
+    self = [super init];
+    if (self) {
         [self setStartTime:aStartTime];
         [self setEndTime:anEndTime];
         [self setAccruedCost:anAccruedCost];

@@ -28,40 +28,48 @@
 }
 
 #pragma mark - Initializers
+// override superclass' designated initializer. Ref Hillegass pg 57
 - (id)init {
-    // Ref Hillegass pg 213
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-	   selector:@selector(handleDefaultNameChange:)
-	       name:defaultNameKey
-	     object:nil];
-
-    [nc addObserver:self
-	   selector:@selector(handleDefaultBillingRateChange:)
-	       name:defaultBillingRateKey
-	     object:nil];
-
-    DLog(@"Registered with notification center");
-
+    // call designated initializer
     // Ref: Hal's preferences fun example
-    [self setName:
-     [[NSUserDefaults standardUserDefaults] valueForKey:defaultNameKey]];
-
-    [self setHourlyRate:
-     [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
-
-    [self initWithName:name
-	    hourlyRate:hourlyRate];
-    return self;
+    return [self initWithName:nil hourlyRate:nil];
 }
 
 // designated initializer
-- (id)initWithName:(NSString*)aName
-	hourlyRate:(NSNumber*)anHourlyRate{
+- (id)initWithName:(NSString *)aName
+        hourlyRate:(NSNumber *)anHourlyRate {
 
-    if (self = [super init]) {
-	[self setName:aName];
-	[self setHourlyRate:anHourlyRate];
+    // call super's designated initializer
+    self = [super init];
+    if (self) {
+
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self
+               selector:@selector(handleDefaultNameChange:)
+                   name:defaultNameKey
+                 object:nil];
+        
+        [nc addObserver:self
+               selector:@selector(handleDefaultBillingRateChange:)
+                   name:defaultBillingRateKey
+                 object:nil];
+        
+        DLog(@"Registered with notification center");
+        
+        if (!aName) {
+            [self setName:
+             [[NSUserDefaults standardUserDefaults] valueForKey:defaultNameKey]];
+        } else {
+            [self setName:aName];
+        }
+        
+        if (!anHourlyRate) {
+            [self setHourlyRate:
+             [[NSUserDefaults standardUserDefaults] valueForKey:defaultBillingRateKey]];
+        } else {
+            [self setHourlyRate:anHourlyRate];
+        }
+        
     }
     return self;
 }
@@ -98,7 +106,7 @@
 - (id)initWithCoder:(NSCoder *)coder {
     // don't call superclass initwithcoder, because NSObject doesn't have one.
     // Ref Hillegass pg 156
-    [super init];
+    self = [super init];
 
     // Right hand side uses setter, which will retain assigned value
     self.name = [coder decodeObjectForKey:BSPersonNameKey];

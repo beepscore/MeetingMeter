@@ -40,10 +40,7 @@
 }
 
 - (id)init {
-    if (![super initWithWindowNibName:@"About"])
-        return nil;
-    
-    return self;
+    return [super initWithWindowNibName:@"About"];
 }
 
 - (void)windowDidLoad {
